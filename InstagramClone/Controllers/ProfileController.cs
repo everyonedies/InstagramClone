@@ -77,6 +77,7 @@ namespace InstagramClone.Controllers
         public IActionResult GetUserProfile(string alias)
         {
             var user = userManager.GetUserAsync(User).Result;
+            return Content("hi");
 
             var currentUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
             var targetUser = unitOfWork.Users.GetByAliasWithItems(alias);
