@@ -9,7 +9,6 @@ using System.IO;
 using Microsoft.AspNetCore.Http;
 using System.Drawing;
 using InstagramClone.Domain.Interfaces;
-using System;
 
 namespace InstagramClone.Controllers
 {
@@ -77,7 +76,6 @@ namespace InstagramClone.Controllers
         public IActionResult GetUserProfile(string alias)
         {
             var user = userManager.GetUserAsync(User).Result;
-            return Content("hi");
 
             var currentUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
             var targetUser = unitOfWork.Users.GetByAliasWithItems(alias);
