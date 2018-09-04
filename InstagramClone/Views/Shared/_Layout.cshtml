@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/site.css" type="text/css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300" rel="stylesheet">
+</head>
+<body>
+    <div id="page">
+        <div id="header">
+            <div class="title">
+                <div class="logo page-margin-left width-calc">
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="logo-font link">
+                        <img src="~/images/logo.png" class="logo-style" />
+                        <span>InstagramClone</span>
+                    </a>
+                </div>
+                <div class="search width-calc" id="searchDiv">
+                    <input type="text" id="search" placeholder="Search" style="text-align: center; width: 200px;" autocomplete="off" />
+                </div>
+                <div class="login page-margin-right width-calc">
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </div>
+        <div id="wrapper">
+            <div id="content" class="page-margin-left page-margin-right">
+                @RenderBody()
+                <div id="searchResult"></div>
+            </div>
+        </div>
+    </div>
+    <div id="footer" style="text-align: center;">
+        @*<span class="page-margin-left page-margin-right">&copy; 2018 - InstagramClone</span>*@
+    </div>
+    <script src="~/js/search.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

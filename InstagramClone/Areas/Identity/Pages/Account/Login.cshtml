@@ -1,0 +1,56 @@
+﻿@page
+@model LoginModel
+@{
+    Layout = null;
+    ViewBag.Title = "Login - InstagramClone";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/login.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <div class="form">
+        <form method="post">
+            <p class="logo-font">InstagramClone</p>
+            <div asp-validation-summary="All" style="color: red;" class="validation"></div>
+            <div class="form-group">
+                <input asp-for="Input.Name" class="form-control" placeholder="Name" />
+            </div>
+            <div class="form-group">
+                <input asp-for="Input.Password" class="form-control" placeholder="Password" />
+            </div>
+            <div class="form-group" style="text-align: left; margin-top: 10px;">
+                <div class="checkbox">
+                    <label asp-for="Input.RememberMe" style="font-size: 14px;">
+                        <input asp-for="Input.RememberMe" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="button-style">Log in</button>
+            </div>
+            <div class="form-group" style="margin-top: 25px;">
+                <p style="margin-bottom: 0;">
+                    <a asp-page="./ForgotPassword" style="text-decoration: none; color: black; font-size: 14px;">Forgot your password?</a>
+                </p>
+            </div>
+        </form>
+    </div>
+    <div class="form" style="margin-top: 15px;">
+        <p style="margin: 0; font-size: 14px;">
+            <span>Don't have an account?</span>
+            <a asp-area="Identity" asp-page="/Account/Register" title="Register" style="text-decoration: none; color: #3897f0">Register</a>
+        </p>
+    </div>
+</body>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+</html>
+

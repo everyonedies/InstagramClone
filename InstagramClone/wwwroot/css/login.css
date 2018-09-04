@@ -1,0 +1,75 @@
+﻿@font-face {
+    font-family: Billabong;
+    src: url("../fonts/Billabong.ttf");
+    src: local("Billabong"), url("../fonts/Billabong.ttf") format("truetype");
+}
+
+body, html {
+    font-family: Arial;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+.logo-font {
+    font-family: Billabong;
+    font-size: 3em;
+    padding: 0;
+    margin: 0;
+    color: #2C2C2C;
+    text-decoration: none;
+}
+
+input[type=text], input[type=password], input[type=url] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 6px;
+    background-color: #fafafa;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.button-style {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+    border-radius: 4px;
+    border-width: 0;
+    color: white;
+    background-color: #249cd9;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.form {
+    margin: 0 auto;
+    width: 300px;
+    border: 1px solid #ccc;
+    padding: 30px;
+    margin-top: 20px;
+    background-color: white;
+    text-align: center;
+}
+
+.validation {
+    color: red;
+    margin-top: 10px;
+    float: left;
+}
+
+.validation-summary-errors ul li {
+    text-align: left;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 10px;
+}
+
+.validation-summary-errors ul {
+    margin: 0;
+    padding: 0;
+}

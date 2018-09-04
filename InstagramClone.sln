@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2047
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstagramClone", "InstagramClone\InstagramClone.csproj", "{C9DD7F74-18DA-42BB-848C-12E2755372E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstagramClone.Domain", "InstagramClone.Domain\InstagramClone.Domain.csproj", "{202915D1-0CDC-421C-A0BD-460484EB45E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9DD7F74-18DA-42BB-848C-12E2755372E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9DD7F74-18DA-42BB-848C-12E2755372E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9DD7F74-18DA-42BB-848C-12E2755372E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9DD7F74-18DA-42BB-848C-12E2755372E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{202915D1-0CDC-421C-A0BD-460484EB45E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{202915D1-0CDC-421C-A0BD-460484EB45E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{202915D1-0CDC-421C-A0BD-460484EB45E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{202915D1-0CDC-421C-A0BD-460484EB45E9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C280700F-BC94-4255-9F93-53259ECB113F}
+	EndGlobalSection
+EndGlobal
