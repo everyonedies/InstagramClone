@@ -95,12 +95,12 @@ namespace InstagramClone.Controllers
                     }
                 }
                 AppUserViewModel userViewModel = GetAppUserViewModel(targetUser);
-                return View("GetUserProfile", userViewModel);
+                return View(userViewModel);
             }
             else
             {
                 ViewBag.Following = "Anon";
-                return View("GetUserProfile", null);
+                return View();
             }
         }
 
@@ -140,7 +140,7 @@ namespace InstagramClone.Controllers
             AppUserViewModel userViewModel = appUser.MapAppUser();
             userViewModel.NumberOfFollowers = whoFollows.Count();
             userViewModel.NumberOfFollowing = forWhomFollows.Count();
-            userViewModel.NumberOfPosts = appUser.Posts.Count();
+            userViewModel.Posts = appUser.Posts.Select(p => p.MapPost()).ToList();
 
             return userViewModel;
         }

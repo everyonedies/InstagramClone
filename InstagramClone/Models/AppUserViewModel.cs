@@ -1,4 +1,6 @@
-﻿namespace InstagramClone.Models
+﻿using System.Collections.Generic;
+
+namespace InstagramClone.Models
 {
     public class AppUserViewModel
     {
@@ -10,6 +12,6 @@
         public string WebSite { get; set; }
         public int NumberOfFollowers { get; set; }
         public int NumberOfFollowing { get; set; }
-        public int NumberOfPosts { get; set; }
+        public ICollection<PostViewModel> Posts { get; set; }
     }
 }
