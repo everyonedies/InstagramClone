@@ -27,8 +27,6 @@ namespace InstagramClone.Mapping
                 Text = post.Text,
                 Date = post.Date,
                 Picture = post.Picture,
-                Comments = post.Comments.Select(c => c.MapComment()).ToList(),
-                Likes = post.Likes.Select(l => l.MapLike()).ToList(),
             };
             return postView;
         }

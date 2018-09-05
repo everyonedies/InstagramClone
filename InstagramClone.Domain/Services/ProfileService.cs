@@ -20,6 +20,28 @@ namespace InstagramClone.Domain.Services
 
         public void SetProfilePhoto(AppUser user, Image image, string imageExt)
         {
+            string fileName = PhotoProcessing(user, image, imageExt, 152, 152);
+            user.Picture = $"/images/Users/{user.Alias}/" + fileName;
+            unitOfWork.SaveAsync();
+        }
+
+        public void AddNewPost(AppUser user, Image image, string imageExt)
+        {
+            var userWithItems = unitOfWork.Users.GetByAliasWithItems(user.Alias);
+            string fileName = PhotoProcessing(userWithItems, image, imageExt, 270, 270);
+
+            Post post = new Post
+            {
+                Picture = $"/images/Users/{userWithItems.Alias}/" + fileName,
+                Date = DateTime.Now
+            };
+
+            userWithItems.Posts.Add(post);
+            unitOfWork.SaveAsync();
+        }
+
+        private string PhotoProcessing(AppUser user, Image image, string imageExt, int w, int h)
+        {
             var uploadDirectory = Path.Combine(hostingEnvironment.WebRootPath, $"images\\Users\\{user.Alias}\\");
 
             var fileName = Guid.NewGuid().ToString();
@@ -27,7 +49,7 @@ namespace InstagramClone.Domain.Services
             var savePath = Path.Combine(uploadDirectory, fileNameExt);
 
             Image resized = CutImage(image);
-            Image scaled = ScaleImage(resized, 152, 152);
+            Image scaled = ScaleImage(resized, w, h);
 
             if (!Directory.Exists(uploadDirectory))
             {
@@ -35,8 +57,7 @@ namespace InstagramClone.Domain.Services
             }
 
             scaled.Save(savePath);
-            user.Picture = $"/images/Users/{user.Alias}/" + fileNameExt;
-            unitOfWork.SaveAsync();
+            return fileNameExt;
         }
 
         private Image CutImage(Image image)

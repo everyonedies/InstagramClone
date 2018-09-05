@@ -33,6 +33,11 @@ namespace InstagramClone.Domain.Infrastucture
                     _dbContext.Entry(i).Reference(u => u.ForWhomFollows).Load();
                     _dbContext.Entry(i).Reference(u => u.WhoFollows).Load();
                 }
+
+                foreach (var i in user.Posts)
+                {
+                    _dbContext.Entry(i).Reference(p => p.User).Load();
+                }
             }
 
             return user;

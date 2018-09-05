@@ -1,5 +1,7 @@
 ﻿let input = document.getElementById("file-input");
 
-input.onchange = function (e) {
-    document.getElementById("photo").submit();
+if (input !== null) {
+    input.onchange = function (e) {
+        document.getElementById("photo").submit();
+    }
 }

@@ -47,7 +47,6 @@ namespace InstagramClone
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddScoped<IUnitOfWork, EfUnitOfWork>();
-            services.AddScoped<IPostService, PostService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProfileService, ProfileService>();
 

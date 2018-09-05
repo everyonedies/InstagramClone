@@ -45,6 +45,21 @@ namespace InstagramClone.Controllers
             return Redirect(user.Alias);
         }
 
+        [HttpPost]
+        [Authorize]
+        public IActionResult AddNewPost()
+        {
+            var user = userManager.GetUserAsync(User).Result;
+
+            var file = HttpContext.Request.Form.Files.First();
+            Image image = Image.FromStream(file.OpenReadStream(), true, false);
+            string imageExt = Path.GetExtension(file.FileName);
+
+            profileService.AddNewPost(user, image, imageExt);
+
+            return Redirect("/" + user.Alias);
+        }
+
         public IActionResult GetFollowers(string alias)
         {
             var userFollowers = userService.GetUserFollowers(alias);
@@ -76,12 +91,17 @@ namespace InstagramClone.Controllers
         public IActionResult GetUserProfile(string alias)
         {
             var user = userManager.GetUserAsync(User).Result;
-
-            var currentUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
             var targetUser = unitOfWork.Users.GetByAliasWithItems(alias);
 
-            if (currentUser != null)
+            if (targetUser == null)
             {
+                return View();
+            }
+
+            if (user != null)
+            {
+                var currentUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
+
                 if (currentUser.Alias != targetUser.Alias)
                 {
                     var isFollowing = userService.IsUserFollowing(currentUser, targetUser);
@@ -94,14 +114,14 @@ namespace InstagramClone.Controllers
                         ViewBag.Following = "Follow";
                     }
                 }
-                AppUserViewModel userViewModel = GetAppUserViewModel(targetUser);
-                return View(userViewModel);
             }
             else
             {
                 ViewBag.Following = "Anon";
-                return View();
             }
+
+            AppUserViewModel userViewModel = GetAppUserViewModel(targetUser);
+            return View(userViewModel);
         }
 
         [Authorize]

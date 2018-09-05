@@ -8,21 +8,12 @@ namespace InstagramClone.Domain.Infrastucture
     {
         private readonly ApplicationDbContext applicationDbContext;
 
-        private IPostRepository postRepository;
         private IUserRepository userRepository;
         private IFollowerRepository followerRepository;
 
         public EfUnitOfWork(ApplicationDbContext applicationDbContext)
         {
             this.applicationDbContext = applicationDbContext;
-        }
-
-        public IPostRepository Posts
-        {
-            get
-            {
-                return postRepository = postRepository ?? new PostRepository(applicationDbContext);
-            }
         }
 
         public IUserRepository Users

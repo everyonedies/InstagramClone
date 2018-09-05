@@ -4,82 +4,89 @@
 }
 @if (Model != null)
 {
-<div class="wrap">
-    <div class="profile">
-        <div class="photo">
-            @if (User.Identity.Name == Model.Name)
-            {
-                <form id="photo" method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="SetProfilePicture">
-                    <div class="image-upload" style="margin-top: 15px;">
-                        <label for="file-input" style="cursor: pointer;">
-                            <img src="@Model.Picture" width="152" height="152" style="border-radius: 50%; border: 1px solid #e0e0e0;" />
-                        </label>
-                        <input id="file-input" name="files" type="file" accept="image/*" />
-                        <input type="submit" id="submitPhoto" value="submit" />
-                    </div>
-                </form>
-            }
-            else
-            {
-                <p><img src="@Model.Picture" width="152" height="152" style="border-radius: 50%; border: 1px solid #e0e0e0;" /></p>
-            }
-        </div>
-        <div class="info">
-            <p>
-                <span class="alias-style" style="margin-right: 20px;">@Model.Alias</span>
+    <div class="wrap">
+        <div class="profile">
+            <div class="photo">
                 @if (User.Identity.Name == Model.Name)
                 {
-                    <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" class="button-style-white" style="text-decoration: none;">Edit profile</a>
+                    <form id="photo" method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="SetProfilePicture">
+                        <div class="image-upload" style="margin-top: 15px;">
+                            <label for="file-input" style="cursor: pointer;">
+                                <img src="@Model.Picture" width="152" height="152" style="border-radius: 50%; border: 1px solid #e0e0e0;" />
+                            </label>
+                            <input id="file-input" name="files" type="file" accept="image/*" />
+                            <input type="submit" id="submitPhoto" value="submit" />
+                        </div>
+                    </form>
                 }
-                @if (User.Identity.IsAuthenticated && User.Identity.Name != Model.Name)
+                else
                 {
-                    if (ViewBag.Following != "Anon")
-                    {
-                        <a asp-area="" asp-controller="Profile" asp-action="Follow" asp-route-alias="@Model.Alias" class="button-style-white" style="text-decoration: none;">@ViewBag.Following</a>
-                    }
+                    <p><img src="@Model.Picture" width="152" height="152" style="border-radius: 50%; border: 1px solid #e0e0e0;" /></p>
                 }
-            </p>
-            <p style="margin-top: 25px; margin-bottom: 25px;">
-                <span class="margin-info"><span class="bold">@Model.Posts.Count()</span> posts</span>
-                <span class="margin-info">
-                    <a id="followers" asp-area="" asp-controller="Profile" asp-action="GetFollowers" asp-route-alias="@Model.Alias" class="simple-link"><span class="bold">@Model.NumberOfFollowers</span> followers</a>
-                </span>
-                <span class="margin-info">
-                    <a id="following" asp-area="" asp-controller="Profile" asp-action="GetFollowing" asp-route-alias="@Model.Alias" class="simple-link"><span class="bold">@Model.NumberOfFollowing</span> following</a>
-                </span>
-            </p>
-            <p class="bold p-style">@Model.RealName</p>
-            <p class="p-style">@Model.Bio</p>
-            <p class="p-style"><a href="@Model.WebSite" style="text-decoration: none; color: #003569" class="bold">@Model.WebSite</a></p>
+            </div>
+            <div class="info">
+                <p>
+                    <span class="alias-style" style="margin-right: 20px;">@Model.Alias</span>
+                    @if (User.Identity.Name == Model.Name)
+                    {
+                        <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" class="button-style-white" style="text-decoration: none;">Edit profile</a>
+                    }
+                    @if (User.Identity.IsAuthenticated && User.Identity.Name != Model.Name)
+                    {
+                        if (ViewBag.Following != "Anon")
+                        {
+                            <a asp-area="" asp-controller="Profile" asp-action="Follow" asp-route-alias="@Model.Alias" class="button-style-white" style="text-decoration: none;">@ViewBag.Following</a>
+                        }
+                    }
+                </p>
+                <p style="margin-top: 25px; margin-bottom: 25px;">
+                    <span class="margin-info"><span class="bold">@Model.Posts.Count()</span> posts</span>
+                    <span class="margin-info">
+                        <a id="followers" asp-area="" asp-controller="Profile" asp-action="GetFollowers" asp-route-alias="@Model.Alias" class="simple-link"><span class="bold">@Model.NumberOfFollowers</span> followers</a>
+                    </span>
+                    <span class="margin-info">
+                        <a id="following" asp-area="" asp-controller="Profile" asp-action="GetFollowing" asp-route-alias="@Model.Alias" class="simple-link"><span class="bold">@Model.NumberOfFollowing</span> following</a>
+                    </span>
+                </p>
+                <p class="bold p-style">@Model.RealName</p>
+                <p class="p-style">@Model.Bio</p>
+                <p class="p-style"><a href="@Model.WebSite" style="text-decoration: none; color: #003569" class="bold">@Model.WebSite</a></p>
+            </div>
         </div>
     </div>
-</div>
-<div class="posts">
-    @foreach (var i in Model.Posts)
-    {
-        <div class="post">
-            @i.Text
-        </div>
-    }
-    @if (User.Identity.Name == Model.Name)
-    {
-        <label for="post-input" style="cursor: pointer;" class="new-post">
-            <form id="post" method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="AddNewPost">
-                <p style="margin-top: 185px; line-height: 0px; font-family: 'Roboto', sans-serif;">Add new photo</p>
-                <div class="image-upload">
-                    <input id="post-input" name="post-file" type="file" accept="image/*" />
-                    <input type="submit" id="submit-post" value="submit" />
+    <div class="center" id="all-posts-center">
+        <div class="posts">
+            @foreach (var i in Model.Posts)
+            {
+                <div class="post" style="position: relative;">
+                    <img src="@i.Picture" width="270" height="270" />
+                    <div class="view-for-post" style="visibility: hidden; position: absolute; left: 0px; top: 0px; width: 100%; height: 100%;">
+                        <span style="margin-right: 20px;">0 Likes</span>
+                        <span>0 Comments</span>
+                    </div>
                 </div>
-            </form>
-        </label>
-    }
-</div>
+            }
+            @if (User.Identity.Name == Model.Name)
+            {
+                <div for="post-input" style="cursor: pointer;" class="new-post post" id="add-post">
+                    <form id="post" method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="AddNewPost">
+                        <div class="image-upload">
+                            <label for="post-input" id="label-post"></label>
+                            <input id="post-input" name="post-file" type="file" accept="image/*" />
+                            <input type="submit" id="submit-post" value="submit" />
+                        </div>
+                    </form>
+                </div>
+            }
+        </div>
+    </div>
 }
 else
 {
     <p>Not found</p>
 }
 @section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/followers.js"></script>
     <script src="~/js/picture.js"></script>
     <script src="~/js/publication.js"></script>
