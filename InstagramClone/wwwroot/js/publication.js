@@ -17,16 +17,21 @@
     $(window).on('resize', resize);
     $(window).on('load', resize);
 
-    $("div.post").on('mouseover', function () {
+    let posts = $("div.post");
+
+    posts.on('mouseover', function () {
         let obj = $(this).find("div.view-for-post").first();
         obj.css("background-color", "rgba(0,0,0,0.5)");
         obj.css("visibility", "visible");
     });
 
-    $("div.post").on('mouseleave', function () {
+    posts.on('mouseleave', function () {
         let obj = $(this).find("div.view-for-post").first();
         obj.css("background-color", "");
         obj.css("visibility", "hidden");
+    });
+
+    posts.on('click', function () {
     });
 });
 
@@ -39,7 +44,7 @@ function resize() {
         $(this).height(w);
         let h = $(this).height();
 
-        let img = $(this).find("img");
+        let img = $(this).find("img.pic");
         img.width(w);
         img.height(h);
     });

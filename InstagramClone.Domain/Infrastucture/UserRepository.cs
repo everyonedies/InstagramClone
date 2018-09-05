@@ -37,6 +37,8 @@ namespace InstagramClone.Domain.Infrastucture
                 foreach (var i in user.Posts)
                 {
                     _dbContext.Entry(i).Reference(p => p.User).Load();
+                    _dbContext.Entry(i).Collection(p => p.Likes).Load();
+                    _dbContext.Entry(i).Collection(p => p.Comments).Load();
                 }
             }
 

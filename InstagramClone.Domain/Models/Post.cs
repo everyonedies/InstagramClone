@@ -8,7 +8,8 @@ namespace InstagramClone.Domain.Models
         public int Id { get; set; }
 
         public string Text { get; set; }
-        public string Picture { get; set; }
+        public string PictureView { get; set; }
+        public string PicturePreview { get; set; }
         public DateTime Date { get; set; }
 
         public virtual AppUser User { get; set; }

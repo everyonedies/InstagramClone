@@ -26,7 +26,8 @@ namespace InstagramClone.Mapping
             {
                 Text = post.Text,
                 Date = post.Date,
-                Picture = post.Picture,
+                PicturePreview = post.PicturePreview,
+                PictureView = post.PictureView
             };
             return postView;
         }

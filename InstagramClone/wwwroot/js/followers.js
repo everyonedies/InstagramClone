@@ -39,7 +39,7 @@ function createView(objFollowers, text)
     let y = document.body.offsetHeight / 2;
 
     let blackDiv = document.createElement("div");
-    blackDiv.style = "width: 100%; height: 100%; position: absolute; left: 0; top: 0; background-color: black; opacity: 0.2;";
+    blackDiv.style = "width: 100%; height: 100%; position: fixed; left: 0; top: 0; background-color: black; opacity: 0.2;";
 
     document.body.appendChild(blackDiv);
 

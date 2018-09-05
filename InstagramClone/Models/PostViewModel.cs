@@ -6,7 +6,8 @@ namespace InstagramClone.Models
     public class PostViewModel
     {
         public string Text { get; set; }
-        public string Picture { get; set; }
+        public string PicturePreview { get; set; }
+        public string PictureView { get; set; }
         public DateTime Date { get; set; }
         public ICollection<LikeViewModel> Likes { get; set; }
         public ICollection<CommentViewModel> Comments { get; set; }

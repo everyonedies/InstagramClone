@@ -285,7 +285,7 @@ input[type=text], input[type=password], input[type=url] {
 }
 
 .searchBox {
-    position: absolute;
+    position: fixed;
     overflow: scroll;
     overflow-x: hidden;
     width: 200px;

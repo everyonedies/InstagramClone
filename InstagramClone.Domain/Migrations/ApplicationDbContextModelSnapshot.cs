@@ -4,6 +4,7 @@ using InstagramClone.Domain.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InstagramClone.Domain.Migrations
 {
@@ -177,7 +178,9 @@ namespace InstagramClone.Domain.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<string>("Picture");
+                    b.Property<string>("PicturePreview");
+
+                    b.Property<string>("PictureView");
 
                     b.Property<string>("Text");
 

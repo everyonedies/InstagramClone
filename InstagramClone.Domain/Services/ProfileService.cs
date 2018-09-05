@@ -28,19 +28,28 @@ namespace InstagramClone.Domain.Services
         public void AddNewPost(AppUser user, Image image, string imageExt)
         {
             var userWithItems = unitOfWork.Users.GetByAliasWithItems(user.Alias);
-            string fileName = PhotoProcessing(userWithItems, image, imageExt, 270, 270);
+            string fileNamePicView = SavePhoto(userWithItems, image, imageExt);
+            string fileNamePicPreview = PhotoProcessing(userWithItems, image, imageExt, 270, 270);
 
             Post post = new Post
             {
-                Picture = $"/images/Users/{userWithItems.Alias}/" + fileName,
-                Date = DateTime.Now
+                PictureView = $"/images/Users/{userWithItems.Alias}/" + fileNamePicView,
+                PicturePreview = $"/images/Users/{userWithItems.Alias}/" + fileNamePicPreview,
+                Date = DateTime.Now,
             };
 
             userWithItems.Posts.Add(post);
             unitOfWork.SaveAsync();
         }
 
-        private string PhotoProcessing(AppUser user, Image image, string imageExt, int w, int h)
+        private string SavePhoto(AppUser user, Image image, string imageExt)
+        {
+            var (savePath, fileNameExt) = PreparePhoto(user, image, imageExt);
+            image.Save(savePath);
+            return fileNameExt;
+        }
+
+        private (string savePath, string fileNameExt) PreparePhoto(AppUser user, Image image, string imageExt)
         {
             var uploadDirectory = Path.Combine(hostingEnvironment.WebRootPath, $"images\\Users\\{user.Alias}\\");
 
@@ -48,13 +57,20 @@ namespace InstagramClone.Domain.Services
             var fileNameExt = fileName + imageExt;
             var savePath = Path.Combine(uploadDirectory, fileNameExt);
 
-            Image resized = CutImage(image);
-            Image scaled = ScaleImage(resized, w, h);
-
             if (!Directory.Exists(uploadDirectory))
             {
                 Directory.CreateDirectory(uploadDirectory);
             }
+
+            return (savePath, fileNameExt);
+        }
+
+        private string PhotoProcessing(AppUser user, Image image, string imageExt, int w, int h)
+        {
+            var (savePath, fileNameExt) = PreparePhoto(user, image, imageExt);
+
+            Image resized = CutImage(image);
+            Image scaled = ScaleImage(resized, w, h);
 
             scaled.Save(savePath);
             return fileNameExt;

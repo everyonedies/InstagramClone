@@ -94,9 +94,7 @@ namespace InstagramClone.Controllers
             var targetUser = unitOfWork.Users.GetByAliasWithItems(alias);
 
             if (targetUser == null)
-            {
                 return View();
-            }
 
             if (user != null)
             {
@@ -106,19 +104,13 @@ namespace InstagramClone.Controllers
                 {
                     var isFollowing = userService.IsUserFollowing(currentUser, targetUser);
                     if (isFollowing)
-                    {
                         ViewBag.Following = "Unfollow";
-                    }
                     else
-                    {
                         ViewBag.Following = "Follow";
-                    }
                 }
             }
             else
-            {
                 ViewBag.Following = "Anon";
-            }
 
             AppUserViewModel userViewModel = GetAppUserViewModel(targetUser);
             return View(userViewModel);
@@ -161,6 +153,15 @@ namespace InstagramClone.Controllers
             userViewModel.NumberOfFollowers = whoFollows.Count();
             userViewModel.NumberOfFollowing = forWhomFollows.Count();
             userViewModel.Posts = appUser.Posts.Select(p => p.MapPost()).ToList();
+            
+            foreach (var i in userViewModel.Posts)
+            {
+                var likes = appUser.Posts.SelectMany(p => p.Likes.Select(l => l.MapLike()));
+                var comments = appUser.Posts.SelectMany(p => p.Comments.Select(c => c.MapComment()));
+
+                i.Likes = likes.ToList();
+                i.Comments = comments.ToList();
+            }
 
             return userViewModel;
         }
