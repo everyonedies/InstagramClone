@@ -6,6 +6,7 @@ namespace InstagramClone.Domain.Interfaces
     {
         IUserRepository Users { get; }
         IFollowerRepository Followers { get; }
+        IPostRepository Posts { get; }
         Task SaveAsync();
     }
 }

@@ -49,6 +49,7 @@ namespace InstagramClone
             services.AddScoped<IUnitOfWork, EfUnitOfWork>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProfileService, ProfileService>();
+            services.AddScoped<IPostService, PostService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -99,6 +100,12 @@ namespace InstagramClone
                     name: "profile3",
                     template: "profile/follow/{alias}",
                     defaults: new { controller = "Profile", action = "Follow" }
+                );
+
+                routes.MapRoute(
+                    name: "post",
+                    template: "post/{id}",
+                    defaults: new { controller = "Post", action = "ShowPost" }
                 );
             });
         }

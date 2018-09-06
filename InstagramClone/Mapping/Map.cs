@@ -24,10 +24,12 @@ namespace InstagramClone.Mapping
         {
             PostViewModel postView = new PostViewModel
             {
+                Id = post.Id,
                 Text = post.Text,
                 Date = post.Date,
                 PicturePreview = post.PicturePreview,
-                PictureView = post.PictureView
+                PictureView = post.PictureView,
+                User = post.User.MapAppUser(),
             };
             return postView;
         }

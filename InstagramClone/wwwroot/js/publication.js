@@ -30,9 +30,6 @@
         obj.css("background-color", "");
         obj.css("visibility", "hidden");
     });
-
-    posts.on('click', function () {
-    });
 });
 
 function resize() {

@@ -57,7 +57,7 @@ namespace InstagramClone.Controllers
 
             profileService.AddNewPost(user, image, imageExt);
 
-            return Redirect("/" + user.Alias);
+            return Json(new { alias = user.Alias });
         }
 
         public IActionResult GetFollowers(string alias)
@@ -150,18 +150,19 @@ namespace InstagramClone.Controllers
             var forWhomFollows = appUser.Following.Select(u => u.ForWhomFollows);
 
             AppUserViewModel userViewModel = appUser.MapAppUser();
+
             userViewModel.NumberOfFollowers = whoFollows.Count();
             userViewModel.NumberOfFollowing = forWhomFollows.Count();
-            userViewModel.Posts = appUser.Posts.Select(p => p.MapPost()).ToList();
-            
-            foreach (var i in userViewModel.Posts)
-            {
-                var likes = appUser.Posts.SelectMany(p => p.Likes.Select(l => l.MapLike()));
-                var comments = appUser.Posts.SelectMany(p => p.Comments.Select(c => c.MapComment()));
 
-                i.Likes = likes.ToList();
-                i.Comments = comments.ToList();
-            }
+            userViewModel.Posts = appUser.Posts.Select(p => 
+            {
+                var res = p.MapPost();
+
+                res.Likes = p.Likes.Select(l => l.MapLike()).ToList();
+                res.Comments = p.Comments.Select(c => c.MapComment()).ToList();
+
+                return res;
+            }).ToList();
 
             return userViewModel;
         }

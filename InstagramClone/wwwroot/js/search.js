@@ -1,16 +1,11 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-
-let searchField = document.getElementById("search");
+﻿let searchField = document.getElementById("search");
 let rect = searchField.getBoundingClientRect();
 let state = "hidden";
 
 let resultViewDiv = document.createElement("div");
 resultViewDiv.id = "resultView";
 resultViewDiv.classList.add("searchBox");
-resultViewDiv.style = "left: " + (rect.left - 1) + "px;" + "top: " + (rect.bottom + 10) + "px;";
+resultViewDiv.style = "left: " + (rect.left - 1) + "px;" + "top: " + (rect.bottom + 10) + "px; max-height: 245px;";
 resultViewDiv.style.visibility = state;
 
 window.onresize = function (event) {
@@ -67,7 +62,7 @@ function searchFunc(evt) {
                     resultViewDiv.style.visibility = state;
                     let text = "";
                     obj.forEach(function (o) {
-                        text += "<a href='/" + o + "' class='searchLink'>" + "<p style='margin: 0; padding: 15px; border-bottom: 1px solid #ccc;'>" + o.alias + "</p></a>";
+                        text += "<a href='/" + o + "' class='searchLink'>" + "<p style='margin: 0; padding: 15px; border-bottom: 1px solid #ccc;'>" + o + "</p></a>";
                     });
                     resultViewDiv.innerHTML = text;
                 }
