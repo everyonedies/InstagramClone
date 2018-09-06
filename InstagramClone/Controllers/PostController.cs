@@ -37,15 +37,30 @@ namespace InstagramClone.Controllers
             var user = userManager.GetUserAsync(User).Result;
             if (user != null)
             {
-                if (postId == 0 || text == null || text == "")
-                {
-                    return Content(postId + " " + text);
-                }
                 bool result = postService.AddNewComment(postId, text, user.Alias);
                 if (result)
                     return Json(new { alias = user.Alias });
                 else
                     return Json(new { error = "Anon users can't send comments" });
+            }
+            else
+            {
+                return Redirect("/post/" + postId);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult AddPostCaption(int postId, string caption)
+        {
+            var user = userManager.GetUserAsync(User).Result;
+            if (user != null)
+            {
+                bool result = postService.AddPostCaption(postId, caption, user.Alias);
+                if (result)
+                    return Ok();
+                else
+                    return BadRequest();
             }
             else
             {
@@ -62,8 +77,16 @@ namespace InstagramClone.Controllers
                 return commentMap;
             }).ToList();
 
+            var likes = post.Likes.Select(l => 
+            {
+                var res = l.MapLike();
+                res.User = l.User.MapAppUser();
+                return res;
+            }).ToList();
+
             PostViewModel postViewModel = post.MapPost();
             postViewModel.Comments = comments;
+            postViewModel.Likes = likes;
 
             return postViewModel;
         }

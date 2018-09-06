@@ -1,6 +1,7 @@
 ﻿using InstagramClone.Domain.Interfaces;
 using InstagramClone.Domain.Models;
 using System;
+using System.Linq;
 
 namespace InstagramClone.Domain.Services
 {
@@ -28,6 +29,25 @@ namespace InstagramClone.Domain.Services
                 };
 
                 post.Comments.Add(comment);
+                unitOfWork.SaveAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool AddPostCaption(int postId, string text, string userAlias)
+        {
+            Post post = unitOfWork.Posts.GetByIdWithItems(postId);
+            AppUser user = unitOfWork.Users.GetByAliasWithItems(userAlias);
+
+            var check = user.Posts.FirstOrDefault(p => p.Id == postId);
+
+            if (check != null && post != null && user != null && text != null && text != string.Empty)
+            {
+                post.Text = text;
                 unitOfWork.SaveAsync();
                 return true;
             }

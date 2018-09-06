@@ -1,7 +1,6 @@
 ﻿$(document).ready(function () {
     let frm = $("#post-comment");
 
-
     frm.on('submit', function (e) {
         e.preventDefault();
 
@@ -33,5 +32,27 @@
         xmrl.open("POST", "/Post/AddNewComment", true);
         xmrl.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xmrl.send(body);
+    });
+
+    let frmOwnText = $("#post-owner-text");
+
+    frmOwnText.on('submit', function (e) {
+        e.preventDefault();
+
+        let text = $("#post-input-text").val();
+        let postId = $("#post-text-id").val();
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                $("#caption-text").text(text);
+                $("#post-input-text").val("");
+            }
+        };
+        let body = `postId=${encodeURIComponent(postId)}&caption=${encodeURIComponent(text)}`;
+
+        xhr.open("POST", "/Post/AddPostCaption", true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(body);
     });
 });

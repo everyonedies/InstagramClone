@@ -57,7 +57,7 @@ namespace InstagramClone.Controllers
 
             profileService.AddNewPost(user, image, imageExt);
 
-            return Json(new { alias = user.Alias });
+            return Redirect("/" + user.Alias);
         }
 
         public IActionResult GetFollowers(string alias)

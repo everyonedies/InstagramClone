@@ -495,7 +495,7 @@ div.form div{
     color: white;
 }
 
-#comment-input:focus {
+.post-input-style:focus {
     outline: none;
 }
 
