@@ -15,7 +15,9 @@ namespace InstagramClone.Controllers
         private readonly IPostService postService;
         private readonly UserManager<AppUser> userManager;
 
-        public PostController(IUnitOfWork unitOfWork, IPostService postService, UserManager<AppUser> userManager)
+        public PostController(IUnitOfWork unitOfWork, 
+            IPostService postService, 
+            UserManager<AppUser> userManager)
         {
             this.unitOfWork = unitOfWork;
             this.postService = postService;
@@ -25,9 +27,29 @@ namespace InstagramClone.Controllers
         public IActionResult ShowPost(int id)
         {
             var post = unitOfWork.Posts.GetByIdWithItems(id);
-            var postView = GetPostViewModel(post);
+            var user = userManager.GetUserAsync(User).Result;
+            var curUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
 
-            return View(postView);
+            if (post != null)
+            {
+                if (user != null)
+                {
+                    if (postService.IsLiked(post, curUser))
+                    {
+                        ViewBag.LikeState = "Like";
+                    }
+                    else
+                    {
+                        ViewBag.LikeState = "Unlike";
+                    }
+                }
+                var postView = GetPostViewModel(post);
+                return View(postView);
+            }
+            else
+            {
+                return View();
+            }
         }
 
         [HttpPost]
@@ -35,18 +57,42 @@ namespace InstagramClone.Controllers
         public IActionResult AddNewComment(int postId, string text)
         {
             var user = userManager.GetUserAsync(User).Result;
-            if (user != null)
+            bool result = postService.AddNewComment(postId, text, user.Alias);
+
+            if (result)
+                return Json(new { alias = user.Alias });
+            else
+                return Json(new { error = "Anon users can't send comments" });
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Like(int postId)
+        {
+            var user = userManager.GetUserAsync(User).Result;
+            Post post = unitOfWork.Posts.GetByIdWithItems(postId);
+            AppUser curUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
+
+            bool result = false;
+            string status = "";
+            if (postService.IsLiked(post, curUser))
             {
-                bool result = postService.AddNewComment(postId, text, user.Alias);
-                if (result)
-                    return Json(new { alias = user.Alias });
-                else
-                    return Json(new { error = "Anon users can't send comments" });
+                result = postService.Unlike(post, curUser);
+                status = "Unlike";
             }
             else
             {
-                return Redirect("/post/" + postId);
+                result = postService.Like(post, curUser);
+                status = "Like";
             }
+
+            if (result)
+            {
+                int numOfLikes = post.Likes.Count();
+                return Json(new { likes = numOfLikes, state = status });
+            }
+            else
+                return BadRequest();
         }
 
         [HttpPost]

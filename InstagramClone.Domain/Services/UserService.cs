@@ -52,23 +52,33 @@ namespace InstagramClone.Domain.Services
             return result;
         }
 
-        public void Follow(AppUser currentUser, AppUser targetUser)
+        public bool Follow(AppUser currentUser, AppUser targetUser)
         {
-            if (currentUser.Alias != targetUser.Alias)
+            if (currentUser.Alias != targetUser.Alias && !IsUserFollowing(currentUser, targetUser))
             {
                 Follower follower = new Follower { ForWhomFollows = targetUser, WhoFollows = currentUser };
                 currentUser.Following.Add(follower);
                 unitOfWork.SaveAsync();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
-        public void Unfollow(AppUser currentUser, AppUser targetUser)
+        public bool Unfollow(AppUser currentUser, AppUser targetUser)
         {
-            if (currentUser.Alias != targetUser.Alias)
+            if (currentUser.Alias != targetUser.Alias && IsUserFollowing(currentUser, targetUser))
             {
                 var following = GetFollowing(currentUser, targetUser);
                 unitOfWork.Followers.Delete(following);
                 unitOfWork.SaveAsync();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

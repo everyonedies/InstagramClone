@@ -32,10 +32,7 @@ namespace InstagramClone.Domain.Services
                 unitOfWork.SaveAsync();
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            else return false;
         }
 
         public bool AddPostCaption(int postId, string text, string userAlias)
@@ -51,10 +48,51 @@ namespace InstagramClone.Domain.Services
                 unitOfWork.SaveAsync();
                 return true;
             }
-            else
+            else return false;
+        }
+
+        public bool Like(Post post, AppUser user)
+        {
+            if (post != null && user != null && !IsLiked(post, user))
             {
-                return false;
+                Like like = new Like
+                {
+                    User = user,
+                    Date = DateTime.Now
+                };
+                post.Likes.Add(like);
+                unitOfWork.SaveAsync();
+                return true;
             }
+            else return false;
+        }
+
+        public bool Unlike(Post post, AppUser user)
+        {
+            if (post != null && user != null && IsLiked(post, user))
+            {
+                var like = GetLike(post, user);
+                unitOfWork.Likes.Delete(like);
+                unitOfWork.SaveAsync();
+                return true;
+            }
+            else return false;
+        }
+
+        public bool IsLiked(Post post, AppUser user)
+        {
+            var checkLike = GetLike(post, user);
+
+            if (checkLike == null)
+                return false;
+            else
+                return true;
+        }
+
+        private Like GetLike(Post post, AppUser user)
+        {
+            var like = post.Likes.FirstOrDefault(l => l.User.Alias == user.Alias);
+            return like;
         }
     }
 }

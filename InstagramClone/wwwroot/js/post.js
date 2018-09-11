@@ -7,7 +7,7 @@
         let text = $("#comment-input").val();
         let postId = $("#postId").val();
 
-        var xmrl = new XMLHttpRequest();
+        let xmrl = new XMLHttpRequest();
         xmrl.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
 
@@ -42,7 +42,7 @@
         let text = $("#post-input-text").val();
         let postId = $("#post-text-id").val();
 
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 $("#caption-text").text(text);
@@ -52,6 +52,39 @@
         let body = `postId=${encodeURIComponent(postId)}&caption=${encodeURIComponent(text)}`;
 
         xhr.open("POST", "/Post/AddPostCaption", true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(body);
+    });
+
+    let frmLike = $("#post-like");
+
+    frmLike.on('click', function (e) {
+        $(this).submit();
+    });
+
+    frmLike.on('submit', function (e) {
+        e.preventDefault();
+
+        let postId = $("#post-like-id").val();
+
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let result = JSON.parse(this.response);
+                $("#num-of-likes").text(result.likes + " likes");
+
+                let img = $("#like-img");
+                if (result.state == "Like") {
+                    img.attr('src', "/images/favorite-heart-icon-png-23.png");
+                }
+                else if (result.state == "Unlike") {
+                    img.attr('src', "/images/heart-outline.png");
+                }
+            }
+        };
+        let body = `postId=${encodeURIComponent(postId)}`;
+
+        xhr.open("POST", "/Post/Like", true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send(body);
     });

@@ -42,7 +42,7 @@ namespace InstagramClone.Controllers
 
             profileService.SetProfilePhoto(user, image, imageExt);
 
-            return Redirect(user.Alias);
+            return Redirect("/" + user.Alias);
         }
 
         [HttpPost]

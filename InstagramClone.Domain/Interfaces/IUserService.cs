@@ -9,7 +9,7 @@ namespace InstagramClone.Domain.Interfaces
         IEnumerable<string> GetUserFollowers(string alias);
         IEnumerable<string> GetUserFollowing(string alias);
         bool IsUserFollowing(AppUser currentUser, AppUser targetUser);
-        void Follow(AppUser currentUser, AppUser targetUser);
-        void Unfollow(AppUser currentUser, AppUser targetUser);
+        bool Follow(AppUser currentUser, AppUser targetUser);
+        bool Unfollow(AppUser currentUser, AppUser targetUser);
     }
 }
