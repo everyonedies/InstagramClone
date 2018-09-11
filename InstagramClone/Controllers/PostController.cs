@@ -28,12 +28,12 @@ namespace InstagramClone.Controllers
         {
             var post = unitOfWork.Posts.GetByIdWithItems(id);
             var user = userManager.GetUserAsync(User).Result;
-            var curUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
 
             if (post != null)
             {
                 if (user != null)
                 {
+                    var curUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
                     if (postService.IsLiked(post, curUser))
                     {
                         ViewBag.LikeState = "Like";

@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 using InstagramClone.Domain.Interfaces;
 
 namespace InstagramClone.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         private readonly IUserService userService;

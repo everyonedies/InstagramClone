@@ -47,6 +47,8 @@
                 }
                 <p class="post-like-info" id="num-of-likes">@Model.Likes.Count() likes</p>
             </div>
+            @if (User.Identity.IsAuthenticated)
+            {
             <div class="comments comments-bottom">
                 <form id="post-comment" method="post" asp-controller="Post" asp-action="AddNewComment">
                     <input type="hidden" value="@Model.Id" name="postId" id="postId"/>
@@ -54,6 +56,7 @@
                     <input type="submit" hidden/>
                 </form>
             </div>
+            }
         </div>
     </div>
 }

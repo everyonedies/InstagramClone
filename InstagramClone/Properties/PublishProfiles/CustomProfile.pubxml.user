@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword />
+    <_PublishTargetUrl>ftp://ftp-eu.site4now.net/InstagramClone</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="appsettings.Development.json">
+      <publishTime>08/16/2018 13:01:44</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>09/04/2018 21:47:21</publishTime>
+    </File>
+    <File Include="InstagramClone.deps.json">
+      <publishTime>09/11/2018 20:59:50</publishTime>
+    </File>
+    <File Include="InstagramClone.dll">
+      <publishTime>09/11/2018 20:59:28</publishTime>
+    </File>
+    <File Include="InstagramClone.Domain.dll">
+      <publishTime>09/11/2018 19:02:32</publishTime>
+    </File>
+    <File Include="InstagramClone.Domain.pdb">
+      <publishTime>09/11/2018 19:02:32</publishTime>
+    </File>
+    <File Include="InstagramClone.pdb">
+      <publishTime>09/11/2018 20:59:28</publishTime>
+    </File>
+    <File Include="InstagramClone.runtimeconfig.json">
+      <publishTime>09/11/2018 20:59:50</publishTime>
+    </File>
+    <File Include="InstagramClone.Views.dll">
+      <publishTime>09/11/2018 20:59:37</publishTime>
+    </File>
+    <File Include="InstagramClone.Views.pdb">
+      <publishTime>09/11/2018 20:59:37</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Abstractions.dll">
+      <publishTime>07/26/2018 18:17:04</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Design.dll">
+      <publishTime>07/26/2018 18:17:04</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.dll">
+      <publishTime>07/26/2018 18:17:06</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Relational.dll">
+      <publishTime>07/26/2018 18:17:00</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.SqlServer.dll">
+      <publishTime>07/26/2018 18:17:04</publishTime>
+    </File>
+    <File Include="Microsoft.Win32.SystemEvents.dll">
+      <publishTime>05/15/2018 13:29:34</publishTime>
+    </File>
+    <File Include="OpenTK.dll">
+      <publishTime>07/11/2017 18:27:40</publishTime>
+    </File>
+    <File Include="PdfSharpCore.dll">
+      <publishTime>08/31/2018 05:42:46</publishTime>
+    </File>
+    <File Include="Remotion.Linq.dll">
+      <publishTime>02/06/2018 22:25:00</publishTime>
+    </File>
+    <File Include="runtimes/unix/lib/netcoreapp2.0/System.Drawing.Common.dll">
+      <publishTime>05/15/2018 13:29:42</publishTime>
+    </File>
+    <File Include="runtimes/win/lib/netcoreapp2.0/Microsoft.Win32.SystemEvents.dll">
+      <publishTime>05/15/2018 13:29:34</publishTime>
+    </File>
+    <File Include="runtimes/win/lib/netcoreapp2.0/System.Drawing.Common.dll">
+      <publishTime>05/15/2018 13:29:42</publishTime>
+    </File>
+    <File Include="System.Drawing.Common.dll">
+      <publishTime>05/15/2018 13:29:42</publishTime>
+    </File>
+    <File Include="System.Interactive.Async.dll">
+      <publishTime>11/21/2016 14:05:54</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>09/11/2018 20:59:50</publishTime>
+    </File>
+    <File Include="wwwroot/css/login.css">
+      <publishTime>09/03/2018 18:07:06</publishTime>
+    </File>
+    <File Include="wwwroot/css/site.css">
+      <publishTime>09/11/2018 20:52:17</publishTime>
+    </File>
+    <File Include="wwwroot/css/site.min.css">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/favicon.ico">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/fonts/Billabong.ttf">
+      <publishTime>04/11/2016 21:57:32</publishTime>
+    </File>
+    <File Include="wwwroot/fonts/Bunch Blossoms.ttf">
+      <publishTime>07/13/2018 16:39:14</publishTime>
+    </File>
+    <File Include="wwwroot/fonts/Lemon Jelly.ttf">
+      <publishTime>06/06/2018 20:47:25</publishTime>
+    </File>
+    <File Include="wwwroot/images/favorite-heart-icon-png-23.png">
+      <publishTime>09/11/2018 11:14:03</publishTime>
+    </File>
+    <File Include="wwwroot/images/heart-outline.png">
+      <publishTime>09/11/2018 11:14:33</publishTime>
+    </File>
+    <File Include="wwwroot/images/logo.png">
+      <publishTime>08/26/2018 16:59:35</publishTime>
+    </File>
+    <File Include="wwwroot/images/photo_camera_grey_192x192.png">
+      <publishTime>09/05/2018 11:08:51</publishTime>
+    </File>
+    <File Include="wwwroot/images/profile.jpg">
+      <publishTime>08/31/2018 11:15:03</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/account/0d7b7487-5bce-42c4-8d1d-5ce1d04d7200.jpg">
+      <publishTime>09/02/2018 18:22:02</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/01442065-97a3-40e5-8a4e-248c259d5cde.jpg">
+      <publishTime>09/05/2018 22:31:38</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/1832b9db-7be2-4076-ba8f-27aa614c3b39.jpeg">
+      <publishTime>09/05/2018 14:12:53</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/22b0cc66-307a-484c-ae99-924ad9cdddc7.jpg">
+      <publishTime>09/03/2018 10:47:59</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/2813fccf-2024-4727-965d-117bc7c202d3.jpg">
+      <publishTime>09/05/2018 22:40:56</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/29c9fc96-ae59-4b14-89cc-3c5be3e2d67e.jpg">
+      <publishTime>09/06/2018 11:15:52</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/2ab153ef-a931-4c85-aa3e-537abecd8fa2.jpg">
+      <publishTime>09/06/2018 11:13:10</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/2cffac52-9e33-4c5a-a4e2-6edb92bd6a27.jpg">
+      <publishTime>09/05/2018 14:27:50</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/3c697afe-95f2-4528-aae5-bf2c251f033f.jpg">
+      <publishTime>09/06/2018 11:11:36</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/4593e12f-e39e-48e1-9b2a-48a8d1c5c7a5.jpg">
+      <publishTime>09/06/2018 13:45:07</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/4ab1d5c4-fcc3-44d0-9d24-c62fc1d2361e.jpeg">
+      <publishTime>09/05/2018 14:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/4fb2af3b-b7bf-482e-9f1a-cd868227caa7.jpeg">
+      <publishTime>09/05/2018 14:20:12</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/51a5369c-aa2e-47bc-9181-7cd6922d0d43.jpg">
+      <publishTime>09/04/2018 13:52:15</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/51f514b9-64aa-425a-83e1-e3137d755769.jpg">
+      <publishTime>09/06/2018 11:06:56</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/53e25c92-63ef-47c7-84dd-236287e246b6.jpg">
+      <publishTime>09/05/2018 14:20:59</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/5486bb6a-eaaa-432c-8a24-975c972fc822.jpg">
+      <publishTime>09/05/2018 14:26:31</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/55f0f401-f20d-4f98-8e87-e2019ab94650.jpg">
+      <publishTime>09/06/2018 11:06:56</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/5ffb57fa-9682-4d80-bd7e-b724e6ca3c00.jpg">
+      <publishTime>09/05/2018 22:40:56</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/611103ee-8e03-447f-8a8d-6e20e3b24775.jpeg">
+      <publishTime>09/05/2018 14:10:27</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/7a1e268b-5b1d-44f0-8817-a963271d219e.jpg">
+      <publishTime>09/05/2018 22:31:38</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/8107cef8-c7a4-44cc-8ea8-78acc640cb61.jpg">
+      <publishTime>09/04/2018 13:52:20</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/84a6808c-f7c8-4833-9c18-ff4861e6b2ea.jpg">
+      <publishTime>09/06/2018 11:11:36</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/8c35134e-8cb2-461d-a5f6-8f9b87ed14ba.jpg">
+      <publishTime>09/03/2018 09:35:27</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/9095b3f7-cbf1-49de-95c7-ea333110dbbb.jpg">
+      <publishTime>09/05/2018 15:47:54</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/b451e671-a4e0-4624-a2b8-149cbccc9179[ImageFormat">
+      <publishTime>09/04/2018 13:46:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/b8a71261-14a6-4be5-a524-c4e3a00009cc.jpg">
+      <publishTime>09/05/2018 14:24:19</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/c428bd2c-5a2e-4c9b-97a7-25183353c1bd.jpg">
+      <publishTime>09/05/2018 14:25:55</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/d0054145-adcc-4f38-ad82-8a8560e64225.jpg">
+      <publishTime>09/06/2018 13:45:07</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/e34591d4-e883-4d5b-9f03-6bd2366252f3.jpg">
+      <publishTime>09/04/2018 13:51:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/e930e328-61fd-4da1-8758-1af1728c369e.jpg">
+      <publishTime>09/06/2018 11:13:09</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/ef11cb20-d739-493c-908d-31e5aaca344c.jpg">
+      <publishTime>09/06/2018 11:15:52</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/follower/10c8155d-18ed-44ff-bd5e-0db542fad49c.jpg">
+      <publishTime>09/06/2018 16:39:55</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/follower/33783a73-46b5-4a00-b8e5-94900cb843b1.jpg">
+      <publishTime>09/06/2018 19:17:57</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/follower/392749b3-61d0-40f3-ad6f-dc1640fd83d3.jpg">
+      <publishTime>09/06/2018 16:43:44</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/follower/5be26542-8bc1-439d-96d7-cff7889f1366.jpg">
+      <publishTime>09/06/2018 19:17:56</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/follower/5be6b2cf-44ac-40e1-83b5-f8aed4fd9797.jpg">
+      <publishTime>09/06/2018 16:39:55</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/follower/5f350946-ecac-4567-a358-f511639e71c4.jpg">
+      <publishTime>09/06/2018 16:43:44</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/follower/79a55f9c-8c0d-4f4d-be8c-19bd7a4245ea.jpg">
+      <publishTime>09/06/2018 19:21:08</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/follower/c099ddca-0314-4e47-ab53-27ee8a990132.jpg">
+      <publishTime>09/02/2018 18:16:14</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/follower/dba66eb1-0cc0-4a39-b0be-835b6461b966.jpg">
+      <publishTime>09/06/2018 19:21:08</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/horror/3f893735-004d-4823-8d47-bb8b77ea0123.jpg">
+      <publishTime>09/02/2018 18:08:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/horror/86160cf9-52f3-4360-ac7e-cd0cb2a979ca.jpg">
+      <publishTime>09/02/2018 18:09:15</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/horror/9ced6c21-7363-4fcf-a15d-cd16725618b8.jpg">
+      <publishTime>09/02/2018 18:08:28</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/horror/a67b4807-a609-4a75-b731-cccd1ec0dcf7.jpg">
+      <publishTime>09/02/2018 18:07:15</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/horror/FEAR.jpg">
+      <publishTime>09/02/2018 18:07:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/horror/IMG_2571-722X358.jpg">
+      <publishTime>09/02/2018 18:08:18</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/0d44d4fd-ee24-400c-a971-3d686d82370d.jpeg">
+      <publishTime>09/02/2018 14:33:14</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/1183c082-2985-4e1a-b2ea-c3125f9d0426.jpeg">
+      <publishTime>09/02/2018 16:15:19</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/141ca1a8-b18c-4a2f-8c45-a8725609f453.jpg">
+      <publishTime>09/02/2018 16:17:56</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/3f3ed108-63eb-4ed5-ae6f-9bea300d9425.jpg">
+      <publishTime>09/06/2018 20:48:53</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/4174fa89-6fff-43b8-a7a2-8661f1fc95fc.jpg">
+      <publishTime>09/06/2018 20:48:53</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/539a6540-95b4-4454-98c5-4455f7eb6e24.jpg">
+      <publishTime>09/02/2018 16:17:15</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/539de552-4607-4b4c-946c-674f83f55b5b.jpg">
+      <publishTime>09/02/2018 14:10:29</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/550582551-1024x1024.jpg">
+      <publishTime>09/02/2018 14:08:45</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/6a01053620481c970b01b7c7617a9f970b-600wi.jpg">
+      <publishTime>09/02/2018 16:17:04</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/7513abb6-4992-4bc8-a6b3-c17ca489faf7.jpg">
+      <publishTime>09/02/2018 16:16:08</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/756a3b90-df1c-46e8-956d-1201d7c41c79.jpg">
+      <publishTime>09/02/2018 14:33:25</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/83eea483-abcc-4f76-b483-3166d6260b83.jpg">
+      <publishTime>09/02/2018 14:09:14</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/97e28ad0-6821-4eb1-be93-03d246ebda75.jpg">
+      <publishTime>09/02/2018 14:06:01</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/982b5b33-d8a9-42a0-8290-76f3dbe467d3.jpg">
+      <publishTime>09/02/2018 14:06:39</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/ade2baa3-36b0-4dd7-8707-1cc52ed43114.jpg">
+      <publishTime>09/02/2018 14:10:35</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/b96d3ce6-ef20-4e38-b27f-431530a28464.jpeg">
+      <publishTime>09/02/2018 14:27:18</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/c2c0dbda-de1a-4c43-84d2-d8342bab28d2.jpg">
+      <publishTime>09/02/2018 14:33:52</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/c5f3f02c-ba0b-400c-a3db-a9afe081b866.jpeg">
+      <publishTime>09/02/2018 14:32:15</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/d5d79d84-39f6-4d27-b3ad-adcf3b54127a.jpg">
+      <publishTime>09/02/2018 17:35:00</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/dbe09fa3-23e6-4e7c-884d-e28230e45141.jpeg">
+      <publishTime>09/02/2018 14:27:57</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/e9bbeedd-42bb-4227-89e9-da3b4fe6241e.jpg">
+      <publishTime>09/02/2018 14:33:41</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/fede8c41-9544-4dfb-a893-104eac2866b9.jpg">
+      <publishTime>09/02/2018 14:09:44</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/images.jpg">
+      <publishTime>09/02/2018 13:19:43</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/Karen Lynn Smith_1512421341226_10154147_ver1.0_1280_720.jpg">
+      <publishTime>09/02/2018 16:17:48</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/Monkey.jpg">
+      <publishTime>09/02/2018 16:16:01</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/nature-purple-petals-36753.jpg">
+      <publishTime>09/02/2018 17:34:52</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/pexels-photo-219998.jpeg">
+      <publishTime>09/02/2018 14:27:08</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/pexels-photo-874158.jpeg">
+      <publishTime>09/02/2018 14:27:51</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/monkey/pic.jpg">
+      <publishTime>09/02/2018 13:45:02</publishTime>
+    </File>
+    <File Include="wwwroot/js/followers.js">
+      <publishTime>09/06/2018 09:29:34</publishTime>
+    </File>
+    <File Include="wwwroot/js/picture.js">
+      <publishTime>09/05/2018 14:36:17</publishTime>
+    </File>
+    <File Include="wwwroot/js/post.js">
+      <publishTime>09/11/2018 13:34:35</publishTime>
+    </File>
+    <File Include="wwwroot/js/publication.js">
+      <publishTime>09/06/2018 10:15:42</publishTime>
+    </File>
+    <File Include="wwwroot/js/search.js">
+      <publishTime>09/11/2018 20:50:53</publishTime>
+    </File>
+    <File Include="wwwroot/js/search.min.js">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/.bower.json">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css.map">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css.map">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.css">
+      <publishTime>08/16/2018 14:07:52</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.css.map">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.js">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.min.js">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/npm.js">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/LICENSE">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation-unobtrusive/.bower.json">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/.bower.json">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/dist/additional-methods.js">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/dist/additional-methods.min.js">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/dist/jquery.validate.js">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/dist/jquery.validate.min.js">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/LICENSE.md">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/.bower.json">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/dist/jquery.js">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/dist/jquery.min.js">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/dist/jquery.min.map">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/LICENSE.txt">
+      <publishTime>08/16/2018 13:01:45</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

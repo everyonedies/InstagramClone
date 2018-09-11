@@ -10,7 +10,7 @@ resultViewDiv.style.visibility = state;
 
 window.onresize = function (event) {
     let rect = searchField.getBoundingClientRect();
-    resultViewDiv.style = "left: " + (rect.left - 1) + "px;" + "top: " + (rect.bottom + 10) + "px;";
+    resultViewDiv.style = "left: " + (rect.left - 1) + "px;" + "top: " + (rect.bottom + 10) + "px; max-height: 245px;";
     resultViewDiv.style.visibility = state;
 };
 
