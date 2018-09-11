@@ -35,12 +35,15 @@ namespace InstagramClone.Controllers
         public IActionResult SetProfilePicture()
         {
             var user = userManager.GetUserAsync(User).Result;
-
             var file = HttpContext.Request.Form.Files.First();
-            Image image = Image.FromStream(file.OpenReadStream(), true, false);
-            string imageExt = Path.GetExtension(file.FileName);
+            string type = file.ContentType;
 
-            profileService.SetProfilePhoto(user, image, imageExt);
+            if (type == "image/jpeg" || type == "image/gif" || type == "image/png")
+            {
+                Image image = Image.FromStream(file.OpenReadStream(), true, false);
+                string imageExt = Path.GetExtension(file.FileName);
+                profileService.SetProfilePhoto(user, image, imageExt);
+            }
 
             return Redirect("/" + user.Alias);
         }
