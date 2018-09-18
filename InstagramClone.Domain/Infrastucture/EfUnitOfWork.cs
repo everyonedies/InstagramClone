@@ -12,6 +12,8 @@ namespace InstagramClone.Domain.Infrastucture
         private IFollowerRepository followerRepository;
         private IPostRepository postRepository;
         private ILikeRepository likeRepository;
+        private ITagRepository tagRepository;
+        private ITagPostRepository tagPostRepository;
 
         public EfUnitOfWork(ApplicationDbContext applicationDbContext)
         {
@@ -47,6 +49,22 @@ namespace InstagramClone.Domain.Infrastucture
             get
             {
                 return likeRepository = likeRepository ?? new LikeRepository(applicationDbContext);
+            }
+        }
+
+        public ITagRepository Tags
+        {
+            get
+            {
+                return tagRepository = tagRepository ?? new TagRepository(applicationDbContext);
+            }
+        }
+
+        public ITagPostRepository TagPost
+        {
+            get
+            {
+                return tagPostRepository = tagPostRepository ?? new TagPostRepository(applicationDbContext);
             }
         }
 

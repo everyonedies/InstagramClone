@@ -1,0 +1,49 @@
+﻿@model AppUserViewModel
+<div class="profile">
+    <div class="photo">
+        @if (User.Identity.Name == Model.Name)
+        {
+            <form id="photo" method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="SetProfilePicture">
+                <div class="image-upload" style="margin-top: 15px;">
+                    <label for="file-input" style="cursor: pointer;">
+                        <img src="@Model.Picture" width="152" height="152" style="border-radius: 50%; border: 1px solid #e0e0e0;" />
+                    </label>
+                    <input id="file-input" name="files" type="file" accept="image/*" />
+                    <input type="submit" id="submitPhoto" value="submit" />
+                </div>
+            </form>
+        }
+        else
+        {
+            <p><img src="@Model.Picture" width="152" height="152" style="border-radius: 50%; border: 1px solid #e0e0e0;" /></p>
+        }
+    </div>
+    <div class="info">
+        <p>
+            <span class="alias-style" style="margin-right: 20px;">@Model.Alias</span>
+            @if (User.Identity.Name == Model.Name)
+            {
+                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" class="button-style-white" style="text-decoration: none;">Edit profile</a>
+            }
+            @if (User.Identity.IsAuthenticated && User.Identity.Name != Model.Name)
+            {
+                if (ViewBag.Following != "Anon")
+                {
+                    <a asp-area="" asp-controller="Profile" asp-action="Follow" asp-route-alias="@Model.Alias" class="button-style-white" style="text-decoration: none;">@ViewBag.Following</a>
+                }
+            }
+        </p>
+        <p style="margin-top: 25px; margin-bottom: 25px;">
+            <span class="margin-info"><span class="bold">@Model.Posts.Count()</span> posts</span>
+            <span class="margin-info">
+                <a id="followers" asp-area="" asp-controller="Profile" asp-action="GetFollowers" asp-route-alias="@Model.Alias" class="simple-link"><span class="bold">@Model.NumberOfFollowers</span> followers</a>
+            </span>
+            <span class="margin-info">
+                <a id="following" asp-area="" asp-controller="Profile" asp-action="GetFollowing" asp-route-alias="@Model.Alias" class="simple-link"><span class="bold">@Model.NumberOfFollowing</span> following</a>
+            </span>
+        </p>
+        <p class="bold p-style">@Model.RealName</p>
+        <p class="p-style">@Model.Bio</p>
+        <p class="p-style"><a href="@Model.WebSite" style="text-decoration: none; color: #003569" class="bold">@Model.WebSite</a></p>
+    </div>
+</div>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace InstagramClone.Controllers
 {
@@ -16,7 +17,7 @@ namespace InstagramClone.Controllers
         private readonly UserManager<AppUser> userManager;
 
         public PostController(IUnitOfWork unitOfWork, 
-            IPostService postService, 
+            IPostService postService,
             UserManager<AppUser> userManager)
         {
             this.unitOfWork = unitOfWork;
@@ -24,39 +25,34 @@ namespace InstagramClone.Controllers
             this.userManager = userManager;
         }
 
-        public IActionResult ShowPost(int id)
+        public async Task<IActionResult> ShowPost(int id)
         {
             var post = unitOfWork.Posts.GetByIdWithItems(id);
-            var user = userManager.GetUserAsync(User).Result;
+            var user = await userManager.GetUserAsync(User);
 
             if (post != null)
             {
                 if (user != null)
                 {
                     var curUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
+
                     if (postService.IsLiked(post, curUser))
-                    {
                         ViewBag.LikeState = "Like";
-                    }
                     else
-                    {
                         ViewBag.LikeState = "Unlike";
-                    }
                 }
+
                 var postView = GetPostViewModel(post);
                 return View(postView);
             }
-            else
-            {
-                return View();
-            }
+            return View();
         }
 
         [HttpPost]
         [Authorize]
-        public IActionResult AddNewComment(int postId, string text)
+        public async Task<IActionResult> AddNewComment(int postId, string text)
         {
-            var user = userManager.GetUserAsync(User).Result;
+            var user = await userManager.GetUserAsync(User);
             bool result = postService.AddNewComment(postId, text, user.Alias);
 
             if (result)
@@ -67,9 +63,9 @@ namespace InstagramClone.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Like(int postId)
+        public async Task<IActionResult> Like(int postId)
         {
-            var user = userManager.GetUserAsync(User).Result;
+            var user = await userManager.GetUserAsync(User);
             Post post = unitOfWork.Posts.GetByIdWithItems(postId);
             AppUser curUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
 
@@ -91,18 +87,41 @@ namespace InstagramClone.Controllers
                 int numOfLikes = post.Likes.Count();
                 return Json(new { likes = numOfLikes, state = status });
             }
-            else
-                return BadRequest();
+            else return BadRequest();
         }
 
         [HttpPost]
         [Authorize]
-        public IActionResult AddPostCaption(int postId, string caption)
+        public async Task<IActionResult> AddPostCaption(int postId, string caption)
         {
-            var user = userManager.GetUserAsync(User).Result;
+            var user = await userManager.GetUserAsync(User);
             if (user != null)
             {
                 bool result = postService.AddPostCaption(postId, caption, user.Alias);
+                if (result)
+                    return Ok();
+                else
+                    return BadRequest();
+            }
+            else
+            {
+                return Redirect("/post/" + postId);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> AddPostTags(int postId, string tags)
+        {
+            var user = await userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                bool result = false;
+                if (tags != null && tags != string.Empty)
+                    result = postService.AddPostTags(postId, tags, user.Alias);
+                else
+                    result = postService.RemovePostTags(postId, user.Alias);
+
                 if (result)
                     return Ok();
                 else
@@ -130,9 +149,16 @@ namespace InstagramClone.Controllers
                 return res;
             }).ToList();
 
+            var tags = post.TagPosts.Select(tp =>
+            {
+                var res = tp.Tag.MapTag();
+                return res;
+            }).ToList();
+
             PostViewModel postViewModel = post.MapPost();
             postViewModel.Comments = comments;
             postViewModel.Likes = likes;
+            postViewModel.Tags = tags;
 
             return postViewModel;
         }

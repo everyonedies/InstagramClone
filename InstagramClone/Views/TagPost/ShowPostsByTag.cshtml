@@ -1,0 +1,17 @@
+﻿@model ICollection<PostViewModel>
+@{
+    ViewData["Title"] = "#" + ViewBag.Tag;
+}
+<div style="text-align: center; margin-top: 1em;">
+    <span style="font-family: Roboto; font-size: 2em;">#@ViewBag.Tag</span>
+</div>
+<div class="center" id="all-posts-center">
+    <div class="posts">
+        <partial name="_PostPartialView" model="Model" />
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/publication.js"></script>
+}

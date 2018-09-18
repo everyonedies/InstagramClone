@@ -8,6 +8,8 @@ namespace InstagramClone.Domain.Interfaces
         IFollowerRepository Followers { get; }
         IPostRepository Posts { get; }
         ILikeRepository Likes { get; }
+        ITagRepository Tags { get; }
+        ITagPostRepository TagPost { get; }
         Task SaveAsync();
     }
 }

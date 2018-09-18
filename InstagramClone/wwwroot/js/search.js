@@ -62,14 +62,23 @@ function searchFunc(evt) {
                     resultViewDiv.style.visibility = state;
                     let text = "";
                     obj.forEach(function (o) {
-                        text += "<a href='/" + o + "' class='searchLink'>" + "<p style='margin: 0; padding: 15px; border-bottom: 1px solid #ccc;'>" + o + "</p></a>";
+                        let hrf = "";
+                        if (o.type == "user") {
+                            hrf = "/" + o.text;
+                        }
+                        else if (o.type == "tag") {
+                            hrf = "/tagpost/showpostsbytag?text=" + o.text;
+                            o.text = "#" + o.text;
+                        }
+                        text += "<a href='" + hrf + "' class='searchLink'>" + "<p style='margin: 0; padding: 15px; border-bottom: 1px solid #ccc;'>" + o.text + "</p></a>";
                     });
                     resultViewDiv.innerHTML = text;
                 }
                 resultViewDiv.style.visibility = state;
             }
         };
-        xmlhttp.open("GET", "/Home/SearchAjax?alias=" + this.value, true);
+        let text = `${encodeURIComponent(this.value)}`;
+        xmlhttp.open("GET", "/Home/SearchAjax?text=" + text, true);
         xmlhttp.send();
     }
 }

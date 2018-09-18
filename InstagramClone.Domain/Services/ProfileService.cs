@@ -42,6 +42,19 @@ namespace InstagramClone.Domain.Services
             unitOfWork.SaveAsync();
         }
 
+        public bool DeletePost(AppUser user, int postId)
+        {
+            var postWithItems = unitOfWork.Posts.GetByIdWithItems(postId);
+            var check = postWithItems.User.Alias == user.Alias;
+
+            if (check)
+            {
+                unitOfWork.Posts.Delete(postWithItems);
+                return true;
+            }
+            else return false;
+        }
+
         private string SavePhoto(AppUser user, Image image, string imageExt)
         {
             var (savePath, fileNameExt) = PreparePhoto(user, image, imageExt);

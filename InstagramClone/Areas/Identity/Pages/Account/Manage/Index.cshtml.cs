@@ -103,7 +103,7 @@ namespace InstagramClone.Areas.Identity.Pages.Account.Manage
 
             await _unitOfWork.SaveAsync();
 
-            return Redirect("/profile");
+            return Redirect("/" + user.Alias);
         }
     }
 }

@@ -42,13 +42,72 @@ namespace InstagramClone.Domain.Services
 
             var check = user.Posts.FirstOrDefault(p => p.Id == postId);
 
-            if (check != null && post != null && user != null && text != null && text != string.Empty)
+            if (check != null && post != null && user != null)
             {
                 post.Text = text;
                 unitOfWork.SaveAsync();
                 return true;
             }
             else return false;
+        }
+
+        public bool AddPostTags(int postId, string tags, string userAlias)
+        {
+            Post post = unitOfWork.Posts.GetByIdWithItems(postId);
+            AppUser user = unitOfWork.Users.GetByAliasWithItems(userAlias);
+
+            var check = user.Posts.FirstOrDefault(p => p.Id == postId);
+
+            if (user != null && post != null && check != null && tags != null)
+            {
+                var res = tags.Split("#").Where(s => s != "").Select(s => s.Trim());
+                foreach (var i in res)
+                {
+                    Tag tag = unitOfWork.Tags.List(t => t.Text == i).FirstOrDefault();
+                    if (tag == null)
+                    {
+                        tag = new Tag
+                        {
+                            Text = i
+                        };
+                        unitOfWork.Tags.Add(tag);
+                    }
+
+                    TagPost tagPost = post.TagPosts.Where(tp => tp.Tag == tag).FirstOrDefault();
+                    if (tagPost == null)
+                    {
+                        tagPost = new TagPost
+                        {
+                            Tag = tag,
+                            Post = post
+                        };
+                        unitOfWork.TagPost.Add(tagPost);
+                    }
+                }
+                unitOfWork.SaveAsync();
+                return true;
+            }
+            return false;
+        }
+
+        public bool RemovePostTags(int postId, string userAlias)
+        {
+            Post post = unitOfWork.Posts.GetByIdWithItems(postId);
+            AppUser user = unitOfWork.Users.GetByAliasWithItems(userAlias);
+
+            var check = user.Posts.FirstOrDefault(p => p.Id == postId);
+
+            if (user != null && post != null && check != null)
+            {
+                var tp = post.TagPosts.ToList();
+                foreach (var i in tp)
+                {
+                    unitOfWork.TagPost.Delete(i);
+                }
+                unitOfWork.SaveAsync();
+                return true;
+            }
+            return false;
         }
 
         public bool Like(Post post, AppUser user)

@@ -10,11 +10,22 @@
             <div class="comments comments-top" id="post-info">
                 <p class="post-title"><a href="/@Model.User.Alias">@Model.User.Alias</a></p>
                 <p id="caption-text">@Model.Text</p>
+                <p id="tags">
+                    @foreach (var i in Model.Tags)
+                    {
+                    <span><a asp-controller="TagPost" asp-action="ShowPostsByTag" asp-route-text="@i.Text" style="text-decoration: none; color: blue;">#@i.Text</a></span>
+                    }
+                </p>
                 @if (User.Identity.Name == Model.User.Name)
                 {
                     <form id="post-owner-text" method="post" asp-controller="Post" asp-action="AddPostCaption">
-                        <input type="hidden" value="@Model.Id" name="post-text-id" id="post-text-id" />
-                        <input class="post-input-style" autocomplete="off" required id="post-input-text" name="post-input-text" type="text" placeholder="Type something here..." />
+                        <input type="hidden" value="@Model.Id" name="postId" id="post-text-id" />
+                        <input class="post-input-style" autocomplete="off" id="post-input-text" name="caption" type="text" placeholder="Type caption here..." />
+                        <input type="submit" hidden />
+                    </form>
+                    <form id="tag-form" method="post" asp-controller="Post" asp-action="AddPostTags">
+                        <input type="hidden" value="@Model.Id" name="postId" id="post-id-tags" />
+                        <input class="post-input-style" autocomplete="off" id="post-input-tags" name="tags" type="text" placeholder="Type tags here..." />
                         <input type="submit" hidden />
                     </form>
                 }
@@ -28,24 +39,31 @@
             <div class="comments post-info">
                 @if (User.Identity.IsAuthenticated)
                 {
-                <form id="post-like" method="post" asp-controller="Post" asp-action="Like">
-                    <input type="hidden" value="@Model.Id" name="postId" id="post-like-id" />
-                    @{
-                        string src = "";
-                    }
-                    @if (ViewBag.LikeState == "Unlike")
-                    {
-                        src = "/images/heart-outline.png";
-                    }
-                    else if (ViewBag.LikeState == "Like")
-                    {
-                        src = "/images/favorite-heart-icon-png-23.png";
-                    }
-                    <img id="like-img" src="@src" width="15" height="15" />
-                    <input type="submit" hidden />
-                </form>
+                    <form id="post-like" method="post" asp-controller="Post" asp-action="Like">
+                        <input type="hidden" value="@Model.Id" name="postId" id="post-like-id" />
+                        @{
+                            string src = "";
+                        }
+                        @if (ViewBag.LikeState == "Unlike")
+                        {
+                            src = "/images/heart-outline.png";
+                        }
+                        else if (ViewBag.LikeState == "Like")
+                        {
+                            src = "/images/favorite-heart-icon-png-23.png";
+                        }
+                        <img id="like-img" src="@src" width="15" height="15" />
+                        <input type="submit" hidden />
+                    </form>
                 }
                 <p class="post-like-info" id="num-of-likes">@Model.Likes.Count() likes</p>
+                @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.User.Name)
+                {
+                    <form id="delete-post" method="post" asp-controller="Profile" asp-action="DeletePost">
+                        <input type="hidden" value="@Model.Id" name="postId" id="post-delete-id" />
+                        <input type="submit" id="delete-post-button" value="Delete post" class="button-style"/>
+                    </form>
+                }
             </div>
             @if (User.Identity.IsAuthenticated)
             {

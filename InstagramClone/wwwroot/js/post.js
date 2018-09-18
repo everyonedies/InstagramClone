@@ -56,6 +56,36 @@
         xhr.send(body);
     });
 
+    let frmTags = $("#tag-form");
+
+    frmTags.on('submit', function (e) {
+        e.preventDefault();
+
+        let text = $("#post-input-tags").val();
+        let postId = $("#post-id-tags").val();
+
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let tags = text.split("#");
+                let strView = "";
+                for (let i = 0; i < tags.length; i++) {
+                    let t = tags[i].trim();
+                    if (t != "") {
+                        strView += "<span><a href='/TagPost/ShowPostsByTag?text=" + t + "' style='text-decoration: none;'>#" + t + "</a>&nbsp</span>";
+                    }
+                }
+                $("#tags").html(strView);
+                $("#post-input-tags").val("");
+            }
+        };
+        let body = `postId=${encodeURIComponent(postId)}&tags=${encodeURIComponent(text)}`;
+
+        xhr.open("POST", "/Post/AddPostTags", true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(body);
+    });
+
     let frmLike = $("#post-like");
 
     frmLike.on('click', function (e) {
@@ -87,5 +117,17 @@
         xhr.open("POST", "/Post/Like", true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send(body);
+    });
+
+    let frmDeletePost = $("#delete-post");
+    let check = false;
+    frmDeletePost.on('submit', function (e) {
+        if (!check && confirm("Are you sure want to delete this post?")) {
+            check = true;
+            frmDeletePost.submit();
+        }
+        else {
+            e.preventDefault();
+        }
     });
 });

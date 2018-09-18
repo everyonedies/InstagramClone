@@ -1,0 +1,14 @@
+﻿@model ICollection<PostViewModel>
+
+@foreach (var i in Model)
+{
+    <div class="post" style="position: relative;">
+        <a asp-area="" asp-controller="Post" asp-action="ShowPost" asp-route-id="@i.Id" style="text-decoration: none; color: white;">
+            <img class="pic" src="@i.PicturePreview" width="270" height="270" />
+            <div class="view-for-post" style="visibility: hidden; position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; font-size: 15px; font-family: Roboto;">
+                <span style="margin-right: 10px;">@i.Likes.Count() likes</span>
+                <span>@i.Comments.Count() comments</span>
+            </div>
+        </a>
+    </div>
+}

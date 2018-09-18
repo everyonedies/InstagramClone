@@ -7,5 +7,6 @@ namespace InstagramClone.Domain.Interfaces
     {
         void SetProfilePhoto(AppUser user, Image image, string imageExt);
         void AddNewPost(AppUser user, Image image, string imageExt);
+        bool DeletePost(AppUser user, int postId);
     }
 }

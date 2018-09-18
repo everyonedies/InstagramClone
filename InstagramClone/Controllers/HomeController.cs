@@ -1,16 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using InstagramClone.Domain.Interfaces;
+using System.Collections.Generic;
 
 namespace InstagramClone.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IUserService userService;
+        private readonly IUnitOfWork unitOfWork;
 
-        public HomeController(IUserService userService)
+        public HomeController(IUserService userService, IUnitOfWork unitOfWork)
         {
             this.userService = userService;
+            this.unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
@@ -18,18 +21,35 @@ namespace InstagramClone.Controllers
             return View();
         }
 
-        public IActionResult SearchAjax(string alias)
+        public IActionResult SearchAjax(string text)
         {
-            var list = userService.FindUsersByAlias(alias);
-
-            if (list.Count() != 0)
+            object data;
+            int len = 0;
+            if (text[0] == '#')
             {
-                return Json(list);
+                var res = unitOfWork.Tags.List(t => t.Text.Contains(text.Substring(1))).Select(t => new { text = t.Text, type = "tag" });
+                len = res.Count();
+                data = res;
+            }
+            else if (text[0] == '@')
+            {
+                var res = userService.FindUsersByAlias(text).Select(u => new { text = u, type = "user" });
+                len = res.Count();
+                data = res;
             }
             else
             {
-                return Json(new { error = "Not found" });
+                var tags = unitOfWork.Tags.List(t => t.Text.Contains(text.Substring(1))).Select(t => new { text = t.Text, type = "tag" });
+                var users = userService.FindUsersByAlias(text).Select(u => new { text = u, type = "user" });
+                var res = users.Concat(tags).OrderBy(i => i.text);
+                len = res.Count();
+                data = res;
             }
+
+            if (len != 0)
+                return Json(data);
+            else
+                return Json(new { error = "Not found" });
         }
     }
 }

@@ -9,6 +9,7 @@ using System.IO;
 using Microsoft.AspNetCore.Http;
 using System.Drawing;
 using InstagramClone.Domain.Interfaces;
+using System.Threading.Tasks;
 
 namespace InstagramClone.Controllers
 {
@@ -32,9 +33,9 @@ namespace InstagramClone.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult SetProfilePicture()
+        public async Task<IActionResult> SetProfilePicture()
         {
-            var user = userManager.GetUserAsync(User).Result;
+            var user = await userManager.GetUserAsync(User);
             var file = HttpContext.Request.Form.Files.First();
             string type = file.ContentType;
 
@@ -50,17 +51,33 @@ namespace InstagramClone.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult AddNewPost()
+        public async Task<IActionResult> AddNewPost()
         {
-            var user = userManager.GetUserAsync(User).Result;
-
+            var user = await userManager.GetUserAsync(User);
             var file = HttpContext.Request.Form.Files.First();
-            Image image = Image.FromStream(file.OpenReadStream(), true, false);
-            string imageExt = Path.GetExtension(file.FileName);
+            string type = file.ContentType;
 
-            profileService.AddNewPost(user, image, imageExt);
+            if (type == "image/jpeg" || type == "image/gif" || type == "image/png")
+            {
+                Image image = Image.FromStream(file.OpenReadStream(), true, false);
+                string imageExt = Path.GetExtension(file.FileName);
+                profileService.AddNewPost(user, image, imageExt);
+            }
 
             return Redirect("/" + user.Alias);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> DeletePost(int postId)
+        {
+            var user = await userManager.GetUserAsync(User);
+            bool result = profileService.DeletePost(user, postId);
+
+            if (result)
+                return Redirect("/" + user.Alias);
+            else
+                return BadRequest();
         }
 
         public IActionResult GetFollowers(string alias)
@@ -68,13 +85,9 @@ namespace InstagramClone.Controllers
             var userFollowers = userService.GetUserFollowers(alias);
 
             if (userFollowers.Count() != 0)
-            {
                 return Json(userFollowers);
-            }
             else
-            {
                 return Json(new { error = $"The user '{alias}' doesn't have followers" });
-            }
         }
 
         public IActionResult GetFollowing(string alias)
@@ -82,18 +95,14 @@ namespace InstagramClone.Controllers
             var userFollowing = userService.GetUserFollowing(alias);
 
             if (userFollowing.Count() != 0)
-            {
                 return Json(userFollowing);
-            }
             else
-            {
                 return Json(new { error = $"The user '{alias}' doesn't following anyone"});
-            }
         }
 
-        public IActionResult GetUserProfile(string alias)
+        public async Task<IActionResult> GetUserProfile(string alias)
         {
-            var user = userManager.GetUserAsync(User).Result;
+            var user = await userManager.GetUserAsync(User);
             var targetUser = unitOfWork.Users.GetByAliasWithItems(alias);
 
             if (targetUser == null)
@@ -102,7 +111,6 @@ namespace InstagramClone.Controllers
             if (user != null)
             {
                 var currentUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
-
                 if (currentUser.Alias != targetUser.Alias)
                 {
                     var isFollowing = userService.IsUserFollowing(currentUser, targetUser);
@@ -113,34 +121,32 @@ namespace InstagramClone.Controllers
                 }
             }
             else
+            {
                 ViewBag.Following = "Anon";
+            }
 
             AppUserViewModel userViewModel = GetAppUserViewModel(targetUser);
             return View(userViewModel);
         }
 
         [Authorize]
-        public IActionResult Follow(string alias)
+        public async Task<IActionResult> Follow(string alias)
         {
-            var user = userManager.GetUserAsync(User).Result;
+            var user = await userManager.GetUserAsync(User);
+            var targetUser = unitOfWork.Users.GetByAliasWithItems(alias);
 
-            if (user != null)
+            if (user != null && targetUser != null)
             {
                 var currentUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
-                var targetUser = unitOfWork.Users.GetByAliasWithItems(alias);
 
                 if (currentUser.Alias != targetUser.Alias)
                 {
                     var isFollowing = userService.IsUserFollowing(currentUser, targetUser);
 
                     if (isFollowing)
-                    {
                         userService.Unfollow(currentUser, targetUser);
-                    }
                     else
-                    {
                         userService.Follow(currentUser, targetUser);
-                    }
                 }
             }
 

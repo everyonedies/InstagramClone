@@ -14,8 +14,8 @@
         }
     }
 
-    $(window).on('resize', resize);
-    $(window).on('load', resize);
+    //$(window).on('resize', resize);
+    //$(window).on('load', resize);
 
     let posts = $("div.post");
 
