@@ -1,93 +1,80 @@
-﻿let searchField = document.getElementById("search");
-let rect = searchField.getBoundingClientRect();
-let state = "hidden";
+﻿$(document).ready(function () {
+    let searchField = document.getElementById("input-search");
+    let searchResult = document.getElementById("searchResult");
+    let state = "hidden";
 
-let resultViewDiv = document.createElement("div");
-resultViewDiv.id = "resultView";
-resultViewDiv.classList.add("searchBox");
-resultViewDiv.style = "left: " + (rect.left - 1) + "px;" + "top: " + (rect.bottom + 10) + "px; max-height: 245px;";
-resultViewDiv.style.visibility = state;
-
-window.onresize = function (event) {
-    let rect = searchField.getBoundingClientRect();
-    resultViewDiv.style = "left: " + (rect.left - 1) + "px;" + "top: " + (rect.bottom + 10) + "px; max-height: 245px;";
-    resultViewDiv.style.visibility = state;
-};
-
-document.body.appendChild(resultViewDiv);
-
-function forBlur(e) {
-    state = "hidden";
-    resultViewDiv.style.visibility = state;
-}
-
-resultViewDiv.addEventListener("mouseover", function (e) {
-    searchField.removeEventListener("blur", forBlur, false)
-});
-
-resultViewDiv.addEventListener("mouseleave", function (e) {
-    if (searchField !== document.activeElement) {
+    function forBlur(e) {
         state = "hidden";
-        resultViewDiv.style.visibility = state;
+        searchResult.style.visibility = state;
     }
-    searchField.addEventListener("blur", forBlur, false)
-});
 
-searchField.addEventListener('blur', forBlur, false);
+    searchResult.addEventListener("mouseover", function (e) {
+        searchField.removeEventListener("blur", forBlur, false);
+    });
 
-searchField.addEventListener('focus', function (e) {
-    if (searchField.value !== "")
-        state = "visible";
-    else
-        state = "hidden";
-    resultViewDiv.style.visibility = state;
-});
+    searchResult.addEventListener("mouseleave", function (e) {
+        if (searchField !== document.activeElement) {
+            state = "hidden";
+            searchResult.style.visibility = state;
+        }
+        searchField.addEventListener("blur", forBlur, false);
+    });
 
-function searchFunc(evt) {
-    if (this.value == 0) {
-        state = "hidden";
-        resultViewDiv.style.visibility = state;
-    }
-    else {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                let obj = JSON.parse(this.responseText);
-                state = "visible";
-                if (obj.error) {
-                    resultViewDiv.style.visibility = state;
-                    resultViewDiv.innerHTML = '<p align="center" style="width: 100%; margin: 0; padding-top: 10px; padding-bottom: 10px;">No results</p>';
+    searchField.addEventListener('blur', forBlur, false);
+
+    searchField.addEventListener('focus', function (e) {
+        if (searchField.value !== "")
+            state = "visible";
+        else
+            state = "hidden";
+        searchResult.style.visibility = state;
+    });
+
+    function searchFunc(evt) {
+        if (this.value == 0) {
+            state = "hidden";
+            searchResult.style.visibility = state;
+        }
+        else {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    let obj = JSON.parse(this.responseText);
+                    state = "visible";
+                    if (obj.error) {
+                        searchResult.style.visibility = state;
+                        searchResult.innerHTML = '<p align="center" style="width: 100%; margin: 0; padding-top: 10px; padding-bottom: 10px;">No results</p>';
+                    }
+                    else {
+                        searchResult.style.visibility = state;
+                        let text = "";
+                        obj.forEach(function (o) {
+                            let hrf = "";
+                            if (o.type == "user") {
+                                hrf = "/" + o.text;
+                            }
+                            else if (o.type == "tag") {
+                                hrf = "/tagpost/showpostsbytag?text=" + o.text;
+                                o.text = "#" + o.text;
+                            }
+                            text += "<a href='" + hrf + "' class='searchLink'>" + "<p style='margin: 0; padding: 15px; border-bottom: 1px solid #ccc;'>" + o.text + "</p></a>";
+                        });
+                        searchResult.innerHTML = text;
+                    }
+                    searchResult.style.visibility = state;
                 }
-                else {
-                    resultViewDiv.style.visibility = state;
-                    let text = "";
-                    obj.forEach(function (o) {
-                        let hrf = "";
-                        if (o.type == "user") {
-                            hrf = "/" + o.text;
-                        }
-                        else if (o.type == "tag") {
-                            hrf = "/tagpost/showpostsbytag?text=" + o.text;
-                            o.text = "#" + o.text;
-                        }
-                        text += "<a href='" + hrf + "' class='searchLink'>" + "<p style='margin: 0; padding: 15px; border-bottom: 1px solid #ccc;'>" + o.text + "</p></a>";
-                    });
-                    resultViewDiv.innerHTML = text;
-                }
-                resultViewDiv.style.visibility = state;
-            }
-        };
-        let text = `${encodeURIComponent(this.value)}`;
-        xmlhttp.open("GET", "/Home/SearchAjax?text=" + text, true);
-        xmlhttp.send();
+            };
+            let text = `${encodeURIComponent(this.value)}`;
+            xmlhttp.open("GET", "/Home/SearchAjax?text=" + text, true);
+            xmlhttp.send();
+        }
     }
-}
 
-searchField.addEventListener('input', searchFunc);
-searchField.addEventListener('click', function (e) {
-    if (this.value != 0) {
-        state = "visible";
-        resultViewDiv.style.visibility = state;
-    }
+    searchField.addEventListener('input', searchFunc);
+    searchField.addEventListener('click', function (e) {
+        if (this.value != 0) {
+            state = "visible";
+            searchResult.style.visibility = state;
+        }
+    });
 });
-

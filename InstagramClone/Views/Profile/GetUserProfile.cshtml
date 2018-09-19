@@ -3,25 +3,21 @@
 @if (Model != null)
 {
     ViewData["Title"] = "InstagramClone - " + Model.Alias;
-    <div class="wrap">
-        <partial name="_ProfilePartialView" model="Model" />
-    </div>
-    <div class="center" id="all-posts-center">
-        <div class="posts">
-            <partial name="_PostPartialView" model="Model.Posts" />
-            @if (User.Identity.Name == Model.Name)
-            {
-                <div for="post-input" style="cursor: pointer;" class="new-post post" id="add-post">
-                    <form id="post" method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="AddNewPost">
-                        <div class="image-upload">
-                            <label for="post-input" id="label-post"></label>
-                            <input id="post-input" name="post-file" type="file" accept="image/*" />
-                            <input type="submit" id="submit-post" value="submit" />
-                        </div>
-                    </form>
-                </div>
-            }
-        </div>
+    <partial name="_ProfilePartialView" model="Model" />
+    <div class="posts">
+        <partial name="_PostPartialView" model="Model.Posts" />
+        @if (User.Identity.Name == Model.Name)
+        {
+            <div for="post-input" style="cursor: pointer;" class="new-post post" id="add-post">
+                <form id="post" method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="AddNewPost">
+                    <div class="image-upload">
+                        <label for="post-input" id="label-post"></label>
+                        <input id="post-input" name="post-file" type="file" accept="image/*" />
+                        <input type="submit" id="submit-post" value="submit" />
+                    </div>
+                </form>
+            </div>
+        }
     </div>
 }
 else
@@ -30,7 +26,6 @@ else
     <p>Not found</p>
 }
 @section Scripts{
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/followers.js"></script>
     <script src="~/js/picture.js"></script>
     <script src="~/js/publication.js"></script>

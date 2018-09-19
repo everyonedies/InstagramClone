@@ -72,7 +72,7 @@
                 for (let i = 0; i < tags.length; i++) {
                     let t = tags[i].trim();
                     if (t != "") {
-                        strView += "<span><a href='/TagPost/ShowPostsByTag?text=" + t + "' style='text-decoration: none;'>#" + t + "</a>&nbsp</span>";
+                        strView += "<span><a href='/TagPost/ShowPostsByTag?text=" + t + "' style='text-decoration: none; color: blue;'>#" + t + "</a>&nbsp</span>";
                     }
                 }
                 $("#tags").html(strView);

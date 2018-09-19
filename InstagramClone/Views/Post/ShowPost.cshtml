@@ -4,7 +4,7 @@
 }
 @if (Model != null)
 {
-    <div class="showPost center post-style-wrap">
+    <div class="showPost center post-style-wrap" id="post">
         <div id="image-post"><img src="@Model.PictureView" id="img-post" /></div>
         <div class="post-comments-wrap">
             <div class="comments comments-top" id="post-info">
@@ -31,6 +31,10 @@
                 }
             </div>
             <div id="comments" class="comments post-comments" >
+                @if (Model.Comments.Count() == 0)
+                {
+                    <p>There are no comments yet.</p>
+                }
                 @foreach (var i in Model.Comments)
                 {
                     <p class="comment-style"><a href="/@i.User.Alias"><b>@i.User.Alias:</b></a> @i.Text</p>
@@ -61,7 +65,7 @@
                 {
                     <form id="delete-post" method="post" asp-controller="Profile" asp-action="DeletePost">
                         <input type="hidden" value="@Model.Id" name="postId" id="post-delete-id" />
-                        <input type="submit" id="delete-post-button" value="Delete post" class="button-style"/>
+                        <div style="margin-top: 8px;"><input type="submit" id="delete-post-button" value="Delete post" class="button-style" /></div>
                     </form>
                 }
             </div>
@@ -83,6 +87,5 @@ else
     <p>Not found</p>
 }
 @section Scripts{
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/post.js"></script>
 }

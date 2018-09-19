@@ -4,7 +4,6 @@ using InstagramClone.Mapping;
 using InstagramClone.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace InstagramClone.Controllers
 {
@@ -20,27 +19,12 @@ namespace InstagramClone.Controllers
         public IActionResult ShowPostsByTag(string text)
         {
             Tag tag = new Tag { Text = text };
-            var posts = unitOfWork.Posts.GetPostsWithItemsByTag(tag);
+            ICollection<Post> posts = unitOfWork.Posts.GetPostsWithItemsByTag(tag);
 
             ViewBag.Tag = text;
-            var viewModel = GetTagPostViewModel(posts);
+            ICollection<PostViewModel> viewModel = posts.GetPostsViewModel();
 
             return View(viewModel);
-        }
-
-        private ICollection<PostViewModel> GetTagPostViewModel(ICollection<Post> posts)
-        {
-            var viewModel = posts.Select(p =>
-            {
-                var res = p.MapPost();
-
-                res.Likes = p.Likes.Select(l => l.MapLike()).ToList();
-                res.Comments = p.Comments.Select(c => c.MapComment()).ToList();
-
-                return res;
-            }).ToList();
-
-            return viewModel;
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using InstagramClone.Domain.Interfaces;
-using System.Collections.Generic;
 
 namespace InstagramClone.Controllers
 {
@@ -27,19 +26,19 @@ namespace InstagramClone.Controllers
             int len = 0;
             if (text[0] == '#')
             {
-                var res = unitOfWork.Tags.List(t => t.Text.Contains(text.Substring(1))).Select(t => new { text = t.Text, type = "tag" });
+                var res = unitOfWork.Tags.GetTagsByNameWithItems(text.Substring(1)).Select(t => new { text = t.Text, type = "tag" });
                 len = res.Count();
                 data = res;
             }
             else if (text[0] == '@')
             {
-                var res = userService.FindUsersByAlias(text).Select(u => new { text = u, type = "user" });
+                var res = userService.FindUsersByAlias(text.Substring(1)).Select(u => new { text = u, type = "user" });
                 len = res.Count();
                 data = res;
             }
             else
             {
-                var tags = unitOfWork.Tags.List(t => t.Text.Contains(text.Substring(1))).Select(t => new { text = t.Text, type = "tag" });
+                var tags = unitOfWork.Tags.GetTagsByNameWithItems(text).Select(t => new { text = t.Text, type = "tag" });
                 var users = userService.FindUsersByAlias(text).Select(u => new { text = u, type = "user" });
                 var res = users.Concat(tags).OrderBy(i => i.text);
                 len = res.Count();

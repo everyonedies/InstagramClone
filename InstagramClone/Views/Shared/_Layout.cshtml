@@ -9,33 +9,28 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300" rel="stylesheet">
 </head>
 <body>
-    <div id="page">
-        <div id="header">
-            <div class="title">
-                <div class="logo page-margin-left width-calc">
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="logo-font link">
-                        <img src="~/images/logo.png" class="logo-style" />
-                        <span>InstagramClone</span>
-                    </a>
+    <header>
+        <div class="top">
+            <a asp-controller="Home" asp-action="Index" id="logo-link">
+                <div id="logo">
+                    <div><img src="~/images/logo.png" width="25" height="25" /></div>
+                    <div class="logo-text">InstagramClone</div>
                 </div>
-                <div class="search width-calc" id="searchDiv">
-                    <input type="text" id="search" placeholder="Search" style="text-align: center; width: 200px;" autocomplete="off" />
-                </div>
-                <div class="login page-margin-right width-calc">
-                    <partial name="_LoginPartial" />
-                </div>
+            </a>
+            <div id="search">
+                <input type="text" id="input-search" placeholder="Search" autocomplete="off" />
+                <div id="searchResult" class="searchBox"></div>
+            </div>
+            <div id="profile">
+                <partial name="_LoginPartial" />
             </div>
         </div>
-        <div id="wrapper">
-            <div id="content" class="page-margin-left page-margin-right">
-                @RenderBody()
-                <div id="searchResult"></div>
-            </div>
-        </div>
-    </div>
-    <div id="footer" style="text-align: center;">
-        @*<span class="page-margin-left page-margin-right">&copy; 2018 - InstagramClone</span>*@
-    </div>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+    <footer></footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/search.js"></script>
     @RenderSection("Scripts", required: false)
 </body>

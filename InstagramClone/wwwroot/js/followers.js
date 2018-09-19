@@ -37,8 +37,8 @@ function createView(objFollowers, text)
 {
     lockScroll();
 
-    let x = document.body.offsetWidth / 2;
-    let y = document.body.offsetHeight / 2;
+    let x = $(window).width() / 2;
+    let y = $(window).height() / 2;
 
     let blackDiv = document.createElement("div");
     blackDiv.style = "width: 100%; height: 100%; position: fixed; left: 0; top: 0; background-color: black; opacity: 0.2;";
