@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Http;
 using System.Drawing;
 using InstagramClone.Domain.Interfaces;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace InstagramClone.Controllers
 {
@@ -81,9 +80,10 @@ namespace InstagramClone.Controllers
                 return BadRequest();
         }
 
-        public IActionResult GetFollowers(string alias)
+        public async Task<IActionResult> GetFollowers(string alias)
         {
-            IEnumerable<string> userFollowers = userService.GetUserFollowers(alias);
+            AppUser appUser = await userManager.GetUserAsync(User);
+            var userFollowers = userService.GetUserFollowers(appUser).Select(u => u.Alias);
 
             if (userFollowers.Count() != 0)
                 return Json(userFollowers);
@@ -91,9 +91,10 @@ namespace InstagramClone.Controllers
                 return Json(new { error = $"The user '{alias}' doesn't have followers" });
         }
 
-        public IActionResult GetFollowing(string alias)
+        public async Task<IActionResult> GetFollowing(string alias)
         {
-            IEnumerable<string> userFollowing = userService.GetUserFollowing(alias);
+            AppUser appUser = await userManager.GetUserAsync(User);
+            var userFollowing = userService.GetUserFollowing(appUser).Select(u => u.Alias);
 
             if (userFollowing.Count() != 0)
                 return Json(userFollowing);
@@ -136,7 +137,7 @@ namespace InstagramClone.Controllers
             AppUser user = await userManager.GetUserAsync(User);
             AppUser targetUser = unitOfWork.Users.GetByAliasWithItems(alias);
 
-            if (user != null && targetUser != null)
+            if (targetUser != null)
             {
                 AppUser currentUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
 

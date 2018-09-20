@@ -6,7 +6,8 @@
 @if (SignInManager.IsSignedIn(User))
 {
     string alias = UserManager.GetUserAsync(User).Result.Alias;
-    <div><a href="/@alias" style="color: black; text-decoration: none;">Profile</a></div>
+    <div><a href="/@alias" style="color: #808080; text-decoration: none;">Profile</a></div>
+    <div><a asp-controller="News" asp-action="GetUserNews" style="color: #808080; text-decoration: none;">News</a></div>
     <div style="min-width: 5em;">
         <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm">
             <button type="submit" class="button-style">Log out</button>
@@ -16,6 +17,6 @@
 }
 else
 {
-    <div><a asp-area="Identity" asp-page="/Account/Register" style="color: black; text-decoration: none;">Register</a></div>
+    <div><a asp-area="Identity" asp-page="/Account/Register" style="color: #808080; text-decoration: none;">Register</a></div>
     <div><a asp-area="Identity" asp-page="/Account/Login" class="button-style" style="color: white; text-decoration: none;">Login</a></div>
 }

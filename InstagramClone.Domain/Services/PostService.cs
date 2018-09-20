@@ -14,7 +14,7 @@ namespace InstagramClone.Domain.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public bool AddNewComment(int postId, string text, string userAlias)
+        public void AddNewComment(int postId, string text, string userAlias)
         {
             Post post = unitOfWork.Posts.GetByIdWithItems(postId);
             AppUser user = unitOfWork.Users.GetByAliasWithItems(userAlias);
@@ -30,12 +30,11 @@ namespace InstagramClone.Domain.Services
 
                 post.Comments.Add(comment);
                 unitOfWork.SaveAsync();
-                return true;
             }
-            else return false;
+            else throw new ArgumentException();
         }
 
-        public bool AddPostCaption(int postId, string text, string userAlias)
+        public void AddPostCaption(int postId, string text, string userAlias)
         {
             Post post = unitOfWork.Posts.GetByIdWithItems(postId);
             AppUser user = unitOfWork.Users.GetByAliasWithItems(userAlias);
@@ -46,12 +45,11 @@ namespace InstagramClone.Domain.Services
             {
                 post.Text = text;
                 unitOfWork.SaveAsync();
-                return true;
             }
-            else return false;
+            else throw new ArgumentException();
         }
 
-        public bool AddPostTags(int postId, string tags, string userAlias)
+        public void AddPostTags(int postId, string tags, string userAlias)
         {
             Post post = unitOfWork.Posts.GetByIdWithItems(postId);
             AppUser user = unitOfWork.Users.GetByAliasWithItems(userAlias);
@@ -85,12 +83,11 @@ namespace InstagramClone.Domain.Services
                     }
                 }
                 unitOfWork.SaveAsync();
-                return true;
             }
-            return false;
+            else throw new ArgumentException();
         }
 
-        public bool RemovePostTags(int postId, string userAlias)
+        public void RemovePostTags(int postId, string userAlias)
         {
             Post post = unitOfWork.Posts.GetByIdWithItems(postId);
             AppUser user = unitOfWork.Users.GetByAliasWithItems(userAlias);
@@ -105,47 +102,58 @@ namespace InstagramClone.Domain.Services
                     unitOfWork.TagPost.Delete(i);
                 }
                 unitOfWork.SaveAsync();
-                return true;
             }
-            return false;
+            else throw new ArgumentException();
         }
 
-        public bool Like(Post post, AppUser user)
+        public int Like(Post post, AppUser user)
         {
-            if (post != null && user != null && !IsLiked(post, user))
+            if (post != null && user != null)
             {
-                Like like = new Like
+                if (!IsLiked(post, user))
                 {
-                    User = user,
-                    Date = DateTime.Now
-                };
-                post.Likes.Add(like);
-                unitOfWork.SaveAsync();
-                return true;
+                    Like like = new Like
+                    {
+                        User = user,
+                        Date = DateTime.Now
+                    };
+                    post.Likes.Add(like);
+                    unitOfWork.SaveAsync();
+                }
+                int numOfLikes = post.Likes.Count();
+                return numOfLikes;
             }
-            else return false;
+            else throw new ArgumentNullException();
         }
 
-        public bool Unlike(Post post, AppUser user)
+        public int Unlike(Post post, AppUser user)
         {
-            if (post != null && user != null && IsLiked(post, user))
+            if (post != null && user != null)
             {
-                var like = GetLike(post, user);
-                unitOfWork.Likes.Delete(like);
-                unitOfWork.SaveAsync();
-                return true;
+                if (IsLiked(post, user))
+                {
+                    var like = GetLike(post, user);
+                    unitOfWork.Likes.Delete(like);
+                    unitOfWork.SaveAsync();
+                }
+                int numOfLikes = post.Likes.Count();
+                return numOfLikes;
             }
-            else return false;
+            else throw new ArgumentNullException();
         }
 
         public bool IsLiked(Post post, AppUser user)
         {
-            var checkLike = GetLike(post, user);
+            if (post != null && user != null)
+            {
+                var checkLike = GetLike(post, user);
 
-            if (checkLike == null)
-                return false;
-            else
-                return true;
+                if (checkLike == null)
+                    return false;
+                else
+                    return true;
+            }
+            else throw new ArgumentNullException();
         }
 
         private Like GetLike(Post post, AppUser user)

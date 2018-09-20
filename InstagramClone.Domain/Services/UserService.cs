@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using InstagramClone.Domain.Interfaces;
 using InstagramClone.Domain.Models;
@@ -15,25 +14,40 @@ namespace InstagramClone.Domain.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<string> FindUsersByAlias(string alias)
+        public ICollection<Post> GetUserNews(AppUser user)
         {
-            var users = unitOfWork.Users.List(u => u.Alias.Contains(alias)).Select(u => u.Alias).OrderBy(u => u).AsEnumerable();
+            AppUser appUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
+            IEnumerable<Post> posts = new List<Post>();
+
+            foreach (Follower i in appUser.Following)
+            {
+                AppUser following = unitOfWork.Users.GetByAliasWithItems(i.ForWhomFollows.Alias);
+                posts = posts.Concat(following.Posts);
+            }
+
+            posts = posts.OrderByDescending(p => p.Date);
+            return posts.ToList();
+        }
+
+        public ICollection<AppUser> FindUsersByAlias(string alias)
+        {
+            var users = unitOfWork.Users.List(u => u.Alias.Contains(alias)).ToList();
 
             return users;
         }
 
-        public IEnumerable<string> GetUserFollowers(string alias)
+        public ICollection<AppUser> GetUserFollowers(AppUser user)
         {
-            var appUser = unitOfWork.Users.GetByAliasWithItems(alias);
-            var userFollowers = appUser.Followers.Select(u => u.WhoFollows.Alias).OrderBy(u => u).ToList();
+            AppUser appUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
+            ICollection<AppUser> userFollowers = appUser.Followers.Select(u => u.WhoFollows).ToList();
 
             return userFollowers;
         }
 
-        public IEnumerable<string> GetUserFollowing(string alias)
+        public ICollection<AppUser> GetUserFollowing(AppUser user)
         {
-            var appUser = unitOfWork.Users.GetByAliasWithItems(alias);
-            var userFollowing = appUser.Following.Select(u => u.ForWhomFollows.Alias).OrderBy(u => u).ToList();
+            AppUser appUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
+            ICollection<AppUser> userFollowing = appUser.Following.Select(u => u.ForWhomFollows).ToList();
 
             return userFollowing;
         }
@@ -42,9 +56,9 @@ namespace InstagramClone.Domain.Services
         {
             bool result = false;
 
-            var isCurrentUserFollowing = GetFollowing(currentUser, targetUser) == null;
+            var following = GetFollowing(currentUser, targetUser);
 
-            if (!isCurrentUserFollowing)
+            if (following != null)
             {
                 result = true;
             }

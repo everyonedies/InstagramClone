@@ -32,14 +32,14 @@ namespace InstagramClone.Controllers
             }
             else if (text[0] == '@')
             {
-                var res = userService.FindUsersByAlias(text.Substring(1)).Select(u => new { text = u, type = "user" });
+                var res = userService.FindUsersByAlias(text.Substring(1)).Select(u => new { text = u.Alias, type = "user" });
                 len = res.Count();
                 data = res;
             }
             else
             {
                 var tags = unitOfWork.Tags.GetTagsByNameWithItems(text).Select(t => new { text = t.Text, type = "tag" });
-                var users = userService.FindUsersByAlias(text).Select(u => new { text = u, type = "user" });
+                var users = userService.FindUsersByAlias(text).Select(u => new { text = u.Alias, type = "user" });
                 var res = users.Concat(tags).OrderBy(i => i.text);
                 len = res.Count();
                 data = res;

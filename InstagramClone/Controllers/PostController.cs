@@ -5,6 +5,7 @@ using InstagramClone.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -53,12 +54,15 @@ namespace InstagramClone.Controllers
         public async Task<IActionResult> AddNewComment(int postId, string text)
         {
             AppUser user = await userManager.GetUserAsync(User);
-            bool result = postService.AddNewComment(postId, text, user.Alias);
-
-            if (result)
+            try
+            {
+                postService.AddNewComment(postId, text, user.Alias);
                 return Json(new { alias = user.Alias });
-            else
+            }
+            catch (ArgumentException)
+            {
                 return Json(new { error = "Anon users can't send comments" });
+            }
         }
 
         [HttpPost]
@@ -69,25 +73,28 @@ namespace InstagramClone.Controllers
             Post post = unitOfWork.Posts.GetByIdWithItems(postId);
             AppUser curUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
 
-            bool result = false;
-            string status = "";
-            if (postService.IsLiked(post, curUser))
+            try
             {
-                result = postService.Unlike(post, curUser);
-                status = "Unlike";
-            }
-            else
-            {
-                result = postService.Like(post, curUser);
-                status = "Like";
-            }
+                int numOfLikes = 0;
+                string status = "";
 
-            if (result)
-            {
-                int numOfLikes = post.Likes.Count();
+                if (postService.IsLiked(post, curUser))
+                {
+                    numOfLikes = postService.Unlike(post, curUser);
+                    status = "Unlike";
+                }
+                else
+                {
+                    numOfLikes = postService.Like(post, curUser);
+                    status = "Like";
+                }
+
                 return Json(new { likes = numOfLikes, state = status });
             }
-            else return BadRequest();
+            catch (ArgumentNullException)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPost]
@@ -95,17 +102,15 @@ namespace InstagramClone.Controllers
         public async Task<IActionResult> AddPostCaption(int postId, string caption)
         {
             AppUser user = await userManager.GetUserAsync(User);
-            if (user != null)
+
+            try
             {
-                bool result = postService.AddPostCaption(postId, caption, user.Alias);
-                if (result)
-                    return Ok();
-                else
-                    return BadRequest();
+                postService.AddPostCaption(postId, caption, user.Alias);
+                return Ok();
             }
-            else
+            catch (ArgumentException)
             {
-                return Redirect("/post/" + postId);
+                return BadRequest();
             }
         }
 
@@ -114,22 +119,18 @@ namespace InstagramClone.Controllers
         public async Task<IActionResult> AddPostTags(int postId, string tags)
         {
             AppUser user = await userManager.GetUserAsync(User);
-            if (user != null)
-            {
-                bool result = false;
-                if (tags != null && tags != string.Empty)
-                    result = postService.AddPostTags(postId, tags, user.Alias);
-                else
-                    result = postService.RemovePostTags(postId, user.Alias);
 
-                if (result)
-                    return Ok();
-                else
-                    return BadRequest();
-            }
-            else
+            try
             {
-                return Redirect("/post/" + postId);
+                if (tags != null && tags != string.Empty)
+                    postService.AddPostTags(postId, tags, user.Alias);
+                else
+                    postService.RemovePostTags(postId, user.Alias);
+                return Ok();
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest();
             }
         }
     }

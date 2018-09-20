@@ -1,0 +1,23 @@
+﻿@model ICollection<PostViewModel>
+@{
+    ViewData["Title"] = "News";
+}
+
+<div style="text-align: center; margin-top: 1em; width: 100%;">
+    <span style="font-family: Roboto; font-size: 2em;">News</span>
+</div>
+<div class="posts">
+    @if (Model.Count() == 0)
+    {
+        <p style="font-family: Roboto;">There are no posts yet</p>
+    }
+    else
+    {
+        <partial name="_PostPartialView" model="Model" />
+    }
+</div>
+
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/publication.js"></script>
+}
