@@ -14,9 +14,9 @@ namespace InstagramClone.Domain.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public ICollection<Post> GetUserNews(AppUser user)
+        public ICollection<Post> GetUserNews(string alias)
         {
-            AppUser appUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
+            AppUser appUser = unitOfWork.Users.GetByAliasWithItems(alias);
             IEnumerable<Post> posts = new List<Post>();
 
             foreach (Follower i in appUser.Following)
@@ -36,17 +36,17 @@ namespace InstagramClone.Domain.Services
             return users;
         }
 
-        public ICollection<AppUser> GetUserFollowers(AppUser user)
+        public ICollection<AppUser> GetUserFollowers(string alias)
         {
-            AppUser appUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
+            AppUser appUser = unitOfWork.Users.GetByAliasWithItems(alias);
             ICollection<AppUser> userFollowers = appUser.Followers.Select(u => u.WhoFollows).ToList();
 
             return userFollowers;
         }
 
-        public ICollection<AppUser> GetUserFollowing(AppUser user)
+        public ICollection<AppUser> GetUserFollowing(string alias)
         {
-            AppUser appUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
+            AppUser appUser = unitOfWork.Users.GetByAliasWithItems(alias);
             ICollection<AppUser> userFollowing = appUser.Following.Select(u => u.ForWhomFollows).ToList();
 
             return userFollowing;

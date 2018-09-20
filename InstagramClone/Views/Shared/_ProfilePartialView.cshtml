@@ -19,7 +19,7 @@
         }
     </div>
     <div class="info">
-        <div style="display: flex;">
+        <div style="display: flex; flex-wrap: wrap;">
             <div class="alias-style" style="margin-right: 20px;">@Model.Alias</div>
             @if (User.Identity.Name == Model.Name)
             {
@@ -47,5 +47,9 @@
         <p class="bold p-style">@Model.RealName</p>
         <p class="p-style">@Model.Bio</p>
         <p class="p-style"><a href="@Model.WebSite" style="text-decoration: none; color: #003569" class="bold">@Model.WebSite</a></p>
+        @if (ViewBag.Follower == "Follower")
+        {
+            <p class="p-style">This user is following you.</p>
+        }
     </div>
 </div>

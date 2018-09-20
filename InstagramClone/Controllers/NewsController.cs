@@ -27,7 +27,7 @@ namespace InstagramClone.Controllers
         public async Task<IActionResult> GetUserNews()
         {
             AppUser appUser = await userManager.GetUserAsync(User);
-            ICollection<Post> userNews = userService.GetUserNews(appUser);
+            ICollection<Post> userNews = userService.GetUserNews(appUser.Alias);
 
             ICollection<PostViewModel> viewModel = userNews.GetPostsViewModel();
             return View(viewModel);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using InstagramClone.Domain.Interfaces;
 using InstagramClone.Domain.Models;
@@ -57,12 +58,18 @@ namespace InstagramClone.Domain.Services
 
         private string SavePhoto(AppUser user, Image image, string imageExt)
         {
-            var (savePath, fileNameExt) = PreparePhoto(user, image, imageExt);
-            image.Save(savePath);
+            var (savePath, fileNameExt) = PreparePhoto(user, imageExt);
+            ImageFormat format = ImageFormat.Jpeg;
+            switch (imageExt)
+            {
+                case ".png": format = ImageFormat.Png; break;
+                case ".gif": format = ImageFormat.Gif; break;
+            }
+            image.Save(savePath, format);
             return fileNameExt;
         }
 
-        private (string savePath, string fileNameExt) PreparePhoto(AppUser user, Image image, string imageExt)
+        private (string savePath, string fileNameExt) PreparePhoto(AppUser user, string imageExt)
         {
             var uploadDirectory = Path.Combine(hostingEnvironment.WebRootPath, $"images\\Users\\{user.Alias}\\");
 
@@ -80,12 +87,17 @@ namespace InstagramClone.Domain.Services
 
         private string PhotoProcessing(AppUser user, Image image, string imageExt, int w, int h)
         {
-            var (savePath, fileNameExt) = PreparePhoto(user, image, imageExt);
+            var (savePath, fileNameExt) = PreparePhoto(user, imageExt);
 
             Image resized = CutImage(image);
             Image scaled = ScaleImage(resized, w, h);
-
-            scaled.Save(savePath);
+            ImageFormat format = ImageFormat.Jpeg;
+            switch (imageExt)
+            {
+                case ".png": format = ImageFormat.Png; break;
+                case ".gif": format = ImageFormat.Gif; break;
+            }
+            scaled.Save(savePath, format);
             return fileNameExt;
         }
 

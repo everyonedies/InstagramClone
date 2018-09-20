@@ -494,7 +494,7 @@ div.form div{
     background-repeat: no-repeat;
     background-size: 96px 96px;
     width: 25%;
-    max-height: 268px;
+    padding-bottom: 25%;
 }
 
 .view-post {

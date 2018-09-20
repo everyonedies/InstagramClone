@@ -69,13 +69,20 @@
             if (this.readyState == 4 && this.status == 200) {
                 let tags = text.split("#");
                 let strView = "";
-                for (let i = 0; i < tags.length; i++) {
-                    let t = tags[i].trim();
-                    if (t != "") {
-                        strView += "<span><a href='/TagPost/ShowPostsByTag?text=" + t + "' style='text-decoration: none; color: blue;'>#" + t + "</a>&nbsp</span>";
+                if (text != "") {
+                    for (let i = 0; i < tags.length; i++) {
+                        let t = tags[i].trim();
+                        if (t != "") {
+                            strView += "<span><a href='/TagPost/ShowPostsByTag?text=" + t + "' style='text-decoration: none; color: blue;'>#" + t + "</a>&nbsp</span>";
+                        }
                     }
+                    let htl = $("#tags").html();
+                    $("#tags").html(htl + strView);
                 }
-                $("#tags").html(strView);
+                else {
+                    $("#tags").html("");
+                }
+
                 $("#post-input-tags").val("");
             }
         };

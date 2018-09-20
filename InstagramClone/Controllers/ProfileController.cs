@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Http;
 using System.Drawing;
 using InstagramClone.Domain.Interfaces;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using System;
+using System.Drawing.Imaging;
 
 namespace InstagramClone.Controllers
 {
@@ -19,16 +22,19 @@ namespace InstagramClone.Controllers
         private readonly IProfileService profileService;
         private readonly IUserService userService;
         private readonly UserManager<AppUser> userManager;
+        private readonly IHostingEnvironment hostingEnvironment;
 
         public ProfileController(IUnitOfWork unitOfWork, 
             IProfileService profileService, 
-            IUserService userService, 
+            IUserService userService,
+            IHostingEnvironment hostingEnvironment,
             UserManager<AppUser> userManager)
         {
             this.unitOfWork = unitOfWork;
             this.userManager = userManager;
             this.profileService = profileService;
             this.userService = userService;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
         [HttpPost]
@@ -80,10 +86,9 @@ namespace InstagramClone.Controllers
                 return BadRequest();
         }
 
-        public async Task<IActionResult> GetFollowers(string alias)
+        public IActionResult GetFollowers(string alias)
         {
-            AppUser appUser = await userManager.GetUserAsync(User);
-            var userFollowers = userService.GetUserFollowers(appUser).Select(u => u.Alias);
+            var userFollowers = userService.GetUserFollowers(alias).Select(u => u.Alias);
 
             if (userFollowers.Count() != 0)
                 return Json(userFollowers);
@@ -91,10 +96,9 @@ namespace InstagramClone.Controllers
                 return Json(new { error = $"The user '{alias}' doesn't have followers" });
         }
 
-        public async Task<IActionResult> GetFollowing(string alias)
+        public IActionResult GetFollowing(string alias)
         {
-            AppUser appUser = await userManager.GetUserAsync(User);
-            var userFollowing = userService.GetUserFollowing(appUser).Select(u => u.Alias);
+            var userFollowing = userService.GetUserFollowing(alias).Select(u => u.Alias);
 
             if (userFollowing.Count() != 0)
                 return Json(userFollowing);
@@ -116,6 +120,11 @@ namespace InstagramClone.Controllers
                 if (currentUser.Alias != targetUser.Alias)
                 {
                     bool isFollowing = userService.IsUserFollowing(currentUser, targetUser);
+                    bool isFollower = userService.IsUserFollowing(targetUser, currentUser);
+
+                    if (isFollower)
+                        ViewBag.Follower = "Follower";
+
                     if (isFollowing)
                         ViewBag.Following = "Unfollow";
                     else
