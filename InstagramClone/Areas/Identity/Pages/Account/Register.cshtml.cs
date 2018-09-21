@@ -53,6 +53,8 @@ namespace InstagramClone.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "Alias")]
+            [RegularExpression(@"^[a-zA-Z0-9-]+$", ErrorMessage = "Alias must contains only numbers and latin characters.")]
+            [StringLength(100, MinimumLength = 1, ErrorMessage = "Alias must be at least 1 characters.")]
             public string Alias { get; set; }
 
             [Required]
@@ -78,10 +80,10 @@ namespace InstagramClone.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new AppUser { UserName = Input.Name, Alias = Input.Alias, Picture = "/images/profile.jpg" };
+                AppUser user = new AppUser { UserName = Input.Name, Alias = Input.Alias, Picture = "/images/profile.jpg" };
 
                 bool flag = false;
-                var usrName = _unitOfWork.Users.List(u => u.UserName == Input.Name).First();
+                AppUser usrName = _unitOfWork.Users.List(u => u.UserName == Input.Name).FirstOrDefault();
 
                 if (usrName == null)
                 {
@@ -93,7 +95,7 @@ namespace InstagramClone.Areas.Identity.Pages.Account
                     flag = true;
                 }
 
-                var usrAlias = _unitOfWork.Users.List(u => u.Alias == Input.Alias).First();
+                AppUser usrAlias = _unitOfWork.Users.List(u => u.Alias == Input.Alias).FirstOrDefault();
                 if (usrAlias == null)
                 {
                     user.Alias = Input.Alias;
@@ -109,10 +111,10 @@ namespace InstagramClone.Areas.Identity.Pages.Account
                     return Page();
                 }
 
-                var path = _hostingEnvironment.WebRootPath + $@"\images\Users\{Input.Alias}";
+                string path = _hostingEnvironment.WebRootPath + $@"\images\Users\{Input.Alias}";
                 Directory.CreateDirectory(path);
 
-                var result = await _userManager.CreateAsync(user, Input.Password);
+                IdentityResult result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -120,7 +122,7 @@ namespace InstagramClone.Areas.Identity.Pages.Account
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
                 }
-                foreach (var error in result.Errors)
+                foreach (IdentityError error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }

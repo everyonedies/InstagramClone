@@ -17,28 +17,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/04/2018 21:47:21</publishTime>
     </File>
     <File Include="InstagramClone.deps.json">
-      <publishTime>09/21/2018 01:00:53</publishTime>
+      <publishTime>09/21/2018 01:23:28</publishTime>
     </File>
     <File Include="InstagramClone.dll">
-      <publishTime>09/21/2018 01:00:34</publishTime>
+      <publishTime>09/21/2018 01:23:19</publishTime>
     </File>
     <File Include="InstagramClone.Domain.dll">
-      <publishTime>09/20/2018 23:56:09</publishTime>
+      <publishTime>09/21/2018 01:23:17</publishTime>
     </File>
     <File Include="InstagramClone.Domain.pdb">
-      <publishTime>09/20/2018 23:56:09</publishTime>
+      <publishTime>09/21/2018 01:23:17</publishTime>
     </File>
     <File Include="InstagramClone.pdb">
-      <publishTime>09/21/2018 01:00:34</publishTime>
+      <publishTime>09/21/2018 01:23:19</publishTime>
     </File>
     <File Include="InstagramClone.runtimeconfig.json">
-      <publishTime>09/21/2018 01:00:53</publishTime>
+      <publishTime>09/21/2018 01:23:28</publishTime>
     </File>
     <File Include="InstagramClone.Views.dll">
-      <publishTime>09/21/2018 01:00:44</publishTime>
+      <publishTime>09/21/2018 01:23:23</publishTime>
     </File>
     <File Include="InstagramClone.Views.pdb">
-      <publishTime>09/21/2018 01:00:44</publishTime>
+      <publishTime>09/21/2018 01:23:23</publishTime>
     </File>
     <File Include="Microsoft.EntityFrameworkCore.Abstractions.dll">
       <publishTime>07/26/2018 18:17:04</publishTime>
@@ -83,7 +83,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/21/2016 14:05:54</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>09/21/2018 01:00:53</publishTime>
+      <publishTime>09/21/2018 01:23:28</publishTime>
     </File>
     <File Include="wwwroot/css/login.css">
       <publishTime>09/03/2018 18:07:06</publishTime>

@@ -22,7 +22,7 @@
                 <input asp-for="Input.Name" class="form-control" placeholder="Name" />
             </div>
             <div class="form-group">
-                <input asp-for="Input.Alias" class="form-control" placeholder="Alias" />
+                <input asp-for="Input.Alias" class="form-control" placeholder="Alias" required pattern="[a-zA-Z0-9-]+" title="Alias must contains only numbers and latin characters."/>
             </div>
             <div class="form-group">
                 <input asp-for="Input.Password" class="form-control" placeholder="Password" />

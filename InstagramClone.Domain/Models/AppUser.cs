@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,6 +8,8 @@ namespace InstagramClone.Domain.Models
     {
         [Display(Name = "Alias")]
         [Required(ErrorMessage = "The alias is required")]
+        [RegularExpression(@"^[a-zA-Z0-9-]+$", ErrorMessage = "Alias must contains only numbers and latin letters")]
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "Alias must be at least 1 characters")]
         public string Alias { get; set; }
 
         [Display(Name = "Web-site address")]

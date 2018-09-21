@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using InstagramClone.Domain.Interfaces;
 using InstagramClone.Domain.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,15 +16,18 @@ namespace InstagramClone.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
         public IndexModel(
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager, 
+            IHostingEnvironment hostingEnvironment,
             IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _unitOfWork = unitOfWork;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public string Username { get; set; }
@@ -38,6 +43,8 @@ namespace InstagramClone.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Display(Name = "Alias:")]
+            [RegularExpression(@"^[a-zA-Z0-9-]+$", ErrorMessage = "Alias must contains only numbers and latin letters")]
+            [StringLength(100, MinimumLength = 1, ErrorMessage = "Alias must be at least 1 characters")]
             public string Alias { get; set; }
 
             [Display(Name = "Name:")]
@@ -53,7 +60,7 @@ namespace InstagramClone.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
+            AppUser user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -77,7 +84,7 @@ namespace InstagramClone.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var user = await _userManager.GetUserAsync(User);
+            AppUser user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -85,9 +92,20 @@ namespace InstagramClone.Areas.Identity.Pages.Account.Manage
 
             if (user.Alias != Input.Alias)
             {
-                var usr = _unitOfWork.Users.GetByAliasWithItems(Input.Alias);
+                AppUser usr = _unitOfWork.Users.GetByAliasWithItems(Input.Alias);
                 if (usr == null)
                 {
+                    user = _unitOfWork.Users.GetByAliasWithItems(user.Alias);
+                    user.Picture = user.Picture.Replace(user.Alias, Input.Alias);
+                    foreach (var i in user.Posts)
+                    {
+                        i.PicturePreview = i.PicturePreview.Replace(user.Alias, Input.Alias);
+                        i.PictureView = i.PicturePreview.Replace(user.Alias, Input.Alias);
+                    }
+                    string oldDir = Path.Combine(_hostingEnvironment.WebRootPath, $"images\\Users\\{user.Alias}\\");
+                    string newDir = Path.Combine(_hostingEnvironment.WebRootPath, $"images\\Users\\{Input.Alias}\\");
+                    Directory.Move(oldDir, newDir);
+
                     user.Alias = Input.Alias;
                 }
                 else

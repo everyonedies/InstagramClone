@@ -27,7 +27,8 @@ namespace InstagramClone.Domain.Migrations
                     b.Property<int>("AccessFailedCount");
 
                     b.Property<string>("Alias")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(100);
 
                     b.Property<string>("Bio");
 
