@@ -1,6 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using InstagramClone.Domain.Interfaces;
+using System.Collections.Generic;
+using InstagramClone.Domain.Models;
+using System.Threading.Tasks;
+using InstagramClone.Models;
+using InstagramClone.Mapping;
 
 namespace InstagramClone.Controllers
 {
@@ -15,9 +20,12 @@ namespace InstagramClone.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int numOfTopUsers = 20)
         {
-            return View();
+            ICollection<AppUser> topUsers = await userService.GetTopUsers(numOfTopUsers);
+            ICollection<AppUserViewModel> topUsersViewModel = topUsers.Select(u => u.GetAppUserViewModel()).ToList();
+
+            return View(topUsersViewModel);
         }
 
         public IActionResult SearchAjax(string text)

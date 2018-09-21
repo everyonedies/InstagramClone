@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using InstagramClone.Domain.Interfaces;
 using InstagramClone.Domain.Models;
 
@@ -12,6 +13,18 @@ namespace InstagramClone.Domain.Services
         public UserService(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
+        }
+
+        public Task<ICollection<AppUser>> GetTopUsers(int count)
+        {
+            return Task.Run(() => {
+                ICollection<AppUser> topUsers = unitOfWork.Users.ListAll()
+                .Select(u => unitOfWork.Users.GetByAliasWithItems(u.Alias))
+                .OrderByDescending(u => u.Followers.Count())
+                .Take(count)
+                .ToList();
+                return topUsers;
+            });
         }
 
         public ICollection<Post> GetUserNews(string alias)
