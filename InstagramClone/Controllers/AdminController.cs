@@ -58,12 +58,12 @@ namespace InstagramClone.Controllers
             return View(appUserViewModel);
         }
 
-        public IActionResult BanUser(string alias)
+        public IActionResult BlockUser(string alias)
         {
             return View();
         }
 
-        public IActionResult UnbanUser(string alias)
+        public IActionResult UnblockUser(string alias)
         {
             return View();
         }
@@ -92,13 +92,13 @@ namespace InstagramClone.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        public IActionResult SetModerRole(string alias)
+        public IActionResult SetModerRoleForUser(string alias)
         {
             return View();
         }
-
+        
         [Authorize(Roles = "admin")]
-        public IActionResult UnsetModerRole(string alias)
+        public IActionResult UnsetModerRoleForUser(string alias)
         {
             return View();
         }

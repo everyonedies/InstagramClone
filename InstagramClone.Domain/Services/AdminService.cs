@@ -14,7 +14,7 @@ namespace InstagramClone.Domain.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public void BanUser(string alias)
+        public void BlockUser(string alias)
         {
             throw new System.NotImplementedException();
         }
@@ -34,17 +34,17 @@ namespace InstagramClone.Domain.Services
             else throw new ArgumentException("Invalid post ID");
         }
 
-        public void SetModerRole(string alias)
+        public void SetModerRoleForUser(string alias)
         {
             throw new System.NotImplementedException();
         }
 
-        public void UnbanUser(string alias)
+        public void UnblockUser(string alias)
         {
             throw new System.NotImplementedException();
         }
 
-        public void UnsetModerRole(string alias)
+        public void UnsetModerRoleForUser(string alias)
         {
             throw new System.NotImplementedException();
         }
