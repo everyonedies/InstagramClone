@@ -13,11 +13,13 @@
     }
     else
     {
-        <partial name="_PostPartialView" model="Model" />
+        @foreach (var i in Model)
+        {
+            <partial name="_PostPartialView" model="i" />
+        }
     }
 </div>
 
 @section Scripts{
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/publication.js"></script>
 }

@@ -14,7 +14,18 @@
         };
     }
 
-    let posts = $("div.post");
+    let posts = $(".posts div.post");
+    let forms = $(".posts div.post form");
+    let check = false;
+    forms.on('submit', function (e) {
+        if (!check && confirm("Are you sure want to delete this post?")) {
+            check = true;
+            forms.submit();
+        }
+        else {
+            e.preventDefault();
+        }
+    });
 
     posts.on('mouseover', function () {
         let obj = $(this).find("div.view-for-post").first();

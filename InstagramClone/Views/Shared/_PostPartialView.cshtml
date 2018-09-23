@@ -1,14 +1,21 @@
-﻿@model ICollection<PostViewModel>
-
-@foreach (var i in Model)
-{
-    <div class="post" style="position: relative;">
-        <a asp-area="" asp-controller="Post" asp-action="ShowPost" asp-route-id="@i.Id" style="text-decoration: none; color: white;">
-            <img class="pic" src="@i.PicturePreview" />
+﻿@model PostViewModel
+<div class="post">
+    <div style="position: relative;">
+        <a asp-area="" asp-controller="Post" asp-action="ShowPost" asp-route-id="@Model.Id" style="text-decoration: none; color: white;">
+            <img class="pic" src="@Model.PicturePreview" />
             <div class="view-for-post" style="visibility: hidden; position: absolute; left: 0px; top: 0px; width: 100%; height: 99%; font-size: 15px; font-family: Roboto; display: flex; justify-content: center; align-items: center;">
-                <span style="margin-right: 10px;">@i.Likes.Count() likes</span>
-                <span>@i.Comments.Count() comments</span>
+                <span style="margin-right: 10px;">@Model.Likes.Count() likes</span>
+                <span>@Model.Comments.Count() comments</span>
             </div>
         </a>
     </div>
-}
+    @if (ViewBag.DeletePost == "Delete")
+    {
+        <div style="line-height: 2em;">
+            <form asp-controller="Admin" asp-action="DeletePost" method="post">
+                <input type="hidden" value="@Model.Id" name="postId" />
+                <input type="submit" value="Delete" class="button-style" style="cursor: pointer;" />
+            </form>
+        </div>
+    }
+</div>

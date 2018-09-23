@@ -6,6 +6,10 @@
 @if (SignInManager.IsSignedIn(User))
 {
     string alias = UserManager.GetUserAsync(User).Result.Alias;
+    @if (User.IsInRole("admin") || User.IsInRole("moder"))
+    {
+        <div><a asp-controller="Admin" asp-action="Index" style="color: #808080; text-decoration: none;">Admin</a></div>
+    }
     <div><a href="/@alias" style="color: #808080; text-decoration: none;">Profile</a></div>
     <div><a asp-controller="News" asp-action="GetUserNews" style="color: #808080; text-decoration: none;">News</a></div>
     <div style="min-width: 5em;">

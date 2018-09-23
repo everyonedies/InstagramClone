@@ -20,7 +20,6 @@ namespace InstagramClone.Areas.Identity.Pages.Account
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IUnitOfWork _unitOfWork;
 
@@ -28,14 +27,12 @@ namespace InstagramClone.Areas.Identity.Pages.Account
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender,
             IHostingEnvironment hostingEnvironment,
             IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
             _hostingEnvironment = hostingEnvironment;
             _unitOfWork = unitOfWork;
         }
@@ -117,6 +114,7 @@ namespace InstagramClone.Areas.Identity.Pages.Account
                 IdentityResult result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "user");
                     _logger.LogInformation("User created a new account with password.");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);

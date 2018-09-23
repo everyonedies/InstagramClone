@@ -10,8 +10,8 @@ namespace InstagramClone.Models
         public string Bio { get; set; }
         public string Picture { get; set; }
         public string WebSite { get; set; }
-        public int NumberOfFollowers { get; set; }
-        public int NumberOfFollowing { get; set; }
+        public int? NumberOfFollowers { get; set; }
+        public int? NumberOfFollowing { get; set; }
         public ICollection<PostViewModel> Posts { get; set; }
     }
 }

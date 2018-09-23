@@ -2,11 +2,13 @@
 using InstagramClone.Domain.Models;
 using InstagramClone.Mapping;
 using InstagramClone.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace InstagramClone.Controllers
 {
+    [AllowAnonymous]
     public class TagPostController : Controller
     {
         private readonly IUnitOfWork unitOfWork;

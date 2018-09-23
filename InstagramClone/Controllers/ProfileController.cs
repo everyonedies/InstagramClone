@@ -11,11 +11,10 @@ using System.Drawing;
 using InstagramClone.Domain.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using System;
-using System.Drawing.Imaging;
 
 namespace InstagramClone.Controllers
 {
+    [Authorize(Roles = "admin, moder, user")]
     public class ProfileController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
@@ -38,7 +37,6 @@ namespace InstagramClone.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> SetProfilePicture()
         {
             AppUser user = await userManager.GetUserAsync(User);
@@ -56,7 +54,6 @@ namespace InstagramClone.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> AddNewPost()
         {
             AppUser user = await userManager.GetUserAsync(User);
@@ -74,7 +71,6 @@ namespace InstagramClone.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> DeletePost(int postId)
         {
             AppUser user = await userManager.GetUserAsync(User);
@@ -86,6 +82,7 @@ namespace InstagramClone.Controllers
                 return BadRequest();
         }
 
+        [AllowAnonymous]
         public IActionResult GetFollowers(string alias)
         {
             var userFollowers = userService.GetUserFollowers(alias).Select(u => u.Alias);
@@ -96,6 +93,7 @@ namespace InstagramClone.Controllers
                 return Json(new { error = $"The user '{alias}' doesn't have followers" });
         }
 
+        [AllowAnonymous]
         public IActionResult GetFollowing(string alias)
         {
             var userFollowing = userService.GetUserFollowing(alias).Select(u => u.Alias);
@@ -106,6 +104,7 @@ namespace InstagramClone.Controllers
                 return Json(new { error = $"The user '{alias}' doesn't following anyone"});
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> GetUserProfile(string alias)
         {
             AppUser user = await userManager.GetUserAsync(User);
@@ -140,7 +139,6 @@ namespace InstagramClone.Controllers
             return View(userViewModel);
         }
 
-        [Authorize]
         public async Task<IActionResult> Follow(string alias)
         {
             AppUser user = await userManager.GetUserAsync(User);

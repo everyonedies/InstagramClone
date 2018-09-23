@@ -65,7 +65,14 @@
                 {
                     <form id="delete-post" method="post" asp-controller="Profile" asp-action="DeletePost">
                         <input type="hidden" value="@Model.Id" name="postId" id="post-delete-id" />
-                        <div style="margin-top: 8px;"><input type="submit" id="delete-post-button" value="Delete post" class="button-style" /></div>
+                        <div style="margin-top: 8px;"><input type="submit" id="delete-post-button" value="Delete post" class="button-style" style="cursor: pointer;"/></div>
+                    </form>
+                }
+                else if (User.IsInRole("admin") || User.IsInRole("moder"))
+                {
+                    <form id="delete-post" method="post" asp-controller="Admin" asp-action="DeletePost">
+                        <input type="hidden" value="@Model.Id" name="postId" id="post-delete-id" />
+                        <div style="margin-top: 8px;"><input type="submit" id="delete-post-button" value="Delete post" class="button-style" style="cursor: pointer;"/></div>
                     </form>
                 }
             </div>

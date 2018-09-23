@@ -266,7 +266,6 @@ input[type=text], input[type=password], input[type=url] {
 
 .photo{
     margin-right: 15px;
-    margin-top: 15px;
     margin-left: 15px;
     text-align: center;
 }
@@ -493,9 +492,73 @@ div.form div{
     height: auto;
 }
 
+.admin-main-page {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+.admin-main-page div:first-child, .user-control-panel div:first-child {
+    border-left: 1px solid #e0e0e0;
+}
+
+.admin-main-page div:last-child{
+    border-left: none;
+}
+
+.admin-main-page div, .user-control-panel div{
+    border: 1px solid #e0e0e0;
+    border-left: none;
+    width: calc(100% / 4 - 2px);
+    background-color: white;
+}
+
+.admin-main-page div a, .user-control-panel div a{
+    display: block;
+    padding: 1em;
+    text-decoration: none;
+    color: black;
+}
+
+.currentLink {
+    color: white !important;
+    background-color: #249cd9;
+}
+
+.nav-admin:hover, .user-control-panel div a:hover{
+    color: white !important;
+    background-color: #249cd9;
+}
+
+.user-control-panel {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    text-align: center;
+}
+
+#users{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.user{
+    margin-bottom: 1em;
+}
+
+.user-info {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: Roboto;
+}
+
 .new-post {
     border: 1px solid #e0e0e0;
-    border-radius: 5px;
     background-color: white;
     background-image: url("/images/photo_camera_grey_192x192.png");
     background-position: center;

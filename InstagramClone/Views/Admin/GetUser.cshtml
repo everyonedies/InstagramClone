@@ -1,0 +1,31 @@
+﻿@model AppUserViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div style="display: flex; width: 100%; justify-content: center; flex-wrap: wrap;">
+    <div class="user-info">
+        <div style="width: 100%; text-align: center; font-size: 1.5em; margin-top: 1em;">User info</div>
+        <partial name="_ProfileMinPartialView" model="Model" />
+    </div>
+    <div class="user-control-panel">
+        <div><a href="#posts" id="show-posts">Posts</a></div>
+        <div><a href="#comments" id="show-comments">Comments</a></div>
+    </div>
+</div>
+<div id="user-items">
+    <div class="posts">
+        @if (Model.Posts.Count() == 0)
+        {
+            <p>This user doesn't have any posts.</p>
+        }
+        @foreach (var i in Model.Posts)
+        {
+            ViewBag.DeletePost = "Delete";
+            <partial name="_PostPartialView" model="i" />
+        }
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/publication.js"></script>
+}

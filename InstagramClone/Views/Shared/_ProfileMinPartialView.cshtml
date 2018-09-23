@@ -1,0 +1,20 @@
+﻿@model AppUserViewModel
+<div style="display: flex;">
+    <div class="photo">
+        <p><img src="@Model.Picture" id="profile-photo" style="width: 10%; border-radius: 50%; border: 1px solid #e0e0e0;" /></p>
+    </div>
+    <div style="margin-top: 25px;">
+        <div class="alias-style" style="margin-right: 20px; font-size: 1.3em;"><a href="/@Model.Alias" style="text-decoration: none; color: black;">@Model.Alias</a></div>
+        <p class="margin-info" style="margin: 0;">
+            <span>
+                <span class="bold">@Model.Posts.Count()</span> posts
+            </span>
+            <span>
+                <span class="bold">@Model.NumberOfFollowers</span> followers
+            </span>
+            <span>
+                <span class="bold">@Model.NumberOfFollowing</span> following
+            </span>
+        </p>
+    </div>
+</div>

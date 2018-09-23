@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace InstagramClone.Controllers
 {
+    [Authorize(Roles = "admin, moder, user")]
     public class NewsController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
@@ -23,7 +24,6 @@ namespace InstagramClone.Controllers
             this.userManager = userManager;
         }
 
-        [Authorize]
         public async Task<IActionResult> GetUserNews()
         {
             AppUser appUser = await userManager.GetUserAsync(User);

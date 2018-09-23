@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace InstagramClone.Controllers
 {
+    [Authorize(Roles = "admin, moder, user")]
     public class PostController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
@@ -26,6 +26,7 @@ namespace InstagramClone.Controllers
             this.userManager = userManager;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> ShowPost(int id)
         {
             Post post = unitOfWork.Posts.GetByIdWithItems(id);
@@ -50,7 +51,6 @@ namespace InstagramClone.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> AddNewComment(int postId, string text)
         {
             AppUser user = await userManager.GetUserAsync(User);
@@ -66,7 +66,6 @@ namespace InstagramClone.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Like(int postId)
         {
             AppUser user = await userManager.GetUserAsync(User);
@@ -98,7 +97,6 @@ namespace InstagramClone.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> AddPostCaption(int postId, string caption)
         {
             AppUser user = await userManager.GetUserAsync(User);
@@ -115,7 +113,6 @@ namespace InstagramClone.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> AddPostTags(int postId, string tags)
         {
             AppUser user = await userManager.GetUserAsync(User);

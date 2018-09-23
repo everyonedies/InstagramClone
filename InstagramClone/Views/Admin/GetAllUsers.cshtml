@@ -1,0 +1,26 @@
+﻿@model ICollection<AppUserViewModel>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div style="display: flex; width: 100%; justify-content: center; margin-top: 2em;">
+    <div id="users">
+        @{ 
+            var i = Model.GetEnumerator();
+            bool state = i.MoveNext();
+
+            int num = 3;
+        }
+        @for (int j = 0; j < num && state; j++)
+        {
+            <div style="display: flex; flex-wrap: wrap; flex-direction: column;">
+                @for (int k = 0; k < Model.Count() / num; k++, state = i.MoveNext())
+                {
+                <div class="user" style="width: 25%; display: flex;">
+                    <div><img src="@i.Current.Picture" style="width: 60px; height: 60px; border-radius: 50%;" /></div>
+                    <div style="margin-left: 2em; padding-top: 1em;"><a asp-controller="Admin" asp-action="GetUser" asp-route-alias="@i.Current.Alias" style="text-decoration: none; color: black;">@i.Current.Alias</a></div>
+                </div>
+                }
+            </div>
+        }
+    </div>
+</div>

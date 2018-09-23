@@ -6,9 +6,11 @@ using InstagramClone.Domain.Models;
 using System.Threading.Tasks;
 using InstagramClone.Models;
 using InstagramClone.Mapping;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InstagramClone.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly IUserService userService;

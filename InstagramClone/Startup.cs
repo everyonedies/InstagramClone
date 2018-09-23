@@ -13,6 +13,7 @@ using InstagramClone.Domain.Infrastucture;
 using System.Text;
 using InstagramClone.Domain.Services;
 using System;
+using Microsoft.AspNetCore.Identity;
 
 namespace InstagramClone
 {
@@ -43,13 +44,15 @@ namespace InstagramClone
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            services.AddDefaultIdentity<AppUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddScoped<IUnitOfWork, EfUnitOfWork>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProfileService, ProfileService>();
             services.AddScoped<IPostService, PostService>();
+            services.AddScoped<IAdminService, AdminService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -57,21 +60,19 @@ namespace InstagramClone
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, RoleManager<IdentityRole> roleManager)
         {
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //    //ListAllRegisteredServices(app);
-            //    app.UseDatabaseErrorPage();
-            //}
-            //else
-            //{
-            //    app.UseExceptionHandler("/Home/Error");
-            //    app.UseHsts();
-            //}
             app.UseDeveloperExceptionPage();
             app.UseDatabaseErrorPage();
+
+            if (!roleManager.RoleExistsAsync("admin").Result)
+                roleManager.CreateAsync(new IdentityRole("admin")).Wait();
+
+            if (!roleManager.RoleExistsAsync("moder").Result)
+                roleManager.CreateAsync(new IdentityRole("moder")).Wait();
+
+            if (!roleManager.RoleExistsAsync("user").Result)
+                roleManager.CreateAsync(new IdentityRole("user")).Wait();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -80,6 +81,12 @@ namespace InstagramClone
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "admin",
+                    template: "admin",
+                    defaults: new { controller = "Admin", action = "GetAllUsers"}
+                );
+
                 routes.MapRoute(
                     name: "profile1",
                     template: "{alias}",

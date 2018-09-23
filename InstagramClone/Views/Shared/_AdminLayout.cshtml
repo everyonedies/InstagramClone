@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/site.css" type="text/css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="top">
+            <a asp-controller="Home" asp-action="Index" id="logo-link">
+                <div id="logo">
+                    <div><img src="~/images/logo.png" width="25" height="25" /></div>
+                    <div class="logo-text">InstagramClone</div>
+                </div>
+            </a>
+            <div id="search">
+                <input type="text" id="input-search" placeholder="Search" autocomplete="off" />
+                <div id="searchResult" class="searchBox"></div>
+            </div>
+            <div id="profile">
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </header>
+    <main>
+        <div style="width: 100%;">
+            <div class="admin-main-page">
+                <div><a asp-controller="Admin" asp-action="GetAllUsers" class="nav-admin">All users</a></div>
+                <div><a asp-controller="Admin" asp-action="GetAllPosts" class="nav-admin">All posts</a></div>
+                <div><a asp-controller="Admin" asp-action="GetAllTags" class="nav-admin">All tags</a></div>
+                <div><a asp-controller="Admin" asp-action="GetAllComments" class="nav-admin">All comments</a></div>
+            </div>
+            @RenderBody()
+        </div>
+    </main>
+    <footer></footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/search.js"></script>
+    <script src="~/js/link.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

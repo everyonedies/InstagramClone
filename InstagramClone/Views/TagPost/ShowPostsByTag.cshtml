@@ -13,7 +13,10 @@
     }
     else
     {
-        <partial name="_PostPartialView" model="Model" />
+        @foreach (var i in Model)
+        {
+            <partial name="_PostPartialView" model="i" />
+        }
     }
 </div>
 
