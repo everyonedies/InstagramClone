@@ -1,12 +1,13 @@
 ﻿using InstagramClone.Domain.Models;
 using System.Drawing;
+using System.Threading.Tasks;
 
 namespace InstagramClone.Domain.Interfaces
 {
     public interface IProfileService
     {
-        void SetProfilePhoto(AppUser user, Image image, string imageExt);
-        void AddNewPost(AppUser user, Image image, string imageExt);
-        bool DeletePost(AppUser user, int postId);
+        Task SetProfilePhoto(AppUser user, Image image, string imageExt);
+        Task AddNewPost(AppUser user, Image image, string imageExt);
+        Task<bool> DeletePost(AppUser user, int postId);
     }
 }

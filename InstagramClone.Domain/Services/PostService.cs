@@ -2,6 +2,7 @@
 using InstagramClone.Domain.Models;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace InstagramClone.Domain.Services
 {
@@ -14,10 +15,10 @@ namespace InstagramClone.Domain.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public void AddNewComment(int postId, string text, string userAlias)
+        public async Task AddNewComment(int postId, string text, string userAlias)
         {
-            Post post = unitOfWork.Posts.GetByIdWithItems(postId);
-            AppUser user = unitOfWork.Users.GetByAliasWithItems(userAlias);
+            Post post = await unitOfWork.Posts.GetByIdWithItems(postId);
+            AppUser user = await unitOfWork.Users.GetByAliasWithItems(userAlias);
 
             if (post != null && user != null && text != null && text != string.Empty)
             {
@@ -29,30 +30,30 @@ namespace InstagramClone.Domain.Services
                 };
 
                 post.Comments.Add(comment);
-                unitOfWork.SaveAsync();
+                await unitOfWork.SaveAsync();
             }
             else throw new ArgumentException();
         }
 
-        public void AddPostCaption(int postId, string text, string userAlias)
+        public async Task AddPostCaption(int postId, string text, string userAlias)
         {
-            Post post = unitOfWork.Posts.GetByIdWithItems(postId);
-            AppUser user = unitOfWork.Users.GetByAliasWithItems(userAlias);
+            Post post = await unitOfWork.Posts.GetByIdWithItems(postId);
+            AppUser user = await unitOfWork.Users.GetByAliasWithItems(userAlias);
 
             var check = user.Posts.FirstOrDefault(p => p.Id == postId);
 
             if (check != null && post != null && user != null)
             {
                 post.Text = text;
-                unitOfWork.SaveAsync();
+                await unitOfWork.SaveAsync();
             }
             else throw new ArgumentException();
         }
 
-        public void AddPostTags(int postId, string tags, string userAlias)
+        public async Task AddPostTags(int postId, string tags, string userAlias)
         {
-            Post post = unitOfWork.Posts.GetByIdWithItems(postId);
-            AppUser user = unitOfWork.Users.GetByAliasWithItems(userAlias);
+            Post post = await unitOfWork.Posts.GetByIdWithItems(postId);
+            AppUser user = await unitOfWork.Users.GetByAliasWithItems(userAlias);
 
             var check = user.Posts.FirstOrDefault(p => p.Id == postId);
 
@@ -82,15 +83,15 @@ namespace InstagramClone.Domain.Services
                         unitOfWork.TagPost.Add(tagPost);
                     }
                 }
-                unitOfWork.SaveAsync();
+                await unitOfWork.SaveAsync();
             }
             else throw new ArgumentException();
         }
 
-        public void RemovePostTags(int postId, string userAlias)
+        public async Task RemovePostTags(int postId, string userAlias)
         {
-            Post post = unitOfWork.Posts.GetByIdWithItems(postId);
-            AppUser user = unitOfWork.Users.GetByAliasWithItems(userAlias);
+            Post post = await unitOfWork.Posts.GetByIdWithItems(postId);
+            AppUser user = await unitOfWork.Users.GetByAliasWithItems(userAlias);
 
             var check = user.Posts.FirstOrDefault(p => p.Id == postId);
 
@@ -101,12 +102,12 @@ namespace InstagramClone.Domain.Services
                 {
                     unitOfWork.TagPost.Delete(i);
                 }
-                unitOfWork.SaveAsync();
+                await unitOfWork.SaveAsync();
             }
             else throw new ArgumentException();
         }
 
-        public int Like(Post post, AppUser user)
+        public async Task<int> Like(Post post, AppUser user)
         {
             if (post != null && user != null)
             {
@@ -118,7 +119,7 @@ namespace InstagramClone.Domain.Services
                         Date = DateTime.Now
                     };
                     post.Likes.Add(like);
-                    unitOfWork.SaveAsync();
+                    await unitOfWork.SaveAsync();
                 }
                 int numOfLikes = post.Likes.Count();
                 return numOfLikes;
@@ -126,7 +127,7 @@ namespace InstagramClone.Domain.Services
             else throw new ArgumentNullException();
         }
 
-        public int Unlike(Post post, AppUser user)
+        public async Task<int> Unlike(Post post, AppUser user)
         {
             if (post != null && user != null)
             {
@@ -134,7 +135,7 @@ namespace InstagramClone.Domain.Services
                 {
                     var like = GetLike(post, user);
                     unitOfWork.Likes.Delete(like);
-                    unitOfWork.SaveAsync();
+                    await unitOfWork.SaveAsync();
                 }
                 int numOfLikes = post.Likes.Count();
                 return numOfLikes;

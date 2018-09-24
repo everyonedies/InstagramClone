@@ -4,6 +4,7 @@ using InstagramClone.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace InstagramClone.Domain.Infrastucture
 {
@@ -13,11 +14,13 @@ namespace InstagramClone.Domain.Infrastucture
         {
         }
 
-        public ICollection<Tag> GetTagsByNameWithItems(string text)
+        public Task<ICollection<Tag>> GetTagsByNameWithItems(string text)
         {
-            var tags = _dbContext.Tags.Include(t => t.TagPosts).ToList();
-            var res = tags.Where(t => t.Text.Contains(text) && t.TagPosts.Count() > 0).ToList();
-            return res;
+            return Task.Run(() => {
+                List<Tag> tags = _dbContext.Tags.Include(t => t.TagPosts).ToList();
+                ICollection<Tag> res = tags.Where(t => t.Text.Contains(text) && t.TagPosts.Count() > 0).ToList();
+                return res;
+            });
         }
     }
 }

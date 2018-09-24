@@ -8,11 +8,11 @@ namespace InstagramClone.Domain.Interfaces
     {
         Task<ICollection<AppUser>> GetTopUsers(int count);
         ICollection<AppUser> FindUsersByAlias(string alias);
-        ICollection<AppUser> GetUserFollowers(string alias);
-        ICollection<AppUser> GetUserFollowing(string alias);
-        ICollection<Post> GetUserNews(string alias);
+        Task<ICollection<AppUser>> GetUserFollowers(string alias);
+        Task<ICollection<AppUser>> GetUserFollowing(string alias);
+        Task<ICollection<Post>> GetUserNews(string alias);
         bool IsUserFollowing(AppUser currentUser, AppUser targetUser);
-        bool Follow(AppUser currentUser, AppUser targetUser);
-        bool Unfollow(AppUser currentUser, AppUser targetUser);
+        Task<bool> Follow(AppUser currentUser, AppUser targetUser);
+        Task<bool> Unfollow(AppUser currentUser, AppUser targetUser);
     }
 }

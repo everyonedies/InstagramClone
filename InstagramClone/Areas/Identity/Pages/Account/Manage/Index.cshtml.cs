@@ -92,10 +92,10 @@ namespace InstagramClone.Areas.Identity.Pages.Account.Manage
 
             if (user.Alias != Input.Alias)
             {
-                AppUser usr = _unitOfWork.Users.GetByAliasWithItems(Input.Alias);
+                AppUser usr = await _unitOfWork.Users.GetByAliasWithItems(Input.Alias);
                 if (usr == null)
                 {
-                    user = _unitOfWork.Users.GetByAliasWithItems(user.Alias);
+                    user = await _unitOfWork.Users.GetByAliasWithItems(user.Alias);
                     user.Picture = user.Picture.Replace(user.Alias, Input.Alias);
                     foreach (var i in user.Posts)
                     {

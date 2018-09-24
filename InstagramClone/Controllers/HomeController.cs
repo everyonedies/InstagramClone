@@ -30,13 +30,14 @@ namespace InstagramClone.Controllers
             return View(topUsersViewModel);
         }
 
-        public IActionResult SearchAjax(string text)
+        public async Task<IActionResult> SearchAjax(string text)
         {
             object data;
             int len = 0;
             if (text[0] == '#')
             {
-                var res = unitOfWork.Tags.GetTagsByNameWithItems(text.Substring(1)).Select(t => new { text = t.Text, type = "tag" });
+                ICollection<Tag> tags = await unitOfWork.Tags.GetTagsByNameWithItems(text.Substring(1));
+                var res = tags.Select(t => new { text = t.Text, type = "tag" });
                 len = res.Count();
                 data = res;
             }
@@ -48,9 +49,12 @@ namespace InstagramClone.Controllers
             }
             else
             {
-                var tags = unitOfWork.Tags.GetTagsByNameWithItems(text).Select(t => new { text = t.Text, type = "tag" });
+                ICollection<Tag> tags = await unitOfWork.Tags.GetTagsByNameWithItems(text);
+
+                var tagsText = tags.Select(t => new { text = t.Text, type = "tag" });
                 var users = userService.FindUsersByAlias(text).Select(u => new { text = u.Alias, type = "user" });
-                var res = users.Concat(tags).OrderBy(i => i.text);
+
+                var res = users.Concat(tagsText).OrderBy(i => i.text);
                 len = res.Count();
                 data = res;
             }

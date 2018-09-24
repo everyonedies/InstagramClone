@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Threading.Tasks;
 using InstagramClone.Domain.Interfaces;
 using InstagramClone.Domain.Models;
 using Microsoft.AspNetCore.Hosting;
@@ -19,16 +20,16 @@ namespace InstagramClone.Domain.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public void SetProfilePhoto(AppUser user, Image image, string imageExt)
+        public async Task SetProfilePhoto(AppUser user, Image image, string imageExt)
         {
             string fileName = PhotoProcessing(user, image, imageExt, 152, 152);
             user.Picture = $"/images/Users/{user.Alias}/" + fileName;
-            unitOfWork.SaveAsync();
+            await unitOfWork.SaveAsync();
         }
 
-        public void AddNewPost(AppUser user, Image image, string imageExt)
+        public async Task AddNewPost(AppUser user, Image image, string imageExt)
         {
-            var userWithItems = unitOfWork.Users.GetByAliasWithItems(user.Alias);
+            var userWithItems = await unitOfWork.Users.GetByAliasWithItems(user.Alias);
             string fileNamePicView = SavePhoto(userWithItems, image, imageExt);
             string fileNamePicPreview = PhotoProcessing(userWithItems, image, imageExt, 270, 270);
 
@@ -40,17 +41,17 @@ namespace InstagramClone.Domain.Services
             };
 
             userWithItems.Posts.Add(post);
-            unitOfWork.SaveAsync();
+            await unitOfWork.SaveAsync();
         }
 
-        public bool DeletePost(AppUser user, int postId)
+        public async Task<bool> DeletePost(AppUser user, int postId)
         {
-            var postWithItems = unitOfWork.Posts.GetByIdWithItems(postId);
-            var check = postWithItems.User.Alias == user.Alias;
+            Post postWithItems = await unitOfWork.Posts.GetByIdWithItems(postId);
+            bool check = postWithItems.User.Alias == user.Alias;
 
             if (check)
             {
-                unitOfWork.Posts.Delete(postWithItems);
+                await unitOfWork.Posts.DeleteAsync(postWithItems);
                 return true;
             }
             else return false;

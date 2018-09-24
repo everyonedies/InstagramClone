@@ -29,14 +29,14 @@ namespace InstagramClone.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ShowPost(int id)
         {
-            Post post = unitOfWork.Posts.GetByIdWithItems(id);
+            Post post = await unitOfWork.Posts.GetByIdWithItems(id);
             AppUser user = await userManager.GetUserAsync(User);
 
             if (post != null)
             {
                 if (user != null)
                 {
-                    AppUser curUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
+                    AppUser curUser = await unitOfWork.Users.GetByAliasWithItems(user.Alias);
 
                     if (postService.IsLiked(post, curUser))
                         ViewBag.LikeState = "Like";
@@ -56,7 +56,7 @@ namespace InstagramClone.Controllers
             AppUser user = await userManager.GetUserAsync(User);
             try
             {
-                postService.AddNewComment(postId, text, user.Alias);
+                await postService.AddNewComment(postId, text, user.Alias);
                 return Json(new { alias = user.Alias });
             }
             catch (ArgumentException)
@@ -69,8 +69,8 @@ namespace InstagramClone.Controllers
         public async Task<IActionResult> Like(int postId)
         {
             AppUser user = await userManager.GetUserAsync(User);
-            Post post = unitOfWork.Posts.GetByIdWithItems(postId);
-            AppUser curUser = unitOfWork.Users.GetByAliasWithItems(user.Alias);
+            Post post = await unitOfWork.Posts.GetByIdWithItems(postId);
+            AppUser curUser = await unitOfWork.Users.GetByAliasWithItems(user.Alias);
 
             try
             {
@@ -79,12 +79,12 @@ namespace InstagramClone.Controllers
 
                 if (postService.IsLiked(post, curUser))
                 {
-                    numOfLikes = postService.Unlike(post, curUser);
+                    numOfLikes = await postService.Unlike(post, curUser);
                     status = "Unlike";
                 }
                 else
                 {
-                    numOfLikes = postService.Like(post, curUser);
+                    numOfLikes = await postService.Like(post, curUser);
                     status = "Like";
                 }
 
@@ -103,7 +103,7 @@ namespace InstagramClone.Controllers
 
             try
             {
-                postService.AddPostCaption(postId, caption, user.Alias);
+                await postService.AddPostCaption(postId, caption, user.Alias);
                 return Ok();
             }
             catch (ArgumentException)
@@ -120,9 +120,9 @@ namespace InstagramClone.Controllers
             try
             {
                 if (tags != null && tags != string.Empty)
-                    postService.AddPostTags(postId, tags, user.Alias);
+                    await postService.AddPostTags(postId, tags, user.Alias);
                 else
-                    postService.RemovePostTags(postId, user.Alias);
+                    await postService.RemovePostTags(postId, user.Alias);
                 return Ok();
             }
             catch (ArgumentException)

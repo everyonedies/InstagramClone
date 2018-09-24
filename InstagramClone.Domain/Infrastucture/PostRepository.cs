@@ -4,6 +4,7 @@ using InstagramClone.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace InstagramClone.Domain.Infrastucture
 {
@@ -13,29 +14,35 @@ namespace InstagramClone.Domain.Infrastucture
         {
         }
 
-        public ICollection<Post> GetPostsByTag(Tag tag)
+        public Task<ICollection<Post>> GetPostsByTag(Tag tag)
         {
-            var posts = _dbContext.TagPosts.Include(tp => tp.Tag).Include(tp => tp.Post).ToList();
-            var res = posts.Where(tp => tp.Tag.Text == tag.Text).Select(tp => tp.Post).ToList();
-            return res;
+            return Task.Run(() => {
+                var posts = _dbContext.TagPosts.Include(tp => tp.Tag).Include(tp => tp.Post).ToList();
+                ICollection<Post> res = posts.Where(tp => tp.Tag.Text == tag.Text).Select(tp => tp.Post).ToList();
+                return res;
+            });
         }
 
-        public ICollection<Post> GetPostsWithItemsByTag(Tag tag)
+        public Task<ICollection<Post>> GetPostsWithItemsByTag(Tag tag)
         {
-            var posts = GetPostsByTag(tag);
-            foreach (var i in posts)
-            {
-                LoadPost(i);
-            }
-            return posts;
+            return Task.Run(async () => {
+                var posts = await GetPostsByTag(tag);
+                foreach (var i in posts)
+                {
+                    LoadPost(i);
+                }
+                return posts;
+            });
         }
 
-        public Post GetByIdWithItems(int Id)
+        public Task<Post> GetByIdWithItems(int Id)
         {
-            var post = _dbContext.Posts.FirstOrDefault(p => p.Id == Id);
-            LoadPost(post);
+            return Task.Run(() => {
+                Post post = _dbContext.Posts.FirstOrDefault(p => p.Id == Id);
+                LoadPost(post);
 
-            return post;
+                return post;
+            });
         }
 
         private void LoadPost(Post post)

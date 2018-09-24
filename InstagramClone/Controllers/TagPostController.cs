@@ -5,6 +5,7 @@ using InstagramClone.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace InstagramClone.Controllers
 {
@@ -18,10 +19,10 @@ namespace InstagramClone.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        public IActionResult ShowPostsByTag(string text)
+        public async Task<IActionResult> ShowPostsByTag(string text)
         {
             Tag tag = new Tag { Text = text };
-            ICollection<Post> posts = unitOfWork.Posts.GetPostsWithItemsByTag(tag);
+            ICollection<Post> posts = await unitOfWork.Posts.GetPostsWithItemsByTag(tag);
 
             ViewBag.Tag = text;
             ICollection<PostViewModel> viewModel = posts.GetPostsViewModel();

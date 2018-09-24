@@ -19,7 +19,7 @@ namespace InstagramClone.Domain.Services
         {
             return Task.Run(() => {
                 ICollection<AppUser> topUsers = unitOfWork.Users.ListAll()
-                .Select(u => unitOfWork.Users.GetByAliasWithItems(u.Alias))
+                .Select(u => unitOfWork.Users.GetByAliasWithItems(u.Alias).Result)
                 .OrderByDescending(u => u.Followers.Count())
                 .Take(count)
                 .ToList();
@@ -27,19 +27,24 @@ namespace InstagramClone.Domain.Services
             });
         }
 
-        public ICollection<Post> GetUserNews(string alias)
+        public Task<ICollection<Post>> GetUserNews(string alias)
         {
-            AppUser appUser = unitOfWork.Users.GetByAliasWithItems(alias);
-            IEnumerable<Post> posts = new List<Post>();
-
-            foreach (Follower i in appUser.Following)
+            return Task.Run(async () =>
             {
-                AppUser following = unitOfWork.Users.GetByAliasWithItems(i.ForWhomFollows.Alias);
-                posts = posts.Concat(following.Posts);
-            }
+                AppUser appUser = await unitOfWork.Users.GetByAliasWithItems(alias);
+                IEnumerable<Post> posts = new List<Post>();
 
-            posts = posts.OrderByDescending(p => p.Date);
-            return posts.ToList();
+                foreach (Follower i in appUser.Following)
+                {
+                    AppUser following = await unitOfWork.Users.GetByAliasWithItems(i.ForWhomFollows.Alias);
+                    posts = posts.Concat(following.Posts);
+                }
+
+                posts = posts.OrderByDescending(p => p.Date);
+                ICollection<Post> result = posts.ToList();
+
+                return result;
+            });
         }
 
         public ICollection<AppUser> FindUsersByAlias(string alias)
@@ -49,17 +54,17 @@ namespace InstagramClone.Domain.Services
             return users;
         }
 
-        public ICollection<AppUser> GetUserFollowers(string alias)
+        public async Task<ICollection<AppUser>> GetUserFollowers(string alias)
         {
-            AppUser appUser = unitOfWork.Users.GetByAliasWithItems(alias);
+            AppUser appUser = await unitOfWork.Users.GetByAliasWithItems(alias);
             ICollection<AppUser> userFollowers = appUser.Followers.Select(u => u.WhoFollows).ToList();
 
             return userFollowers;
         }
 
-        public ICollection<AppUser> GetUserFollowing(string alias)
+        public async Task<ICollection<AppUser>> GetUserFollowing(string alias)
         {
-            AppUser appUser = unitOfWork.Users.GetByAliasWithItems(alias);
+            AppUser appUser = await unitOfWork.Users.GetByAliasWithItems(alias);
             ICollection<AppUser> userFollowing = appUser.Following.Select(u => u.ForWhomFollows).ToList();
 
             return userFollowing;
@@ -79,13 +84,13 @@ namespace InstagramClone.Domain.Services
             return result;
         }
 
-        public bool Follow(AppUser currentUser, AppUser targetUser)
+        public async Task<bool> Follow(AppUser currentUser, AppUser targetUser)
         {
             if (currentUser.Alias != targetUser.Alias && !IsUserFollowing(currentUser, targetUser))
             {
                 Follower follower = new Follower { ForWhomFollows = targetUser, WhoFollows = currentUser };
                 currentUser.Following.Add(follower);
-                unitOfWork.SaveAsync();
+                await unitOfWork.SaveAsync();
                 return true;
             }
             else
@@ -94,13 +99,13 @@ namespace InstagramClone.Domain.Services
             }
         }
 
-        public bool Unfollow(AppUser currentUser, AppUser targetUser)
+        public async Task<bool> Unfollow(AppUser currentUser, AppUser targetUser)
         {
             if (currentUser.Alias != targetUser.Alias && IsUserFollowing(currentUser, targetUser))
             {
                 var following = GetFollowing(currentUser, targetUser);
                 unitOfWork.Followers.Delete(following);
-                unitOfWork.SaveAsync();
+                await unitOfWork.SaveAsync();
                 return true;
             }
             else

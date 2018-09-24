@@ -49,13 +49,32 @@ namespace InstagramClone.Controllers
             return View();
         }
 
-        public IActionResult GetUser(string alias)
+        public async Task<IActionResult> GetUser(string alias)
         {
-            AppUser appUser = unitOfWork.Users.GetByAliasWithItems(alias);
-            AppUserViewModel appUserViewModel = appUser.GetAppUserViewModel();
+            AppUser currentUser = await userManager.GetUserAsync(User);
+            AppUser targetUser = await unitOfWork.Users.GetByAliasWithItems(alias);
+            AppUserViewModel targetUserViewModel = targetUser.GetAppUserViewModel();
+
+            if (currentUser.Alias != targetUser.Alias)
+            {
+                bool currUserM = await userManager.IsInRoleAsync(currentUser, "moder");
+                bool currUserA = await userManager.IsInRoleAsync(currentUser, "admin");
+                bool appUserM = await userManager.IsInRoleAsync(targetUser, "moder");
+                bool appUserA = await userManager.IsInRoleAsync(targetUser, "admin");
+
+                if (currUserA && appUserA || currUserM && appUserA || currUserM && appUserM)
+                    ViewBag.Permission = false;
+                else
+                    ViewBag.Permission = true;
+            }
+            else
+            {
+                ViewBag.Permission = true;
+            }
+
             TempData["returnUrl"] = HttpContext.Request.Path.ToString() + "?alias=" +  alias;
 
-            return View(appUserViewModel);
+            return View(targetUserViewModel);
         }
 
         public IActionResult BlockUser(string alias)
@@ -69,20 +88,22 @@ namespace InstagramClone.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeletePost(int postId)
+        public async Task<IActionResult> DeletePost(int postId)
         {
             try
             {
-                adminService.DeletePost(postId);
+                AppUser user = await userManager.GetUserAsync(User);
+                await adminService.DeletePost(user, postId);
+
                 string returnUrl = Convert.ToString(TempData["returnUrl"]);
                 if (!string.IsNullOrEmpty(returnUrl))
                     return Redirect(returnUrl);
                 else
                     return Redirect("/Admin/GetAllUsers");
             }
-            catch (Exception e)
+            catch
             {
-                return BadRequest(e.Message);
+                return BadRequest();
             }
         }
 
