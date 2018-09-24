@@ -17,28 +17,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/04/2018 21:47:21</publishTime>
     </File>
     <File Include="InstagramClone.deps.json">
-      <publishTime>09/21/2018 13:13:40</publishTime>
+      <publishTime>09/24/2018 13:13:51</publishTime>
     </File>
     <File Include="InstagramClone.dll">
-      <publishTime>09/21/2018 13:13:19</publishTime>
+      <publishTime>09/24/2018 13:13:02</publishTime>
     </File>
     <File Include="InstagramClone.Domain.dll">
-      <publishTime>09/21/2018 12:12:13</publishTime>
+      <publishTime>09/24/2018 13:12:58</publishTime>
     </File>
     <File Include="InstagramClone.Domain.pdb">
-      <publishTime>09/21/2018 12:12:13</publishTime>
+      <publishTime>09/24/2018 13:12:58</publishTime>
     </File>
     <File Include="InstagramClone.pdb">
-      <publishTime>09/21/2018 13:13:19</publishTime>
+      <publishTime>09/24/2018 13:13:02</publishTime>
     </File>
     <File Include="InstagramClone.runtimeconfig.json">
-      <publishTime>09/21/2018 13:13:40</publishTime>
+      <publishTime>09/24/2018 13:13:51</publishTime>
     </File>
     <File Include="InstagramClone.Views.dll">
-      <publishTime>09/21/2018 13:13:27</publishTime>
+      <publishTime>09/24/2018 13:13:12</publishTime>
     </File>
     <File Include="InstagramClone.Views.pdb">
-      <publishTime>09/21/2018 13:13:27</publishTime>
+      <publishTime>09/24/2018 13:13:12</publishTime>
     </File>
     <File Include="Microsoft.EntityFrameworkCore.Abstractions.dll">
       <publishTime>07/26/2018 18:17:04</publishTime>
@@ -83,13 +83,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/21/2016 14:05:54</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>09/21/2018 13:13:40</publishTime>
+      <publishTime>09/24/2018 13:13:51</publishTime>
     </File>
     <File Include="wwwroot/css/login.css">
       <publishTime>09/03/2018 18:07:06</publishTime>
     </File>
     <File Include="wwwroot/css/site.css">
-      <publishTime>09/21/2018 12:38:21</publishTime>
+      <publishTime>09/24/2018 01:28:58</publishTime>
     </File>
     <File Include="wwwroot/css/site.min.css">
       <publishTime>08/16/2018 13:01:45</publishTime>
@@ -126,6 +126,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/images/Users/everyonedies/01442065-97a3-40e5-8a4e-248c259d5cde.jpg">
       <publishTime>09/05/2018 22:31:38</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/0ed627d3-61ab-404c-a009-695d8c05f353.jpg">
+      <publishTime>09/24/2018 11:41:58</publishTime>
     </File>
     <File Include="wwwroot/images/Users/everyonedies/16669048-d9b9-4e6c-80b3-20649cbcd6e4.jpg">
       <publishTime>09/18/2018 14:57:38</publishTime>
@@ -172,17 +175,38 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/images/Users/everyonedies/53e25c92-63ef-47c7-84dd-236287e246b6.jpg">
       <publishTime>09/05/2018 14:20:59</publishTime>
     </File>
+    <File Include="wwwroot/images/Users/everyonedies/5473df4a-2e73-43c2-beb6-f18ef5fd1a92.jpg">
+      <publishTime>09/24/2018 10:29:53</publishTime>
+    </File>
     <File Include="wwwroot/images/Users/everyonedies/5486bb6a-eaaa-432c-8a24-975c972fc822.jpg">
       <publishTime>09/05/2018 14:26:31</publishTime>
     </File>
     <File Include="wwwroot/images/Users/everyonedies/55f0f401-f20d-4f98-8e87-e2019ab94650.jpg">
       <publishTime>09/06/2018 11:06:56</publishTime>
     </File>
+    <File Include="wwwroot/images/Users/everyonedies/5cce7ea8-f5ce-4157-a16f-f28f52cc6ee5.jpg">
+      <publishTime>09/24/2018 11:41:58</publishTime>
+    </File>
     <File Include="wwwroot/images/Users/everyonedies/5ffb57fa-9682-4d80-bd7e-b724e6ca3c00.jpg">
       <publishTime>09/05/2018 22:40:56</publishTime>
     </File>
     <File Include="wwwroot/images/Users/everyonedies/611103ee-8e03-447f-8a8d-6e20e3b24775.jpeg">
       <publishTime>09/05/2018 14:10:27</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/670864f8-48c4-4fb2-aba8-bb92132ad614.jpg">
+      <publishTime>09/24/2018 10:30:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/68bf6b3c-f551-4f32-93b7-4e5d502f22e3.jpg">
+      <publishTime>09/24/2018 10:29:31</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/7112f544-a509-4956-8075-36fcfd08647c.jpg">
+      <publishTime>09/24/2018 10:29:37</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/77b10dee-aad6-4a37-974d-92a509e3ceb3.jpg">
+      <publishTime>09/24/2018 10:29:42</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/79c326e9-f498-410f-9e1d-069eb75ae235.jpg">
+      <publishTime>09/23/2018 13:17:07</publishTime>
     </File>
     <File Include="wwwroot/images/Users/everyonedies/7a1e268b-5b1d-44f0-8817-a963271d219e.jpg">
       <publishTime>09/05/2018 22:31:38</publishTime>
@@ -196,6 +220,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/images/Users/everyonedies/84a6808c-f7c8-4833-9c18-ff4861e6b2ea.jpg">
       <publishTime>09/06/2018 11:11:36</publishTime>
     </File>
+    <File Include="wwwroot/images/Users/everyonedies/8536cffc-2452-4fd1-b6e8-41fa5d870b19.jpg">
+      <publishTime>09/24/2018 10:30:06</publishTime>
+    </File>
     <File Include="wwwroot/images/Users/everyonedies/8c35134e-8cb2-461d-a5f6-8f9b87ed14ba.jpg">
       <publishTime>09/03/2018 09:35:27</publishTime>
     </File>
@@ -208,6 +235,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/images/Users/everyonedies/91dc0f20-20be-4ec2-9314-491feed0a426.jpg">
       <publishTime>09/18/2018 15:05:01</publishTime>
     </File>
+    <File Include="wwwroot/images/Users/everyonedies/a2faae65-11a8-4b07-9228-0c8c52b2936a.jpg">
+      <publishTime>09/24/2018 10:29:53</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/a6bae14b-1cbc-4268-bf55-8fef3900a4ec.jpg">
+      <publishTime>09/23/2018 13:17:07</publishTime>
+    </File>
     <File Include="wwwroot/images/Users/everyonedies/b451e671-a4e0-4624-a2b8-149cbccc9179[ImageFormat">
       <publishTime>09/04/2018 13:46:06</publishTime>
     </File>
@@ -217,8 +250,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/images/Users/everyonedies/b8a71261-14a6-4be5-a524-c4e3a00009cc.jpg">
       <publishTime>09/05/2018 14:24:19</publishTime>
     </File>
+    <File Include="wwwroot/images/Users/everyonedies/bbe82cc2-5dde-4bd1-9b11-15d3986d3b79.jpg">
+      <publishTime>09/24/2018 10:29:47</publishTime>
+    </File>
     <File Include="wwwroot/images/Users/everyonedies/c428bd2c-5a2e-4c9b-97a7-25183353c1bd.jpg">
       <publishTime>09/05/2018 14:25:55</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/cba65a56-808b-4484-9927-96ebfe9bd2da.jpg">
+      <publishTime>09/24/2018 10:29:43</publishTime>
     </File>
     <File Include="wwwroot/images/Users/everyonedies/d0054145-adcc-4f38-ad82-8a8560e64225.jpg">
       <publishTime>09/06/2018 13:45:07</publishTime>
@@ -229,8 +268,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/images/Users/everyonedies/e930e328-61fd-4da1-8758-1af1728c369e.jpg">
       <publishTime>09/06/2018 11:13:09</publishTime>
     </File>
+    <File Include="wwwroot/images/Users/everyonedies/eb8333f7-766e-4b63-a039-b70fc1f01f75.jpg">
+      <publishTime>09/24/2018 10:29:37</publishTime>
+    </File>
     <File Include="wwwroot/images/Users/everyonedies/ef11cb20-d739-493c-908d-31e5aaca344c.jpg">
       <publishTime>09/06/2018 11:15:52</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/f04d12de-3ae8-4e79-8bb1-b9b19c02ca1b.jpg">
+      <publishTime>09/24/2018 10:29:31</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/everyonedies/feff17c2-7cb5-49c0-8cce-07de6179abd5.jpg">
+      <publishTime>09/24/2018 10:29:47</publishTime>
     </File>
     <File Include="wwwroot/images/Users/follower/10c8155d-18ed-44ff-bd5e-0db542fad49c.jpg">
       <publishTime>09/06/2018 16:39:55</publishTime>
@@ -307,6 +355,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/images/Users/froggy/9fb84f13-733d-4204-905b-ac582d490c45.jpg">
       <publishTime>09/20/2018 22:07:53</publishTime>
     </File>
+    <File Include="wwwroot/images/Users/froggy/b6fe34b3-770f-4f46-a33c-f945de943afc.jpg">
+      <publishTime>09/24/2018 13:03:25</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/froggy/b7842aa0-41c1-44a6-b780-79c60dd8aec8.jpg">
+      <publishTime>09/24/2018 13:03:42</publishTime>
+    </File>
     <File Include="wwwroot/images/Users/froggy/ba77b893-a085-4803-a48d-30ebf42bd6aa.jpg">
       <publishTime>09/20/2018 23:55:13</publishTime>
     </File>
@@ -316,6 +370,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/images/Users/froggy/c4ca3839-8ee6-4bbe-9c83-142fe7418be7.jpg">
       <publishTime>09/21/2018 10:58:50</publishTime>
     </File>
+    <File Include="wwwroot/images/Users/froggy/d6c2a4f7-57b7-41aa-b7d2-c9a24bbcd8ba.jpg">
+      <publishTime>09/24/2018 13:03:34</publishTime>
+    </File>
     <File Include="wwwroot/images/Users/froggy/dba66eb1-0cc0-4a39-b0be-835b6461b966.jpg">
       <publishTime>09/06/2018 19:21:08</publishTime>
     </File>
@@ -324,6 +381,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/images/Users/froggy/ea884714-1dcc-4efb-be78-206dff2f9e9c.jpg">
       <publishTime>09/21/2018 10:58:50</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/froggy/f10a7c9a-8bd4-4398-a3ce-4e6f9a1e753e.jpg">
+      <publishTime>09/24/2018 13:00:26</publishTime>
     </File>
     <File Include="wwwroot/images/Users/froggy/f3a93f15-ab18-4699-a765-3cc7cda67a43.jpg">
       <publishTime>09/20/2018 22:22:09</publishTime>
@@ -345,6 +405,105 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/images/Users/horror/IMG_2571-722X358.jpg">
       <publishTime>09/02/2018 18:08:18</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/0d44d4fd-ee24-400c-a971-3d686d82370d.jpeg">
+      <publishTime>09/02/2018 14:33:14</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/1183c082-2985-4e1a-b2ea-c3125f9d0426.jpeg">
+      <publishTime>09/02/2018 16:15:19</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/141ca1a8-b18c-4a2f-8c45-a8725609f453.jpg">
+      <publishTime>09/02/2018 16:17:56</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/370dba90-4379-4152-a156-37d4e3d6e1be.jpg">
+      <publishTime>09/24/2018 00:35:25</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/3f3ed108-63eb-4ed5-ae6f-9bea300d9425.jpg">
+      <publishTime>09/06/2018 20:48:53</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/4174fa89-6fff-43b8-a7a2-8661f1fc95fc.jpg">
+      <publishTime>09/06/2018 20:48:53</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/539a6540-95b4-4454-98c5-4455f7eb6e24.jpg">
+      <publishTime>09/02/2018 16:17:15</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/539de552-4607-4b4c-946c-674f83f55b5b.jpg">
+      <publishTime>09/02/2018 14:10:29</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/550582551-1024x1024.jpg">
+      <publishTime>09/02/2018 14:08:45</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/6a01053620481c970b01b7c7617a9f970b-600wi.jpg">
+      <publishTime>09/02/2018 16:17:04</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/7513abb6-4992-4bc8-a6b3-c17ca489faf7.jpg">
+      <publishTime>09/02/2018 16:16:08</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/756a3b90-df1c-46e8-956d-1201d7c41c79.jpg">
+      <publishTime>09/02/2018 14:33:25</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/83eea483-abcc-4f76-b483-3166d6260b83.jpg">
+      <publishTime>09/02/2018 14:09:14</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/92919a05-5369-4b56-9957-7e80ab7354c2.jpg">
+      <publishTime>09/20/2018 14:08:31</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/97e28ad0-6821-4eb1-be93-03d246ebda75.jpg">
+      <publishTime>09/02/2018 14:06:01</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/982b5b33-d8a9-42a0-8290-76f3dbe467d3.jpg">
+      <publishTime>09/02/2018 14:06:39</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/ade2baa3-36b0-4dd7-8707-1cc52ed43114.jpg">
+      <publishTime>09/02/2018 14:10:35</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/b96d3ce6-ef20-4e38-b27f-431530a28464.jpeg">
+      <publishTime>09/02/2018 14:27:18</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/c2c0dbda-de1a-4c43-84d2-d8342bab28d2.jpg">
+      <publishTime>09/02/2018 14:33:52</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/c5f3f02c-ba0b-400c-a3db-a9afe081b866.jpeg">
+      <publishTime>09/02/2018 14:32:15</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/c67a6d59-67bf-4bde-8d3e-eea9e4b8cf44.jpg">
+      <publishTime>09/24/2018 00:35:25</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/d5d79d84-39f6-4d27-b3ad-adcf3b54127a.jpg">
+      <publishTime>09/02/2018 17:35:00</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/dbe09fa3-23e6-4e7c-884d-e28230e45141.jpeg">
+      <publishTime>09/02/2018 14:27:57</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/e9bbeedd-42bb-4227-89e9-da3b4fe6241e.jpg">
+      <publishTime>09/02/2018 14:33:41</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/efe084b8-1203-4cc7-bb74-a11af89e23b0.jpg">
+      <publishTime>09/20/2018 14:08:30</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/fede8c41-9544-4dfb-a893-104eac2866b9.jpg">
+      <publishTime>09/02/2018 14:09:44</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/images.jpg">
+      <publishTime>09/02/2018 13:19:43</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/Karen Lynn Smith_1512421341226_10154147_ver1.0_1280_720.jpg">
+      <publishTime>09/02/2018 16:17:48</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/Monkey.jpg">
+      <publishTime>09/02/2018 16:16:01</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/nature-purple-petals-36753.jpg">
+      <publishTime>09/02/2018 17:34:52</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/pexels-photo-219998.jpeg">
+      <publishTime>09/02/2018 14:27:08</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/pexels-photo-874158.jpeg">
+      <publishTime>09/02/2018 14:27:51</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/moder/pic.jpg">
+      <publishTime>09/02/2018 13:45:02</publishTime>
     </File>
     <File Include="wwwroot/images/Users/monkey/0d44d4fd-ee24-400c-a971-3d686d82370d.jpeg">
       <publishTime>09/02/2018 14:33:14</publishTime>
@@ -439,6 +598,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/images/Users/monkey/pic.jpg">
       <publishTime>09/02/2018 13:45:02</publishTime>
     </File>
+    <File Include="wwwroot/images/Users/profile/ce7bdf3c-c4c5-44fc-aab8-ae69d06bb3de.jpg">
+      <publishTime>09/23/2018 14:41:44</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/profile/fecc7d3a-2620-4a73-990c-9f2a6d901463.jpg">
+      <publishTime>09/23/2018 14:41:44</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/s44/3bd38b6a-4859-4508-9e08-526a16241821.jpg">
+      <publishTime>09/24/2018 11:05:51</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/s44/d1882105-5aca-44b7-a234-63b649e1519e.jpg">
+      <publishTime>09/24/2018 11:05:50</publishTime>
+    </File>
     <File Include="wwwroot/images/Users/Sam/07616370-2079-4334-a069-3a64f394f5b3.jpg">
       <publishTime>09/20/2018 22:41:50</publishTime>
     </File>
@@ -467,7 +638,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/20/2018 22:22:09</publishTime>
     </File>
     <File Include="wwwroot/js/followers.js">
-      <publishTime>09/19/2018 18:55:59</publishTime>
+      <publishTime>09/24/2018 12:51:28</publishTime>
+    </File>
+    <File Include="wwwroot/js/link.js">
+      <publishTime>09/23/2018 22:06:17</publishTime>
     </File>
     <File Include="wwwroot/js/picture.js">
       <publishTime>09/05/2018 14:36:17</publishTime>
@@ -476,7 +650,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/21/2018 00:14:47</publishTime>
     </File>
     <File Include="wwwroot/js/publication.js">
-      <publishTime>09/19/2018 18:43:07</publishTime>
+      <publishTime>09/24/2018 00:03:18</publishTime>
     </File>
     <File Include="wwwroot/js/search.js">
       <publishTime>09/19/2018 14:43:54</publishTime>

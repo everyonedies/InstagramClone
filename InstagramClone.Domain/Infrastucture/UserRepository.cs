@@ -15,7 +15,7 @@ namespace InstagramClone.Domain.Infrastucture
         public Task<AppUser> GetByAliasWithItems(string alias)
         {
             return Task.Run(() => {
-                var user = _dbContext.Users.FirstOrDefault(u => u.Alias == alias);
+                var user = _dbContext.Users.Where(u => u.Alias == alias).FirstOrDefault();
 
                 if (user != null)
                 {

@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -50,7 +49,7 @@ namespace InstagramClone.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "Alias")]
-            [RegularExpression(@"^[a-zA-Z0-9-]+$", ErrorMessage = "Alias must contains only numbers and latin characters.")]
+            [RegularExpression(@"^[a-z0-9_]+$", ErrorMessage = "Alias must contains only numbers, underscore and latin letters in lower case.")]
             [StringLength(100, MinimumLength = 1, ErrorMessage = "Alias must be at least 1 characters.")]
             public string Alias { get; set; }
 
