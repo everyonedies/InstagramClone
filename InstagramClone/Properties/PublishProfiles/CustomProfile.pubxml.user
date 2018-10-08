@@ -17,28 +17,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/04/2018 21:47:21</publishTime>
     </File>
     <File Include="InstagramClone.deps.json">
-      <publishTime>09/24/2018 13:13:51</publishTime>
+      <publishTime>09/24/2018 22:17:36</publishTime>
     </File>
     <File Include="InstagramClone.dll">
-      <publishTime>09/24/2018 13:13:02</publishTime>
+      <publishTime>09/24/2018 14:25:23</publishTime>
     </File>
     <File Include="InstagramClone.Domain.dll">
-      <publishTime>09/24/2018 13:12:58</publishTime>
+      <publishTime>09/24/2018 14:25:17</publishTime>
     </File>
     <File Include="InstagramClone.Domain.pdb">
-      <publishTime>09/24/2018 13:12:58</publishTime>
+      <publishTime>09/24/2018 14:25:17</publishTime>
     </File>
     <File Include="InstagramClone.pdb">
-      <publishTime>09/24/2018 13:13:02</publishTime>
+      <publishTime>09/24/2018 14:25:23</publishTime>
     </File>
     <File Include="InstagramClone.runtimeconfig.json">
-      <publishTime>09/24/2018 13:13:51</publishTime>
+      <publishTime>09/24/2018 22:17:37</publishTime>
     </File>
     <File Include="InstagramClone.Views.dll">
-      <publishTime>09/24/2018 13:13:12</publishTime>
+      <publishTime>09/24/2018 14:25:30</publishTime>
     </File>
     <File Include="InstagramClone.Views.pdb">
-      <publishTime>09/24/2018 13:13:12</publishTime>
+      <publishTime>09/24/2018 14:25:30</publishTime>
     </File>
     <File Include="Microsoft.EntityFrameworkCore.Abstractions.dll">
       <publishTime>07/26/2018 18:17:04</publishTime>
@@ -83,7 +83,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/21/2016 14:05:54</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>09/24/2018 13:13:51</publishTime>
+      <publishTime>09/24/2018 22:17:37</publishTime>
     </File>
     <File Include="wwwroot/css/login.css">
       <publishTime>09/03/2018 18:07:06</publishTime>
@@ -123,6 +123,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/images/Users/account/0d7b7487-5bce-42c4-8d1d-5ce1d04d7200.jpg">
       <publishTime>09/02/2018 18:22:02</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/big_wolf/4041d31e-9080-4ab6-948b-b33896d305ab.jpg">
+      <publishTime>09/24/2018 14:19:18</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/big_wolf/675ca6f5-1866-416a-9f11-01e07e1da548.jpg">
+      <publishTime>09/24/2018 14:19:18</publishTime>
     </File>
     <File Include="wwwroot/images/Users/everyonedies/01442065-97a3-40e5-8a4e-248c259d5cde.jpg">
       <publishTime>09/05/2018 22:31:38</publishTime>
@@ -636,6 +642,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/images/Users/Sam/f3a93f15-ab18-4699-a765-3cc7cda67a43.jpg">
       <publishTime>09/20/2018 22:22:09</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/wolf/4041d31e-9080-4ab6-948b-b33896d305ab.jpg">
+      <publishTime>09/24/2018 14:19:18</publishTime>
+    </File>
+    <File Include="wwwroot/images/Users/wolf/675ca6f5-1866-416a-9f11-01e07e1da548.jpg">
+      <publishTime>09/24/2018 14:19:18</publishTime>
     </File>
     <File Include="wwwroot/js/followers.js">
       <publishTime>09/24/2018 12:51:28</publishTime>

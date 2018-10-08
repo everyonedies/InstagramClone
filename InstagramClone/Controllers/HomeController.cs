@@ -43,18 +43,20 @@ namespace InstagramClone.Controllers
             }
             else if (text[0] == '@')
             {
-                var res = userService.FindUsersByAlias(text.Substring(1)).Select(u => new { text = u.Alias, type = "user" });
+                ICollection<AppUser> users = await userService.FindUsersByAlias(text.Substring(1));
+                var res = users.Select(u => new { text = u.Alias, type = "user" });
                 len = res.Count();
                 data = res;
             }
             else
             {
                 ICollection<Tag> tags = await unitOfWork.Tags.GetTagsByNameWithItems(text);
-
                 var tagsText = tags.Select(t => new { text = t.Text, type = "tag" });
-                var users = userService.FindUsersByAlias(text).Select(u => new { text = u.Alias, type = "user" });
 
-                var res = users.Concat(tagsText).OrderBy(i => i.text);
+                ICollection<AppUser> users = await userService.FindUsersByAlias(text);
+                var userAlias = users.Select(u => new { text = u.Alias, type = "user" });
+
+                var res = userAlias.Concat(tagsText).OrderBy(i => i.text);
                 len = res.Count();
                 data = res;
             }

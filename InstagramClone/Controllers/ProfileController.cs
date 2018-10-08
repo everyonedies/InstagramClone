@@ -43,8 +43,9 @@ namespace InstagramClone.Controllers
             AppUser user = await userManager.GetUserAsync(User);
             IFormFile file = HttpContext.Request.Form.Files.First();
             string type = file.ContentType;
+            int contentSize = 5 * 1024 * 1024;
 
-            if (type == "image/jpeg" || type == "image/gif" || type == "image/png")
+            if ((type == "image/jpeg" || type == "image/gif" || type == "image/png") && file.Length <= contentSize)
             {
                 Image image = Image.FromStream(file.OpenReadStream(), true, false);
                 string imageExt = Path.GetExtension(file.FileName);
@@ -60,8 +61,9 @@ namespace InstagramClone.Controllers
             AppUser user = await userManager.GetUserAsync(User);
             IFormFile file = HttpContext.Request.Form.Files.First();
             string type = file.ContentType;
+            int contentSize = 5 * 1024 * 1024;
 
-            if (type == "image/jpeg" || type == "image/gif" || type == "image/png")
+            if ((type == "image/jpeg" || type == "image/gif" || type == "image/png") && file.Length <= contentSize)
             {
                 Image image = Image.FromStream(file.OpenReadStream(), true, false);
                 string imageExt = Path.GetExtension(file.FileName);

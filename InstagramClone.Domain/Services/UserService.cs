@@ -47,10 +47,21 @@ namespace InstagramClone.Domain.Services
             });
         }
 
-        public ICollection<AppUser> FindUsersByAlias(string alias)
+        public Task<ICollection<Post>> GetUserLiked(string alias)
         {
-            var users = unitOfWork.Users.List(u => u.Alias.Contains(alias)).ToList();
+            return Task.Run(async () => {
+                AppUser appUser = await unitOfWork.Users.GetByAliasWithItems(alias);
 
+                IEnumerable<Post> liked = appUser.Likes.Where(l => l.Post != null).Select(l => l.Post);
+                ICollection<Post> loadedPosts = liked.Select(p => unitOfWork.Posts.GetByIdWithItems(p.Id).Result).OrderByDescending(p => p.Date).ToList();
+
+                return loadedPosts;
+            });
+        }
+
+        public async Task<ICollection<AppUser>> FindUsersByAlias(string alias)
+        {
+            var users = await unitOfWork.Users.ListAsync(u => u.Alias.Contains(alias));
             return users;
         }
 
