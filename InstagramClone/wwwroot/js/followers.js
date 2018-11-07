@@ -1,83 +1,113 @@
-﻿let followers = document.getElementById("followers");
-let following = document.getElementById("following");
+﻿$(document).ready(function () {
+    let followers = document.getElementById("followers");
+    let following = document.getElementById("following");
 
-followers.addEventListener('click', function (e) {
-    e.preventDefault();
-    let url = this.getAttribute("href");
-    getListOfUser(url, "Followers");
+    addClickHandler(followers, "Followers");
+    addClickHandler(following, "Following");
 });
 
-following.addEventListener('click', function (e) {
-    e.preventDefault();
-    let url = this.getAttribute("href");
-    getListOfUser(url, "Following");
-});
-
-function getListOfUser(url, text) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200)
-        {
-            let objFollowers = JSON.parse(this.responseText);
-            if (objFollowers.error)
-            {
-                alert(objFollowers.error);
-            }
-            else
-            {
-                createView(objFollowers, text);
-            }
-        }
-    };
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
+function addClickHandler(element, text) {
+    element.addEventListener('click', async function (e) {
+        e.preventDefault();
+        let url = this.getAttribute("href");
+        let users = await getListOfUsers(url);
+        view(users, text);
+    });
 }
 
-function createView(objFollowers, text)
+function getListOfUsers(url) {
+    return fetch(url, { method: "GET" })
+        .then(async res => {
+            if (res.status === 200) {
+                let obj = await res.json();
+                return obj;
+            } else {
+                alert(res.status + ' - ' + res.statusText);
+            }
+        })
+        .catch(alert);
+}
+
+function view(users, text)
 {
     lockScroll();
+
+    let blackDiv = createBlackDiv();
+    $(document.body).append(blackDiv);
+
+    let usersList = createUsersListDiv();
+    $(document.body).append(usersList);
+
+    let viewForUsersList = createUsersView(users, text);
+    usersList.html(viewForUsersList);
+
+    setUsersListSize(usersList);
+
+    $(window).on("resize", () => setUsersListSize(usersList));
+    blackDiv.on("click", () => deleteView(blackDiv, usersList));
+}
+
+function createBlackDiv() {
+    let blackDiv = $("<div>");
+    blackDiv.css("width", "100%"); 
+    blackDiv.css("height", "100%"); 
+    blackDiv.css("position", "fixed"); 
+    blackDiv.css("left", "0"); 
+    blackDiv.css("top", "0"); 
+    blackDiv.css("background-color", "black"); 
+    blackDiv.css("opacity", "0.2");
+
+    return blackDiv;
+}
+
+function createUsersListDiv() {
+    let usersView = $("<div>");
+    usersView.id = "followersView";
+    usersView.addClass("absoluteBox followersBlock");
+    usersView.css("visibility", "visible");
+
+    return usersView;
+}
+
+function deleteView(usersList, blackDiv) {
+    usersList.remove();
+    blackDiv.remove();
+
+    unlockScroll();
+}
+
+function createUsersView(users, text) {
+    let view = `<p style='
+                    margin: 0; 
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    text-align: center;
+                    border-bottom: 1px solid #ccc;'> ${text}
+                </p>`;
+
+    $.each(users, function (key, value) {
+        view += `<a href='/${value}' class='searchLink'>
+                    <p style='
+                        text-align: center;
+                        margin: 0;
+                        padding: 15px;
+                        border-bottom: 1px solid #ccc;'>${value}
+                    </p>
+                 </a>`;
+    });
+
+    return view;
+}
+
+function setUsersListSize(usersList) {
+    let w = usersList.outerWidth() / 2;
+    let h = usersList.outerHeight() / 2;
 
     let x = $(window).width() / 2;
     let y = $(window).height() / 2;
 
-    let blackDiv = document.createElement("div");
-    blackDiv.style = "width: 100%; height: 100%; position: fixed; left: 0; top: 0; background-color: black; opacity: 0.2;";
-
-    document.body.appendChild(blackDiv);
-
-    let followersView = document.createElement("div");
-    followersView.id = "followersView";
-    followersView.classList.add("absoluteBox");
-    followersView.classList.add("followersBlock");
-    followersView.style.visibility = "visible";
-
-    document.body.appendChild(followersView);
-
-    window.onresize = function (event) {
-        let x = document.body.offsetWidth / 2;
-        let y = document.body.offsetHeight / 2;
-
-        let w = followersView.offsetWidth / 2;
-        let h = followersView.offsetHeight / 2;
-        followersView.style = "left: " + (x - w) + "px;" + "top: " + (y - h * 1.5) + "px; max-height: 245px;";
-    };
-
-    blackDiv.addEventListener("click", function (e) {
-        followersView.outerHTML = "";
-        blackDiv.outerHTML = "";
-
-        unlockScroll();
-    });
-
-    let view = "<p style='margin: 0; padding-top: 20px; padding-bottom: 20px; text-align: center; border-bottom: 1px solid #ccc;'>" + text + "</p>";
-    objFollowers.forEach(function (o) {
-        view += "<a href='/" + o + "' class='searchLink'>" + "<p style='text-align: center; margin: 0; padding: 15px; border-bottom: 1px solid #ccc;'>" + o + "</p></a>";
-    });
-    followersView.innerHTML = view;
-
-    let w = followersView.offsetWidth / 2;
-    let h = followersView.offsetHeight / 2;
-    followersView.style = "left: " + (x - w) + "px;" + "top: " + (y - h * 1.5) + "px;";
+    usersList.css("left", x - w);
+    usersList.css("top", y - h);
 }
 
 function lockScroll() {
@@ -85,7 +115,7 @@ function lockScroll() {
         self.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
         self.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
     ];
-    var html = jQuery('html'); // it would make more sense to apply this to body, but IE7 won't have that
+    var html = jQuery('html');
     html.data('scroll-position', scrollPosition);
     html.data('previous-overflow', html.css('overflow'));
     html.css('overflow', 'hidden');
@@ -96,5 +126,5 @@ function unlockScroll() {
     var html = jQuery('html');
     var scrollPosition = html.data('scroll-position');
     html.css('overflow', html.data('previous-overflow'));
-    window.scrollTo(scrollPosition[0], scrollPosition[1])
+    window.scrollTo(scrollPosition[0], scrollPosition[1]);
 }

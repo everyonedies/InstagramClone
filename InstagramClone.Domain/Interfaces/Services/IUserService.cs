@@ -11,7 +11,7 @@ namespace InstagramClone.Domain.Interfaces
         Task<ICollection<AppUser>> GetUserFollowers(string alias);
         Task<ICollection<AppUser>> GetUserFollowing(string alias);
         Task<ICollection<Post>> GetUserNews(string alias);
-        Task<ICollection<Post>> GetUserLiked(string alias);
+        Task<ICollection<Post>> GetUserLikedPosts(string alias);
         bool IsUserFollowing(AppUser currentUser, AppUser targetUser);
         Task<bool> Follow(AppUser currentUser, AppUser targetUser);
         Task<bool> Unfollow(AppUser currentUser, AppUser targetUser);

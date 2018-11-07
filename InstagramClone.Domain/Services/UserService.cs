@@ -47,7 +47,7 @@ namespace InstagramClone.Domain.Services
             });
         }
 
-        public Task<ICollection<Post>> GetUserLiked(string alias)
+        public Task<ICollection<Post>> GetUserLikedPosts(string alias)
         {
             return Task.Run(async () => {
                 AppUser appUser = await unitOfWork.Users.GetByAliasWithItems(alias);

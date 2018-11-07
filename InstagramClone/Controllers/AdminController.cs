@@ -34,21 +34,6 @@ namespace InstagramClone.Controllers
             return View(allUsersViewModel);
         }
 
-        public IActionResult GetAllPosts()
-        {
-            return View();
-        }
-
-        public IActionResult GetAllComments()
-        {
-            return View();
-        }
-
-        public IActionResult GetAllTags()
-        {
-            return View();
-        }
-
         public async Task<IActionResult> GetUser(string alias)
         {
             AppUser currentUser = await userManager.GetUserAsync(User);

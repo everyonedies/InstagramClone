@@ -22,9 +22,9 @@ namespace InstagramClone.Domain.Infrastucture
             return _dbContext.Set<T>().Find(id);
         }
 
-        public virtual async Task<T> GetByIdAsync(int id)
+        public virtual Task<T> GetByIdAsync(int id)
         {
-            return await _dbContext.Set<T>().FindAsync(id);
+            return _dbContext.Set<T>().FindAsync(id);
         }
 
         public List<T> ListAll()
@@ -32,9 +32,9 @@ namespace InstagramClone.Domain.Infrastucture
             return _dbContext.Set<T>().ToList();
         }
 
-        public async Task<List<T>> ListAllAsync()
+        public Task<List<T>> ListAllAsync()
         {
-            return await _dbContext.Set<T>().ToListAsync();
+            return _dbContext.Set<T>().ToListAsync();
         }
 
         public List<T> List(Func<T, bool> predicate)
@@ -42,9 +42,9 @@ namespace InstagramClone.Domain.Infrastucture
             return _dbContext.Set<T>().Where(predicate).ToList();
         }
 
-        public async Task<List<T>> ListAsync(Func<T, bool> predicate)
+        public Task<List<T>> ListAsync(Func<T, bool> predicate)
         {
-            return await _dbContext.Set<T>().Where(predicate).AsQueryable().ToListAsync();
+            return Task.Run(() => List(predicate));
         }
 
         public T Add(T entity)

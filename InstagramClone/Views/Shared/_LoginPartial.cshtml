@@ -21,7 +21,7 @@
     }
     <div><a href="/@alias" style="color: #808080; text-decoration: none;">Profile</a></div>
     <div><a asp-controller="News" asp-action="GetUserNews" style="color: #808080; text-decoration: none;">News</a></div>
-    <div><a asp-controller="ActionHistory" asp-action="GetLiked" style="color: #808080; text-decoration: none;">Liked</a></div>
+    <div><a asp-controller="ActionHistory" asp-action="GetLikedPosts" style="color: #808080; text-decoration: none;">Liked</a></div>
     <div style="min-width: 5em;">
         <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm">
             <button type="submit" class="button-style">Log out</button>

@@ -24,11 +24,11 @@ namespace InstagramClone.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> GetLiked()
+        public async Task<IActionResult> GetLikedPosts()
         {
             AppUser currentUser = await userManager.GetUserAsync(User);
 
-            ICollection<Post> likedPosts = await userService.GetUserLiked(currentUser.Alias);
+            ICollection<Post> likedPosts = await userService.GetUserLikedPosts(currentUser.Alias);
             ICollection<PostViewModel> likedPostsViewModel = likedPosts.GetPostsViewModel();
 
             return View(likedPostsViewModel);

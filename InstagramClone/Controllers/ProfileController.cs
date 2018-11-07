@@ -94,7 +94,7 @@ namespace InstagramClone.Controllers
             if (followersAlias.Count() != 0)
                 return Json(followersAlias);
             else
-                return Json(new { error = $"The user '{alias}' doesn't have followers" });
+                return Json(null);
         }
 
         [AllowAnonymous]
@@ -106,7 +106,7 @@ namespace InstagramClone.Controllers
             if (followingAlias.Count() != 0)
                 return Json(followingAlias);
             else
-                return Json(new { error = $"The user '{alias}' doesn't following anyone"});
+                return Json(null);
         }
 
         [AllowAnonymous]
